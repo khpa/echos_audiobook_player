@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View, StyleSheet, Button} from 'react-native';
+import {View, StyleSheet, Button, Text} from 'react-native';
 import {width} from '../../assets/theme';
 import useStore from '../../store/useStore';
 import {useNavigation} from '@react-navigation/native';
@@ -11,9 +11,14 @@ const MiniPlayer = () => {
   const navigation = useNavigation<any>();
 
   if (miniPlayerVisible && hasActiveAlbum && tabBarHeight) {
-    <View style={[styles.container, {bottom: tabBarHeight + 5}]}>
-      <Button title="Play" onPress={() => navigation.navigate('AudioPlayer')} />
-    </View>;
+    return (
+      <View style={[styles.container, {bottom: tabBarHeight + 5}]}>
+        <Button
+          title="Play"
+          onPress={() => navigation.navigate('AudioPlayer')}
+        />
+      </View>
+    );
   } else {
     return null;
   }

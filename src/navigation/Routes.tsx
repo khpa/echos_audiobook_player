@@ -3,8 +3,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import AuthNavigation from './AuthNavigation';
 import {AppRoutes, MainRoutes} from './Navigation';
 import HomeNavigation from './HomeNavigation';
-import MiniPlayer from '../main/audio/MiniPlayer';
 import AudioPlayer from '../main/audio/AudioPlayer';
+import MiniPlayer from '../main/audio/MiniPlayer';
 
 const AppStack = createStackNavigator<AppRoutes>();
 const MainStack = createStackNavigator<MainRoutes>();
