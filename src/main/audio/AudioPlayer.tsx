@@ -3,9 +3,10 @@ import {CommonActions} from '@react-navigation/routers';
 import * as React from 'react';
 import {View, Text, Button} from 'react-native';
 import {MainNavigationProps} from '../../navigation/Navigation';
-import {useStore} from '../../store/store';
+import useStore from '../../store/useStore';
 
 export function AudioPlayer({navigation}: MainNavigationProps<'AudioPlayer'>) {
+  // setting
   useFocusEffect(() => {
     useStore.setState({
       miniPlayer: true,

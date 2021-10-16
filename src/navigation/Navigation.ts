@@ -18,7 +18,7 @@ export interface MainNavigationProps<RouteName extends keyof MainRoutes> {
 export interface HomeNavigationProps<RouteName extends keyof HomeRoutes> {
   navigation: CompositeNavigationProp<
     BottomTabNavigationProp<HomeRoutes, RouteName>,
-    StackNavigationProp<MainRoutes, 'HomeRoutes'>
+    StackNavigationProp<MainRoutes, 'AudioPlayer'>
   >;
   route: RouteProp<HomeRoutes, RouteName>;
 }
