@@ -1,15 +1,17 @@
 import {GetState, SetState} from 'zustand';
 import {StoreState} from './useStore';
 
-export interface SpecsSlice {
+export interface LocalDeviceSlice {
   tabBarHeight: number | undefined;
+  localRoot: string;
 }
 
-const createSpecsSlice = (
+const createLocalDeviceSlice = (
   set: SetState<StoreState>,
   get: GetState<StoreState>,
 ) => ({
   tabBarHeight: undefined,
+  localRoot: '/storage/emulated/0/Documents/Echos',
 });
 
-export default createSpecsSlice;
+export default createLocalDeviceSlice;

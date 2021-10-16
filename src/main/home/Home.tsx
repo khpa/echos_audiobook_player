@@ -1,8 +1,11 @@
+// external dependencies
 import React, {useEffect} from 'react';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import {Text, View, StyleSheet, Button} from 'react-native';
-import {HomeNavigationProps} from '../../navigation/Navigation';
+
+// internal dependencies
 import useStore from '../../store/useStore';
+import {HomeNavigationProps} from '../../navigation/Navigation';
 
 // TODO: Look into fluid transition between Home and AudioRoutes (https://reactnavigation.org/docs/community-libraries-and-navigators)
 

@@ -1,3 +1,4 @@
+// external dependencies
 import {checkMultiple, requestMultiple} from 'react-native-permissions';
 
 // check if permissions are already granted
@@ -20,7 +21,7 @@ export function handleAndroidPermissions(requiredPermissions: any[]) {
 }
 
 // request permissions that have not been granted
-function requestAndroidPermissions(permissions: any[]) {
+function requestAndroidPermissions(permissions: any) {
   try {
     requestMultiple(permissions).then(results => {
       for (const permission in results) {

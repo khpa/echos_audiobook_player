@@ -1,8 +1,11 @@
+// external dependencies
 import * as React from 'react';
-import {View, StyleSheet, Button, Text} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {View, StyleSheet, Button} from 'react-native';
+
+// internal dependencies
 import {width} from '../../assets/theme';
 import useStore from '../../store/useStore';
-import {useNavigation} from '@react-navigation/native';
 
 const MiniPlayer = () => {
   const tabBarHeight = useStore(state => state.tabBarHeight);

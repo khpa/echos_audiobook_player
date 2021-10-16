@@ -5,10 +5,10 @@ import {View, Text} from 'react-native';
 // internal dependencies
 import {HomeNavigationProps} from '../../navigation/Navigation';
 
-export function Settings({navigation}: HomeNavigationProps<'Settings'>) {
+export function Analytics({navigation}: HomeNavigationProps<'Analytics'>) {
   return (
     <View>
-      <Text>Settings</Text>
+      <Text>Analytics</Text>
     </View>
   );
 }

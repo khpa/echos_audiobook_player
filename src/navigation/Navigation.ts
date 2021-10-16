@@ -42,5 +42,6 @@ export type MainRoutes = {
 export type HomeRoutes = {
   Home: undefined;
   Library: undefined;
+  Analytics: undefined;
   Settings: undefined;
 };

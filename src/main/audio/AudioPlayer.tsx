@@ -1,12 +1,14 @@
-import {useFocusEffect} from '@react-navigation/core';
-import {CommonActions} from '@react-navigation/routers';
+// external dependencies
 import * as React from 'react';
 import {View, Text, Button} from 'react-native';
-import {MainNavigationProps} from '../../navigation/Navigation';
+import {useFocusEffect} from '@react-navigation/core';
+import {CommonActions} from '@react-navigation/routers';
+
+// internal dependencies
 import useStore from '../../store/useStore';
+import {MainNavigationProps} from '../../navigation/Navigation';
 
 export function AudioPlayer({navigation}: MainNavigationProps<'AudioPlayer'>) {
-  // setting
   useFocusEffect(() => {
     useStore.setState({
       miniPlayer: true,
