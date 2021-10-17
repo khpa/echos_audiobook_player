@@ -9,11 +9,10 @@ import useStore from '../../store/useStore';
 
 const MiniPlayer = () => {
   const tabBarHeight = useStore(state => state.tabBarHeight);
-  const miniPlayerVisible = useStore.getState().miniPlayer;
   const hasActiveAlbum = useStore.getState().hasActiveAlbum;
   const navigation = useNavigation<any>();
 
-  if (miniPlayerVisible && hasActiveAlbum && tabBarHeight) {
+  if (hasActiveAlbum && tabBarHeight) {
     return (
       <View style={[styles.container, {bottom: tabBarHeight + 5}]}>
         <Button

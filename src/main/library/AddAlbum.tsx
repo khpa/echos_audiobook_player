@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {View, Text, TextInput} from 'react-native';
 import {width} from '../../assets/theme';
-import {LibraryStackNavProp} from '../../navigation/types/props';
+import {CompLibraryStackNavProp} from '../../navigation/types/props';
 
-export const AddAlbum = ({navigation}: LibraryStackNavProp<'AddAlbum'>) => {
+export const AddAlbum = ({navigation}: CompLibraryStackNavProp<'AddAlbum'>) => {
   const [searchString, onChangeText] = React.useState<string>('');
 
   return (

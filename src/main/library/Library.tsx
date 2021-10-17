@@ -5,15 +5,11 @@ import {View, Text, Button} from 'react-native';
 // internal dependencies
 import {getLocalLibrary} from '../../data/android/getLocalLibrary';
 import {handlePermissions} from '../../data/handlePermissions';
-import {LibraryStackNavProp} from '../../navigation/types/props';
+import {CompLibraryStackNavProp} from '../../navigation/types/props';
 
-export function Library({navigation}: LibraryStackNavProp<'Library'>) {
+export function Library({navigation}: CompLibraryStackNavProp<'Library'>) {
   // check permissions and load available libraries
   useEffect(() => {
-    async function loadLibrary() {
-      await getLocalLibrary();
-      // TODO: get local library, online library and store them in AsyncStorage (where it makes sense)
-    }
     handlePermissions();
     loadLibrary();
   }, []);
@@ -25,6 +21,15 @@ export function Library({navigation}: LibraryStackNavProp<'Library'>) {
         title="Go to Audio"
         onPress={() => navigation.navigate('AudioPlayer')}
       />
+      <Button
+        title="Go to AddAlbum"
+        onPress={() => navigation.navigate('AddAlbum')}
+      />
     </View>
   );
+}
+
+// TODO: get local library, online library and store them in AsyncStorage (where it makes sense)
+async function loadLibrary() {
+  await getLocalLibrary();
 }

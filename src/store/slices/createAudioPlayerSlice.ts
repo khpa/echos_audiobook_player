@@ -3,7 +3,6 @@ import {StoreState} from '../useStore';
 
 export interface AudioPlayerSlice {
   hasActiveAlbum: boolean;
-  miniPlayer: boolean;
 }
 
 export const createAudioPlayerSlice = (
@@ -11,7 +10,4 @@ export const createAudioPlayerSlice = (
   get: GetState<StoreState>,
 ) => ({
   hasActiveAlbum: false,
-  miniPlayer: false,
 });
-
-// export default createAudioPlayerSlice;

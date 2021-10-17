@@ -4,6 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 // internal dependencies
 import {Library} from '../../main/library/Library';
+import {AddAlbum} from '../../main/library/AddAlbum';
 import {LibraryStackParamList} from '../types/params';
 
 const LibraryStack = createStackNavigator<LibraryStackParamList>();
@@ -14,6 +15,7 @@ export const LibraryStackNavigator = () => {
   return (
     <Navigator>
       <Screen name="Library" component={Library} />
+      <Screen name="AddAlbum" component={AddAlbum} />
     </Navigator>
   );
 };
