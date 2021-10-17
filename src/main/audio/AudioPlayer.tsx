@@ -6,9 +6,9 @@ import {CommonActions} from '@react-navigation/routers';
 
 // internal dependencies
 import useStore from '../../store/useStore';
-import {MainNavigationProps} from '../../navigation/Navigation';
+import {MainStackNavProp} from '../../navigation/types/props';
 
-export function AudioPlayer({navigation}: MainNavigationProps<'AudioPlayer'>) {
+export function AudioPlayer({navigation}: MainStackNavProp<'AudioPlayer'>) {
   useFocusEffect(() => {
     useStore.setState({
       miniPlayer: true,

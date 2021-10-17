@@ -1,1 +1,1 @@
-export async function addAlbum() {}
+export async function addAlbumLocal() {}

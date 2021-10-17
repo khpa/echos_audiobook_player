@@ -1,5 +1,5 @@
 // external dependencies
-import * as React from 'react';
+import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {View, StyleSheet, Button} from 'react-native';
 

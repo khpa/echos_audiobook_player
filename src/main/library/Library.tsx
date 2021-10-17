@@ -5,9 +5,9 @@ import {View, Text, Button} from 'react-native';
 // internal dependencies
 import {getLocalLibrary} from '../../data/android/getLocalLibrary';
 import {handlePermissions} from '../../data/handlePermissions';
-import {HomeNavigationProps} from '../../navigation/Navigation';
+import {LibraryStackNavProp} from '../../navigation/types/props';
 
-export function Library({navigation}: HomeNavigationProps<'Library'>) {
+export function Library({navigation}: LibraryStackNavProp<'Library'>) {
   // check permissions and load available libraries
   useEffect(() => {
     async function loadLibrary() {

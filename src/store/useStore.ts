@@ -1,12 +1,14 @@
+// external dependencies
 import create from 'zustand';
 import {persist} from 'zustand/middleware';
 
-import createLocalDeviceSlice, {
+// internal dependencies
+import {
   LocalDeviceSlice,
-} from './createLocalDeviceSlice';
-import createAudioPlayerSlice, {
   AudioPlayerSlice,
-} from './createAudioPlayerSlice';
+  createLocalDeviceSlice,
+  createAudioPlayerSlice,
+} from './slices';
 
 export type StoreState = LocalDeviceSlice & AudioPlayerSlice;
 

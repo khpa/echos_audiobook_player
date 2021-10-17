@@ -12,12 +12,14 @@
   "dependencies": {
     "@babel/preset-env": "^7.1.6",
     "@react-navigation/bottom-tabs": "^6.0.9",
+    "@react-navigation/devtools": "^6.0.4",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/stack": "^6.0.11",
     "react": "17.0.2",
     "react-native": "0.66.0",
     "react-native-file-access": "^2.0.0",
     "react-native-gesture-handler": "^1.10.3",
+    "react-native-google-books": "^1.0.4",
     "react-native-permissions": "^3.0.6",
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.8.0",
@@ -34,6 +36,7 @@
     "eslint": "^7.14.0",
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "^0.66.2",
+    "react-native-flipper": "^0.115.0",
     "react-test-renderer": "17.0.2",
     "typescript": "^3.8.3"
   },

@@ -1,5 +1,5 @@
 import React from 'react';
-import Routes from './Routes';
+import {AppStackNavigator} from '.';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 //TODO: Add theme provider based on '../assets/theme'
@@ -7,9 +7,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 export const Provider = () => {
   return (
     <SafeAreaProvider>
-      <Routes />
+      <AppStackNavigator />
     </SafeAreaProvider>
   );
 };
-
-export default Provider;

@@ -3,9 +3,9 @@ import * as React from 'react';
 import {View, Button, StyleSheet, Text} from 'react-native';
 
 // internal dependencies
-import {AuthNavigationProps} from '../navigation/Navigation';
+import {CompAuthStackNavProps} from '../navigation/types/props';
 
-export function Welcome({navigation}: AuthNavigationProps<'Welcome'>) {
+export function Welcome({navigation}: CompAuthStackNavProps<'Welcome'>) {
   return (
     <View style={styles.container}>
       <Text>Welcome</Text>

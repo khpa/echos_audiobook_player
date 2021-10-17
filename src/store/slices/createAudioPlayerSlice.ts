@@ -1,12 +1,12 @@
 import {GetState, SetState} from 'zustand';
-import {StoreState} from './useStore';
+import {StoreState} from '../useStore';
 
 export interface AudioPlayerSlice {
   hasActiveAlbum: boolean;
   miniPlayer: boolean;
 }
 
-const createAudioPlayerSlice = (
+export const createAudioPlayerSlice = (
   set: SetState<StoreState>,
   get: GetState<StoreState>,
 ) => ({
@@ -14,4 +14,4 @@ const createAudioPlayerSlice = (
   miniPlayer: false,
 });
 
-export default createAudioPlayerSlice;
+// export default createAudioPlayerSlice;

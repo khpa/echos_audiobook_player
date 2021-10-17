@@ -3,9 +3,9 @@ import React from 'react';
 import {View, Text} from 'react-native';
 
 // internal dependencies
-import {HomeNavigationProps} from '../../navigation/Navigation';
+import {BottomTabsNavProp} from '../../navigation/types/props';
 
-export function Analytics({navigation}: HomeNavigationProps<'Analytics'>) {
+export function Analytics({navigation}: BottomTabsNavProp<'Analytics'>) {
   return (
     <View>
       <Text>Analytics</Text>
