@@ -1,6 +1,6 @@
 // external dependencies
 import * as React from 'react';
-import {useFlipper} from '@react-navigation/devtools';
+// import {useFlipper} from '@react-navigation/devtools';
 import {
   NavigationContainer,
   useNavigationContainerRef,

@@ -26,4 +26,5 @@ export type BottomTabsParamList = {
 export type LibraryStackParamList = {
   Library: undefined;
   AddAlbum: undefined;
+  Test: undefined;
 };

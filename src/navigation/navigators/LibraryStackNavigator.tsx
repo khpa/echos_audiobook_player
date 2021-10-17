@@ -13,7 +13,11 @@ export const LibraryStackNavigator = () => {
   const {Navigator, Screen} = LibraryStack;
 
   return (
-    <Navigator>
+    <Navigator
+      initialRouteName="Library"
+      screenOptions={{
+        headerShown: false,
+      }}>
       <Screen name="Library" component={Library} />
       <Screen name="AddAlbum" component={AddAlbum} />
     </Navigator>

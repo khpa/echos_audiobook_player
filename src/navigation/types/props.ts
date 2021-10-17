@@ -26,13 +26,14 @@ export type MainStackNavProp<RouteName extends keyof MainStackParamList> = {
   route: RouteProp<MainStackParamList, RouteName>;
 };
 
-export type BottomTabsNavProp<RouteName extends keyof BottomTabsParamList> = {
-  navigation: CompositeNavigationProp<
-    BottomTabNavigationProp<BottomTabsParamList, RouteName>,
-    StackNavigationProp<MainStackParamList, 'AudioPlayer'>
-  >;
-  route: RouteProp<BottomTabsParamList, RouteName>;
-};
+export type CompBottomTabsNavProp<RouteName extends keyof BottomTabsParamList> =
+  {
+    navigation: CompositeNavigationProp<
+      BottomTabNavigationProp<BottomTabsParamList, RouteName>,
+      StackNavigationProp<MainStackParamList, 'AudioPlayer'>
+    >;
+    route: RouteProp<BottomTabsParamList, RouteName>;
+  };
 
 export type CompLibraryStackNavProp<
   RouteName extends keyof LibraryStackParamList,

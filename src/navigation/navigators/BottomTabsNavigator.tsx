@@ -8,6 +8,7 @@ import {Library} from '../../main/library/Library';
 import {Settings} from '../../main/settings/Settings';
 import {Analytics} from '../../main/analytics/Analytics';
 import {BottomTabsParamList} from '../types/params';
+import {LibraryStackNavigator} from '..';
 
 const BottomTabs = createBottomTabNavigator<BottomTabsParamList>();
 
@@ -20,7 +21,7 @@ export const BottomTabsNavigator = () => {
         headerShown: false,
       }}>
       <Screen name="Home" component={Home} />
-      <Screen name="LibraryStack" component={Library} />
+      <Screen name="LibraryStack" component={LibraryStackNavigator} />
       <Screen name="Analytics" component={Analytics} />
       <Screen name="Settings" component={Settings} />
     </Navigator>

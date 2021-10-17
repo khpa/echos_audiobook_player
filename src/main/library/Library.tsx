@@ -7,7 +7,7 @@ import {getLocalLibrary} from '../../data/android/getLocalLibrary';
 import {handlePermissions} from '../../data/handlePermissions';
 import {CompLibraryStackNavProp} from '../../navigation/types/props';
 
-export function Library({navigation}: CompLibraryStackNavProp<'Library'>) {
+export const Library = ({navigation}: CompLibraryStackNavProp<'Library'>) => {
   // check permissions and load available libraries
   useEffect(() => {
     handlePermissions();
@@ -27,7 +27,7 @@ export function Library({navigation}: CompLibraryStackNavProp<'Library'>) {
       />
     </View>
   );
-}
+};
 
 // TODO: get local library, online library and store them in AsyncStorage (where it makes sense)
 async function loadLibrary() {
