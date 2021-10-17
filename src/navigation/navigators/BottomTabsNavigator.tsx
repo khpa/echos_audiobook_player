@@ -3,12 +3,11 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 // internal dependencies
-import Home from '../../screens/main/home/Home';
-import {Library} from '../../screens/main/library/Library';
-import {Settings} from '../../screens/main/settings/Settings';
-import {Analytics} from '../../screens/main/analytics/Analytics';
-import {BottomTabsParamList} from '../types/params';
 import {LibraryStackNavigator} from '..';
+import {Home} from '../../screens/main/home';
+import {BottomTabsParamList} from '../types';
+import {Settings} from '../../screens/main/settings';
+import {Analytics} from '../../screens/main/analytics';
 
 const BottomTabs = createBottomTabNavigator<BottomTabsParamList>();
 

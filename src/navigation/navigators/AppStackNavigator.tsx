@@ -3,10 +3,9 @@ import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
 // internal dependencies
-import MiniPlayer from '../../screens/audio/MiniPlayer';
-import AudioPlayer from '../../screens/audio/AudioPlayer';
 import {BottomTabsNavigator, AuthStackNavigator} from '..';
-import {AppStackParamList, MainStackParamList} from '../types/params';
+import {AudioPlayer, MiniPlayer} from '../../screens/audio';
+import {AppStackParamList, MainStackParamList} from '../types';
 
 const AppStack = createStackNavigator<AppStackParamList>();
 const MainStack = createStackNavigator<MainStackParamList>();

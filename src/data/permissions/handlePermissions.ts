@@ -3,7 +3,7 @@ import {Platform} from 'react-native';
 import {PERMISSIONS} from 'react-native-permissions';
 
 // internal dependencies
-import {handleAndroidPermissions} from './android/handleAndroidPermissions';
+import {handleAndroidPermissions} from './handleAndroidPermissions';
 
 // centralized permission handling
 export const handlePermissions = () => {

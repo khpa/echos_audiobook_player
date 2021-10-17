@@ -3,9 +3,8 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
 // internal dependencies
-import {Library} from '../../screens/main/library/Library';
-import {AddAlbum} from '../../screens/main/library/AddAlbum';
-import {LibraryStackParamList} from '../types/params';
+import {Library, AddAlbum} from '../../screens/main/library';
+import {LibraryStackParamList} from '../types';
 
 const LibraryStack = createStackNavigator<LibraryStackParamList>();
 

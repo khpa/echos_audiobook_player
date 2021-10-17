@@ -3,7 +3,7 @@ import {Alert} from 'react-native';
 import {FileSystem} from 'react-native-file-access';
 
 // internal dependencies
-import useStore from '../../store/useStore';
+import useStore from '../store/useStore';
 
 export const getLocalLibrary = async () => {
   await handleLocalRoot();
@@ -11,7 +11,7 @@ export const getLocalLibrary = async () => {
 };
 
 // checking if local root exists and if not, create it
-async function handleLocalRoot() {
+export async function handleLocalRoot() {
   const localRootFolder = useStore.getState().localRoot; // TODO: let user set localRootFolder dynamically
   try {
     if ((await FileSystem.exists(localRootFolder)) === false) {

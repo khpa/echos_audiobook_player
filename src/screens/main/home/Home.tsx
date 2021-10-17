@@ -9,7 +9,9 @@ import {CompBottomTabsNavProp} from '../../../navigation/types/props';
 
 // TODO: Look into fluid transition between Home and AudioRoutes (https://reactnavigation.org/docs/community-libraries-and-navigators)
 
-const Home = ({navigation}: CompBottomTabsNavProp<'Home'>) => {
+type Props = CompBottomTabsNavProp<'Home'>;
+
+export const Home = ({navigation}: Props) => {
   const tabBarHeight = useBottomTabBarHeight();
 
   useEffect(() => {
@@ -28,8 +30,6 @@ const Home = ({navigation}: CompBottomTabsNavProp<'Home'>) => {
     </View>
   );
 };
-
-export default Home;
 
 const styles = StyleSheet.create({
   container: {

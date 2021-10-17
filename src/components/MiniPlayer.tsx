@@ -4,10 +4,10 @@ import {useNavigation} from '@react-navigation/native';
 import {View, StyleSheet, Button} from 'react-native';
 
 // internal dependencies
-import {width} from '../../assets/theme';
-import useStore from '../../store/useStore';
+import {width} from '../assets/theme';
+import useStore from '../store/useStore';
 
-const MiniPlayer = () => {
+export const MiniPlayer = () => {
   const tabBarHeight = useStore(state => state.tabBarHeight);
   const hasActiveAlbum = useStore.getState().hasActiveAlbum;
   const navigation = useNavigation<any>();
@@ -25,8 +25,6 @@ const MiniPlayer = () => {
     return null;
   }
 };
-
-export default MiniPlayer;
 
 const styles = StyleSheet.create({
   container: {

@@ -5,9 +5,11 @@ import {CommonActions} from '@react-navigation/routers';
 
 // internal dependencies
 import useStore from '../../store/useStore';
-import {MainStackNavProp} from '../../navigation/types/props';
+import {MainStackNavProp} from '../../navigation/types';
 
-export function AudioPlayer({navigation}: MainStackNavProp<'AudioPlayer'>) {
+type Props = MainStackNavProp<'AudioPlayer'>;
+
+export function AudioPlayer({navigation}: Props) {
   return (
     <View>
       <Text>AudioPlayer</Text>
@@ -26,5 +28,3 @@ export function AudioPlayer({navigation}: MainStackNavProp<'AudioPlayer'>) {
     </View>
   );
 }
-
-export default AudioPlayer;

@@ -3,9 +3,11 @@ import React from 'react';
 import {View, Text} from 'react-native';
 
 // internal dependencies
-import {CompBottomTabsNavProp} from '../../../navigation/types/props';
+import {CompBottomTabsNavProp} from '../../../navigation/types';
 
-export function Analytics({navigation}: CompBottomTabsNavProp<'Analytics'>) {
+type Props = CompBottomTabsNavProp<'Analytics'>;
+
+export function Analytics({navigation}: Props) {
   return (
     <View>
       <Text>Analytics</Text>

@@ -3,9 +3,11 @@ import * as React from 'react';
 import {View, Button, StyleSheet, Text} from 'react-native';
 
 // internal dependencies
-import {CompAuthStackNavProps} from '../../navigation/types/props';
+import {CompAuthStackNavProps} from '../../navigation/types';
 
-export function Welcome({navigation}: CompAuthStackNavProps<'Welcome'>) {
+type Props = CompAuthStackNavProps<'Welcome'>;
+
+export const Welcome = ({navigation}: Props) => {
   return (
     <View style={styles.container}>
       <Text>Welcome</Text>
@@ -15,7 +17,7 @@ export function Welcome({navigation}: CompAuthStackNavProps<'Welcome'>) {
       />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

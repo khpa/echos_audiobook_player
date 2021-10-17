@@ -1,38 +1,18 @@
 // external dependencies
 import React, {useEffect, useState} from 'react';
-import {View, Text, TextInput, FlatList} from 'react-native';
-// @ts-ignore
-import {BookSearch} from 'react-native-google-books';
+import {View, TextInput, FlatList, StyleSheet} from 'react-native';
 
 // internal dependencies
 import {width} from '../../../assets/theme';
-import {config} from '../../../assets/config';
-import {CompLibraryStackNavProp} from '../../../navigation/types/props';
+import {searchGoogleBooks} from '../../../data';
+import {SearchResultItem} from '../../../components';
+import {CompLibraryStackNavProp} from '../../../navigation/types';
 
-export const AddAlbum = ({navigation}: CompLibraryStackNavProp<'AddAlbum'>) => {
+type Props = CompLibraryStackNavProp<'AddAlbum'>;
+
+export const AddAlbum = ({navigation}: Props) => {
   const [searchString, onChangeText] = useState<string>('');
   const [searchResults, setSearchResults] = useState<any[]>([]);
-
-  async function searchGoogleBooks(searchString: string) {
-    if (searchString.length > 2) {
-      try {
-        const books = await BookSearch.searchbook(
-          searchString,
-          config.googleBooksApi.key,
-        );
-        return books.data;
-      } catch {
-        return [];
-      }
-    }
-  }
-  const renderItem = ({item}: {item: any}) => {
-    return (
-      <View key={item.id} style={{flex: 1}}>
-        <Text>{item.volumeInfo.title}</Text>
-      </View>
-    );
-  };
 
   useEffect(() => {
     searchGoogleBooks(searchString).then((res: any[]) => {
@@ -41,16 +21,9 @@ export const AddAlbum = ({navigation}: CompLibraryStackNavProp<'AddAlbum'>) => {
   }, [searchString]);
 
   return (
-    <View style={{flex: 1}}>
-      <Text>AddAlbum</Text>
+    <View style={styles.container}>
       <TextInput
-        style={{
-          height: 40,
-          width: width - 20,
-          backgroundColor: 'white',
-          color: 'black',
-          borderRadius: 10,
-        }}
+        style={styles.textInputField}
         onChangeText={input => {
           onChangeText(input);
         }}
@@ -58,17 +31,33 @@ export const AddAlbum = ({navigation}: CompLibraryStackNavProp<'AddAlbum'>) => {
       />
       <FlatList
         data={searchResults}
-        style={{
-          flex: 1,
-          paddingTop: 100,
-          padding: 5,
-          width: '100%',
-          backgroundColor: 'gray',
-          alignSelf: 'center',
-        }}
-        renderItem={renderItem}
+        style={styles.albumList}
+        renderItem={SearchResultItem}
         keyExtractor={item => item.id}
       />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textInputField: {
+    height: 40,
+    width: width - 20,
+    backgroundColor: 'white',
+    color: 'black',
+    borderRadius: 10,
+  },
+  albumList: {
+    flex: 1,
+    paddingTop: 100,
+    padding: 5,
+    width: '100%',
+    backgroundColor: 'gray',
+    alignSelf: 'center',
+  },
+});
