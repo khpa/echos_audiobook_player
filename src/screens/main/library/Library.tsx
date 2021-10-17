@@ -3,9 +3,9 @@ import React, {useEffect} from 'react';
 import {View, Text, Button} from 'react-native';
 
 // internal dependencies
-import {getLocalLibrary} from '../../data/android/getLocalLibrary';
-import {handlePermissions} from '../../data/handlePermissions';
-import {CompLibraryStackNavProp} from '../../navigation/types/props';
+import {getLocalLibrary} from '../../../data/android/getLocalLibrary';
+import {handlePermissions} from '../../../data/handlePermissions';
+import {CompLibraryStackNavProp} from '../../../navigation/types/props';
 
 export const Library = ({navigation}: CompLibraryStackNavProp<'Library'>) => {
   // check permissions and load available libraries

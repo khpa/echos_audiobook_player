@@ -3,7 +3,7 @@ import * as React from 'react';
 import {View, Button, StyleSheet, Text} from 'react-native';
 
 // internal dependencies
-import {CompAuthStackNavProps} from '../navigation/types/props';
+import {CompAuthStackNavProps} from '../../navigation/types/props';
 
 export function Welcome({navigation}: CompAuthStackNavProps<'Welcome'>) {
   return (

@@ -5,9 +5,9 @@ import {View, Text, TextInput, FlatList} from 'react-native';
 import {BookSearch} from 'react-native-google-books';
 
 // internal dependencies
-import {width} from '../../assets/theme';
-import {config} from '../../assets/config';
-import {CompLibraryStackNavProp} from '../../navigation/types/props';
+import {width} from '../../../assets/theme';
+import {config} from '../../../assets/config';
+import {CompLibraryStackNavProp} from '../../../navigation/types/props';
 
 export const AddAlbum = ({navigation}: CompLibraryStackNavProp<'AddAlbum'>) => {
   const [searchString, onChangeText] = useState<string>('');

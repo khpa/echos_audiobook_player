@@ -3,8 +3,8 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
 // internal dependencies
-import {Login} from '../../auth/Login';
-import {Welcome} from '../../auth/Welcome';
+import {Login} from '../../screens/auth/Login';
+import {Welcome} from '../../screens/auth/Welcome';
 import {AuthStackParamList} from '../types/params';
 
 const AuthStack = createStackNavigator<AuthStackParamList>();

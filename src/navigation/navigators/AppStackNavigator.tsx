@@ -3,8 +3,8 @@ import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
 // internal dependencies
-import MiniPlayer from '../../main/audio/MiniPlayer';
-import AudioPlayer from '../../main/audio/AudioPlayer';
+import MiniPlayer from '../../screens/audio/MiniPlayer';
+import AudioPlayer from '../../screens/audio/AudioPlayer';
 import {BottomTabsNavigator, AuthStackNavigator} from '..';
 import {AppStackParamList, MainStackParamList} from '../types/params';
 

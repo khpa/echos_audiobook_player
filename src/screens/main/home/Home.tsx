@@ -4,8 +4,8 @@ import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import {Text, View, StyleSheet, Button} from 'react-native';
 
 // internal dependencies
-import useStore from '../../store/useStore';
-import {CompBottomTabsNavProp} from '../../navigation/types/props';
+import useStore from '../../../store/useStore';
+import {CompBottomTabsNavProp} from '../../../navigation/types/props';
 
 // TODO: Look into fluid transition between Home and AudioRoutes (https://reactnavigation.org/docs/community-libraries-and-navigators)
 

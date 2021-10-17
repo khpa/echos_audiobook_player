@@ -3,9 +3,9 @@ import React from 'react';
 import {View, Text} from 'react-native';
 
 // internal dependencies
-import {BottomTabsNavProp} from '../../navigation/types/props';
+import {CompBottomTabsNavProp} from '../../../navigation/types/props';
 
-export function Settings({navigation}: BottomTabsNavProp<'Settings'>) {
+export function Settings({navigation}: CompBottomTabsNavProp<'Settings'>) {
   return (
     <View>
       <Text>Settings</Text>

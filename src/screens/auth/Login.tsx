@@ -3,7 +3,7 @@ import React from 'react';
 import {View, Text, StyleSheet, Button} from 'react-native';
 
 // internal dependencies
-import {CompAuthStackNavProps} from '../navigation/types/props';
+import {CompAuthStackNavProps} from '../../navigation/types/props';
 
 export function Login({navigation}: CompAuthStackNavProps<'Login'>) {
   return (
