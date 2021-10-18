@@ -1,27 +1,21 @@
 // external dependencies
-import create from 'zustand';
-import {persist} from 'zustand/middleware';
+import create from "zustand";
+import {persist} from "zustand/middleware";
 
 // internal dependencies
-import {
-  LocalDeviceSlice,
-  AudioPlayerSlice,
-  createLocalDeviceSlice,
-  createAudioPlayerSlice,
-} from './slices';
+import type {LocalDeviceSlice, AudioPlayerSlice} from "./slices";
+import {createLocalDeviceSlice, createAudioPlayerSlice} from "./slices";
 
 export type StoreState = LocalDeviceSlice & AudioPlayerSlice;
 
-const useStore = create<StoreState>(
+export const useStore = create<StoreState>(
   persist(
     (set, get) => ({
       ...createLocalDeviceSlice(set, get),
       ...createAudioPlayerSlice(set, get),
     }),
     {
-      name: 'store',
+      name: "store",
     },
   ),
 );
-
-export default useStore;

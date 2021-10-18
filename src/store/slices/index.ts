@@ -1,2 +1,9 @@
-export * from './createAudioPlayerSlice';
-export * from './createLocalDeviceSlice';
+export {
+  createAudioPlayerSlice,
+  AudioPlayerSlice,
+} from "./createAudioPlayerSlice";
+
+export {
+  createLocalDeviceSlice,
+  LocalDeviceSlice,
+} from "./createLocalDeviceSlice";

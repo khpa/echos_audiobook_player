@@ -1,5 +1,8 @@
-import {GetState, SetState} from 'zustand';
-import {StoreState} from '../useStore';
+// external dependencies
+import type {GetState, SetState} from "zustand";
+
+// internal dependencies
+import type {StoreState} from "../useStore";
 
 export interface LocalDeviceSlice {
   tabBarHeight: number | undefined;
@@ -11,5 +14,5 @@ export const createLocalDeviceSlice = (
   get: GetState<StoreState>,
 ) => ({
   tabBarHeight: undefined,
-  localRoot: '/storage/emulated/0/Documents/Echos',
+  localRoot: "/storage/emulated/0/Documents/Echos",
 });

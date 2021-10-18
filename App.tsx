@@ -1,22 +1,12 @@
+// ! needs to be imported at the top (https://reactnavigation.org/docs/stack-navigator)
+import "react-native-gesture-handler";
+
 // external dependencies
-import * as React from 'react';
-import {
-  NavigationContainer,
-  useNavigationContainerRef,
-} from '@react-navigation/native';
-import {useFlipper} from '@react-navigation/devtools';
+import * as React from "react";
 
 // internal dependencies
-import {Provider} from './src/navigation';
+import {Root} from "./src";
 
-export default function App() {
-  const navigationRef = useNavigationContainerRef();
-
-  // useFlipper(navigationRef);
-
-  return (
-    <NavigationContainer ref={navigationRef}>
-      <Provider />
-    </NavigationContainer>
-  );
+export function App() {
+  return <Root />;
 }
