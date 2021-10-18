@@ -1,4 +1,5 @@
-// ! needs to be imported at the top (https://reactnavigation.org/docs/stack-navigator)
+// ! needs to be imported at the top
+// https://reactnavigation.org/docs/stack-navigator
 import "react-native-gesture-handler";
 
 // external dependencies
