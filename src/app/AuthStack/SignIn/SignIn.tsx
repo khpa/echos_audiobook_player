@@ -1,25 +1,17 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // external dependencies
 import React from "react";
 import {View, Text, StyleSheet, Button} from "react-native";
 
-type Props = {
-  navigation: any;
-};
+// internal dependencies
+import {useAuth} from "../../../context/AuthProvider";
 
-export const SignIn = ({navigation}: Props) => {
+export const SignIn = () => {
+  const {signIn} = useAuth();
+
   return (
     <View style={styles.container}>
       <Text>Login</Text>
-      <Button
-        title="Login"
-        onPress={() =>
-          navigation.navigate("Main", {
-            screen: "BottomTabs",
-            params: {screen: "Home"},
-          })
-        }
-      />
+      <Button title="Login" onPress={() => signIn()} />
     </View>
   );
 };

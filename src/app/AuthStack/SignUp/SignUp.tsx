@@ -1,19 +1,17 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // external dependencies
 import * as React from "react";
 import {View, Button, StyleSheet, Text} from "react-native";
 
-type Props = {
-  navigation: any;
-};
+// internal dependencies
+import type {AuthNavProps} from "../../components/navigation";
 
-export const SignUp = ({navigation}: Props) => {
+export const SignUp = ({navigation}: AuthNavProps<"SignUp">) => {
   return (
     <View style={styles.container}>
       <Text>SignUp</Text>
       <Button
         title="Go to Login"
-        onPress={() => navigation.navigate("Login")}
+        onPress={() => navigation.navigate("SignIn")}
       />
     </View>
   );

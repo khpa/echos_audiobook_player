@@ -1,3 +1,5 @@
+//TODO: Add theme provider based on '../assets/theme'
+
 // external dependencies
 import React from "react";
 import {NavigationContainer} from "@react-navigation/native";
@@ -6,15 +8,16 @@ import {GestureHandlerRootView} from "react-native-gesture-handler";
 
 // internal dependencies
 import {AppStackScreen} from "./app";
-
-//TODO: Add theme provider based on '../assets/theme'
+import {AuthProvider} from "./context/AuthProvider";
 
 export const Root = () => {
   return (
     <GestureHandlerRootView style={{flex: 1}}>
       <NavigationContainer>
         <SafeAreaProvider>
-          <AppStackScreen />
+          <AuthProvider>
+            <AppStackScreen />
+          </AuthProvider>
         </SafeAreaProvider>
       </NavigationContainer>
     </GestureHandlerRootView>

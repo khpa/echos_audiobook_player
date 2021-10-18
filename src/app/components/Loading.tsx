@@ -1,11 +1,20 @@
 // external dependencies
 import * as React from "react";
-import {Text, View} from "react-native";
+import {ActivityIndicator, StyleSheet, View} from "react-native";
 
 export const Loading = () => {
   return (
-    <View>
-      <Text>Splash Screen</Text>
+    <View style={styles.container}>
+      <ActivityIndicator size="large" />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});

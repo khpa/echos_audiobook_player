@@ -2,23 +2,26 @@
 import * as React from "react";
 import {createStackNavigator} from "@react-navigation/stack";
 
+// context
+import {useAuth} from "../context/AuthProvider";
+
 // internal dependencies
 import {MainTabsScreen} from "./MainTabs";
 import {AuthStackScreen} from "./AuthStack";
 import {Loading, AudioPlayer} from "./components";
 import {AddAlbumPopup} from "./MainTabs/Library/AddAlbum";
+import type {AppRoutes} from "./components";
 
-const AppStack = createStackNavigator();
+const AppStack = createStackNavigator<AppRoutes>();
 
 export const AppStackScreen = () => {
   const {Navigator, Screen, Group} = AppStack;
   const [isLoading, setIsLoading] = React.useState(true);
-  const [user, setUser] = React.useState<string | null>(null);
+  const {user} = useAuth();
 
   React.useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-      setUser("Micha");
     }, 500);
   }, []);
 
@@ -28,23 +31,15 @@ export const AppStackScreen = () => {
 
   return (
     <Navigator>
+      {user ? (
+        <Screen name="Main" component={MainTabsScreen} />
+      ) : (
+        <Screen name="Auth" component={AuthStackScreen} />
+      )}
       <Group>
-        {user ? (
-          <Screen name="Home" component={MainTabsScreen} />
-        ) : (
-          <Screen name="Auth" component={AuthStackScreen} />
-        )}
+        <Screen name="AudioPlayer" component={AudioPlayer} />
+        <Screen name="AddAlbumPopup" component={AddAlbumPopup} />
       </Group>
-      <Screen name="AudioPlayer" component={AudioPlayer} />
-      <Screen
-        name="AddAlbumPopup"
-        component={AddAlbumPopup}
-        options={{
-          headerShown: false,
-          cardStyle: {backgroundColor: "rgba(0, 0, 0, 0.15)"},
-          cardOverlayEnabled: true,
-        }}
-      />
     </Navigator>
   );
 };

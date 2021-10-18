@@ -3,3 +3,4 @@ export {config} from "./config";
 export {theme, height, width} from "./Theme";
 export {MiniPlayer} from "./MiniPlayer";
 export {AudioPlayer} from "./AudioPlayer";
+export {AppRoutes, AuthRoutes, MainRoutes} from "./navigation";
