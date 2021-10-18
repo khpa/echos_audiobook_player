@@ -8,7 +8,7 @@ import {SafeAreaProvider} from "react-native-safe-area-context";
 import {GestureHandlerRootView} from "react-native-gesture-handler";
 
 // internal dependencies
-import {AppStackScreen} from "./app";
+import {AppStackScreen} from "./App";
 import {AuthProvider} from "./context/AuthProvider";
 
 export const Root = () => {
