@@ -1,4 +1,5 @@
-//TODO: Add theme provider based on '../assets/theme'
+// TODO: Add theme provider based on '../assets/theme'
+// TODO: Check if the GestureHandler even does something
 
 // external dependencies
 import React from "react";
