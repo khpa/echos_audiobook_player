@@ -1,19 +1,24 @@
+// TODO: list all folders in localRoot
+// TODO: let user set localRootFolder dynamically
+// TODO: get local library, online library and store them in AsyncStorage (where it makes sense)
+
 // external dependencies
 import {Alert} from "react-native";
 import {FileSystem} from "react-native-file-access";
 
 // internal dependencies
-import useStore from "../../../../store/useStore";
+import {useStore} from "../../../../store/useStore";
 
-// Todo: list all folders in localRoot
-// TODO: let user set localRootFolder dynamically
+export async function getLibrary() {
+  await getLocalLibrary();
+}
 
-export const getLocalLibrary = async () => {
+async function getLocalLibrary() {
   await handleLocalRoot();
-};
+}
 
 // checking if local root exists and if not, create it
-export async function handleLocalRoot() {
+async function handleLocalRoot() {
   const localRootFolder = useStore.getState().localRoot;
   try {
     if ((await FileSystem.exists(localRootFolder)) === false) {

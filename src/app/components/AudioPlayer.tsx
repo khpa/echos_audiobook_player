@@ -4,7 +4,7 @@ import * as React from "react";
 import {View, Text, Button} from "react-native";
 
 // internal dependencies
-import useStore from "../../store/useStore";
+import {useStore} from "../../store/useStore";
 
 type Props = {
   navigation: any;

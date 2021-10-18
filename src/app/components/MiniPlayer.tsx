@@ -1,3 +1,5 @@
+// TODO: hasActiveAlbum should be in context not in store
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // external dependencies
 import React from "react";

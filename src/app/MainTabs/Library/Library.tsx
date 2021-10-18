@@ -1,32 +1,32 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // external dependencies
 import React, {useEffect} from "react";
-import {View, Text} from "react-native";
+import {View, Text, Button} from "react-native";
 
 // internal dependencies
-import {getLocalLibrary, handlePermissions} from "./components";
+import {getLibrary, handlePermissions} from "./components";
 
-export const Library = () => {
+type Props = {
+  navigation: any;
+};
+
+export const Library = ({navigation}: Props) => {
   useEffect(() => {
     handlePermissions();
-    loadLibrary();
+    getLibrary();
   }, []);
 
   return (
     <View>
       <Text>Library</Text>
-      {/* <Button
+      <Button
         title="Go to Audio"
-        onPress={() => navigation.navigate('AudioPlayer')}
+        onPress={() => navigation.navigate("AudioPlayer")}
       />
       <Button
         title="Go to AddAlbum"
-        onPress={() => navigation.navigate('AddAlbum')}
-      /> */}
+        onPress={() => navigation.navigate("AddAlbum")}
+      />
     </View>
   );
 };
-
-// TODO: get local library, online library and store them in AsyncStorage (where it makes sense)
-async function loadLibrary() {
-  await getLocalLibrary();
-}
