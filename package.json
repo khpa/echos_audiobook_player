@@ -17,8 +17,9 @@
     "@react-navigation/devtools": "^6.0.4",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/stack": "^6.0.11",
+    "@types/react": "^17",
     "react": "17.0.2",
-    "react-native": "0.66.0",
+    "react-native": "0.66.1",
     "react-native-file-access": "^2.0.0",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-google-books": "^1.0.4",
@@ -31,13 +32,13 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
-    "@types/react-native": "^0.65.0",
-    "eslint": "^7.14.0",
+    "@types/react-native": "^0.66.1",
+    "eslint": "^8.1.0",
     "eslint-config-react-native-wcandillon": "^3.7.0",
     "eslint-plugin-prettier": "^4.0.0",
     "metro-react-native-babel-preset": "^0.66.2",
     "prettier": "2.4.1",
-    "react-native-flipper": "^0.115.0",
+    "react-native-flipper": "^0.117.0",
     "typescript": "^4.4.4"
   },
   "resolutions": {
