@@ -4,13 +4,10 @@ import * as React from "react";
 import {View, Text, Button} from "react-native";
 
 // internal dependencies
-import {useStore} from "../../store/useStore";
+import {useStore} from "../../../store/useStore";
+import {MainNavProps} from "../../components/navigation";
 
-type Props = {
-  navigation: any;
-};
-
-export const AudioPlayer = ({navigation}: Props) => {
+export const AudioPlayer = ({navigation}: MainNavProps<"AudioStack">) => {
   return (
     <View>
       <Text>AudioPlayer</Text>

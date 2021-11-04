@@ -9,12 +9,9 @@ import {useBottomTabBarHeight} from "@react-navigation/bottom-tabs";
 
 // internal dependencies
 import {useStore} from "../../../store/useStore";
+import {MainNavProps} from "../../components/navigation";
 
-type Props = {
-  navigation: any;
-};
-
-export const Home = ({navigation}: Props) => {
+export const Home = ({navigation}: MainNavProps<"MainTabs">) => {
   const tabBarHeight = useBottomTabBarHeight();
 
   useEffect(() => {
@@ -28,7 +25,9 @@ export const Home = ({navigation}: Props) => {
       <Text>Home</Text>
       <Button
         title="Go to Audio"
-        onPress={() => navigation.navigate("AudioPlayer")}
+        onPress={() =>
+          navigation.navigate("AudioStack", {screen: "AudioPlayer"})
+        }
       />
     </View>
   );

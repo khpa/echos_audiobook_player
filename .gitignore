@@ -1,7 +1,3 @@
-
-# config files
-src/app/components/config.ts
-
 # OSX
 .DS_Store
 

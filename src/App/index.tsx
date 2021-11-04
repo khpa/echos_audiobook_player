@@ -6,10 +6,9 @@ import {createStackNavigator} from "@react-navigation/stack";
 import {useAuth} from "../context/AuthProvider";
 
 // internal dependencies
-import {MainTabsScreen} from "./MainTabs";
+import {MainStackScreen} from "./MainStack";
 import {AuthStackScreen} from "./AuthStack";
-import {Loading, AudioPlayer} from "./components";
-import {AddAlbumPopup} from "./MainTabs/Library/AddAlbum";
+import {Loading} from "./components";
 import type {AppRoutes} from "./components";
 
 const AppStack = createStackNavigator<AppRoutes>();
@@ -30,16 +29,16 @@ export const AppStackScreen = () => {
   }
 
   return (
-    <Navigator>
+    <Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       {user ? (
-        <Screen name="Main" component={MainTabsScreen} />
+        <Screen name="Main" component={MainStackScreen} />
       ) : (
         <Screen name="Auth" component={AuthStackScreen} />
       )}
-      <Group>
-        <Screen name="AudioPlayer" component={AudioPlayer} />
-        <Screen name="AddAlbumPopup" component={AddAlbumPopup} />
-      </Group>
     </Navigator>
   );
 };

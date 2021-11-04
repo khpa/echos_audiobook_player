@@ -13,11 +13,11 @@
   },
   "dependencies": {
     "@babel/preset-env": "^7.1.6",
+    "@react-native-async-storage/async-storage": "^1.15.9",
     "@react-navigation/bottom-tabs": "^6.0.9",
-    "@react-navigation/devtools": "^6.0.4",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/stack": "^6.0.11",
-    "@types/react": "^17",
+    "immer": "^9.0.6",
     "react": "17.0.2",
     "react-native": "0.66.1",
     "react-native-file-access": "^2.0.0",
@@ -32,6 +32,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "@babel/runtime": "^7.12.5",
+    "@types/react": "^17.0.33",
     "@types/react-native": "^0.66.1",
     "eslint": "^8.1.0",
     "eslint-config-react-native-wcandillon": "^3.7.0",

@@ -1,4 +1,4 @@
-// TODO: hasActiveAlbum should be in context not in store
+// TODO - hasActiveAlbum should be in a context not in store
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // external dependencies
@@ -6,25 +6,22 @@ import React from "react";
 import {View, StyleSheet, Button} from "react-native";
 
 // internal dependencies
-import {useStore} from "../../store/useStore";
+import {useStore} from "../../../store/useStore";
 
 // components
-import {width} from "./Theme";
+import {width} from "../../components/Theme";
 
-type Props = {
-  navigation: any;
-};
-
-export const MiniPlayer = ({navigation}: Props) => {
+export const MiniPlayer = () => {
   const tabBarHeight = useStore(state => state.tabBarHeight);
   const {hasActiveAlbum} = useStore.getState();
 
+  // console.log(navigation.setOptions);
   if (hasActiveAlbum && tabBarHeight) {
     return (
       <View style={[styles.container, {bottom: tabBarHeight + 5}]}>
         <Button
           title="Play"
-          onPress={() => navigation.navigate("AudioPlayer")}
+          onPress={() => console.info("go to AudioPlayer")}
         />
       </View>
     );

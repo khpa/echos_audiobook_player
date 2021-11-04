@@ -14,11 +14,12 @@ export async function getLibrary() {
 }
 
 async function getLocalLibrary() {
-  await handleLocalRoot();
+  await createLocalRoot();
+  await refreshLocalLibrary();
 }
 
 // checking if local root exists and if not, create it
-async function handleLocalRoot() {
+async function createLocalRoot() {
   const localRootFolder = useStore.getState().localRoot;
   try {
     if ((await FileSystem.exists(localRootFolder)) === false) {
@@ -30,5 +31,16 @@ async function handleLocalRoot() {
     }
   } catch (err) {
     console.log(err);
+  }
+}
+
+async function refreshLocalLibrary() {
+  const localRootFolder = useStore.getState().localRoot;
+  try {
+    const localLibrary = await FileSystem.ls(localRootFolder);
+    return localLibrary;
+  } catch (err) {
+    console.log(err);
+    return [];
   }
 }
