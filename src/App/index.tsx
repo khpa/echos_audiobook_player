@@ -14,7 +14,7 @@ import type {AppRoutes} from "./components";
 const AppStack = createStackNavigator<AppRoutes>();
 
 export const AppStackScreen = () => {
-  const {Navigator, Screen, Group} = AppStack;
+  const {Navigator, Screen} = AppStack;
   const [isLoading, setIsLoading] = React.useState(true);
   const {user} = useAuth();
 

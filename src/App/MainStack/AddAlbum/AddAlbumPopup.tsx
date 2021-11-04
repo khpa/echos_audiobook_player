@@ -14,14 +14,19 @@ export const AddAlbumPopup = ({navigation, route}: any) => {
   const newAlbum = route.params?.album.volumeInfo;
   const store = useStore();
 
+  const ISBN_13 = newAlbum.industryIdentifiers.find(
+    (identifier: any) => identifier.type === "ISBN_13",
+  ).identifier;
+
   const album = {
-    id: newAlbum.industryIdentifiers.find(
-      (identifier: any) => identifier.type === "ISBN_13",
-    ).identifier,
+    id: ISBN_13,
     title: newAlbum.title,
-    image: newAlbum.imageLinks.extraLarge,
+    image: newAlbum.imageLinks.extraLarge
+      ? newAlbum.imageLinks.extraLarge
+      : newAlbum.imageLinks.thumbnail,
   };
 
+  console.log(newAlbum);
   return (
     <View style={styles.container}>
       <View>
@@ -33,7 +38,8 @@ export const AddAlbumPopup = ({navigation, route}: any) => {
         onPress={() => {
           createNewFolder(album);
           store.addAlbum(album);
-          navigation.popToTop();
+          navigation.pop();
+          navigation.navigate("Library");
         }}
       />
       <Button

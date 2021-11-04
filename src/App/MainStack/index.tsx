@@ -1,6 +1,7 @@
 // external dependencies
 import * as React from "react";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 // components
 import {MainRoutes, TabRoutes} from "../components";
@@ -21,9 +22,44 @@ export const MainTabsScreen = () => {
   return (
     <>
       <Navigator screenOptions={{headerShown: false}}>
-        <Screen name="HomeStack" component={HomeStackScreen} />
-        <Screen name="LibraryStack" component={LibraryStackScreen} />
-        <Screen name="AddAlbumStack" component={AddAlbumStackScreen} />
+        <Screen
+          name="HomeStack"
+          component={HomeStackScreen}
+          options={{
+            title: "Home",
+            tabBarIcon: ({color, size}) => (
+              <MaterialCommunityIcons name="home" color={color} size={size} />
+            ),
+          }}
+        />
+        <Screen
+          name="LibraryStack"
+          component={LibraryStackScreen}
+          options={{
+            title: "Library",
+            tabBarIcon: ({color, size}) => (
+              <MaterialCommunityIcons
+                name="bookshelf"
+                color={color}
+                size={size}
+              />
+            ),
+          }}
+        />
+        <Screen
+          name="AddAlbumStack"
+          component={AddAlbumStackScreen}
+          options={{
+            title: "Search",
+            tabBarIcon: ({color, size}) => (
+              <MaterialCommunityIcons
+                name="magnify"
+                color={color}
+                size={size}
+              />
+            ),
+          }}
+        />
       </Navigator>
       <MiniPlayer />
     </>

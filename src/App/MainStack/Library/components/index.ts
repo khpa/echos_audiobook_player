@@ -1,2 +1,2 @@
-export {getLibrary} from "./getLibrary";
+export {checkRootFolder} from "./checkRootFolder";
 export {handlePermissions} from "./handlePermissions";

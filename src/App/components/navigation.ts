@@ -41,7 +41,7 @@ export type TabRoutes = {
   Library: undefined;
   AddAlbum: undefined;
   AddAlbumPopup: {
-    selectedBook: {
+    album: {
       id: string;
       title: string;
       subtitle: string;

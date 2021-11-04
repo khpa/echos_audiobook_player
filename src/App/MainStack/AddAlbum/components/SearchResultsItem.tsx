@@ -17,8 +17,7 @@ export const SearchResultsItem = ({item, navigation}: any) => {
     const bookDetails = await fetch(item.selfLink).then(response =>
       response.json(),
     );
-    // console.log(bookDetails);
-    navigation.navigate("AddAlbumPopup", {album: bookDetails});
+    navigation.navigate("AddAlbumPopup", {album: bookDetails.volumeInfo});
   }
 
   return (
@@ -83,7 +82,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "black",
   },
-
   text: {
     paddingTop: 20,
     textAlign: "auto",
