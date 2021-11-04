@@ -7,11 +7,11 @@ import {Album} from "../../../../store/slices/createLibrarySlice";
 import {useStore} from "../../../../store/useStore";
 
 export const createNewFolder = async (newAlbum: Album) => {
-  await createLocalFolder(newAlbum);
+  const folderName = newAlbum.title;
+  await createLocalFolder(folderName);
 };
 
-const createLocalFolder = async (newAlbum: Album) => {
-  const folderName = newAlbum.title;
+const createLocalFolder = async (folderName: string) => {
   const localRootFolder = useStore.getState().localRoot;
   const folderPath = `${localRootFolder}/${folderName}`;
 

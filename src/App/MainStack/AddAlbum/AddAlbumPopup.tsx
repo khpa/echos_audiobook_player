@@ -1,3 +1,5 @@
+// TODO - Only the add or the remove function should be shown, depending on the state
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // external dependencies
 import * as React from "react";
@@ -8,23 +10,15 @@ import {useStore} from "../../../store/useStore";
 import {height} from "../../components";
 import {createNewFolder, removeFolder} from "./components";
 
-export type Album = {
-  isbn13: string;
-  title: string;
-  image: string;
-};
-
-export const AddAlbumPopup = ({route}: any) => {
+export const AddAlbumPopup = ({navigation, route}: any) => {
   const newAlbum = route.params?.album.volumeInfo;
-  // const {addAlbum, removeAlbum} = useStore();
-
-  const isbn13 = newAlbum.industryIdentifiers.find(
-    (identifier: any) => identifier.type === "ISBN_13",
-  ).identifier;
+  const store = useStore();
 
   const album = {
+    id: newAlbum.industryIdentifiers.find(
+      (identifier: any) => identifier.type === "ISBN_13",
+    ).identifier,
     title: newAlbum.title,
-    isbn13: isbn13,
     image: newAlbum.imageLinks.extraLarge,
   };
 
@@ -38,14 +32,17 @@ export const AddAlbumPopup = ({route}: any) => {
         title="Add Album"
         onPress={() => {
           createNewFolder(album);
-          // addAlbum(album);
+          store.addAlbum(album);
+          navigation.popToTop();
         }}
       />
       <Button
         title="Remove Album"
         onPress={() => {
           removeFolder(album);
-          // removeAlbum(isbn13);
+          store.removeAlbum(album.id);
+          navigation.pop();
+          navigation.navigate("Library");
         }}
       />
     </View>

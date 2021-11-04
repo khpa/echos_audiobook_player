@@ -1,35 +1,36 @@
 // external dependencies
-import type {GetState, SetState} from "zustand";
+import type {SetState} from "zustand";
 
 // internal dependencies
 import type {StoreState} from "../useStore";
 
 export type Album = {
-  isbn13: string;
+  id: string;
   title: string;
   image: string;
 };
 
-export interface LibrarySlice {
+export type LibrarySlice = {
   library: Album[];
   addAlbum: (album: Album) => void;
-  removeAlbum: (isbn13: string) => void;
-}
+  removeAlbum: (id: string) => void;
+};
 
-export const createLibrarySlice = (
-  set: SetState<StoreState>,
-  get: GetState<StoreState>,
-) => ({
-  library: [],
-  addAlbum: (album: Album) => {
-    set(state => ({
-      library: [...state.library, album],
-    }));
-  },
-  removeAlbum: (isbn13: string) => {
-    set(state => ({
-      ...state,
-      library: state.library.filter(album => album.isbn13 !== isbn13),
-    }));
-  },
-});
+export const createLibrarySlice = (set: SetState<StoreState>) => {
+  return {
+    library: [],
+    addAlbum: (album: Album) => {
+      set(state => {
+        if (state.library.find(a => a.id === album.id)) {
+          return;
+        }
+        state.library.push(album);
+      });
+    },
+    removeAlbum: (id: string) => {
+      set(state => {
+        state.library = state.library.filter(album => album.id !== id);
+      });
+    },
+  };
+};
