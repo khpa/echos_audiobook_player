@@ -8,14 +8,15 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   Image,
+  FlatList,
 } from "react-native";
-import {TabNavProps} from "../../components/navigation";
+import {TabNavProps} from "../../../components/navigation";
 
 // internal dependencies
-import {handlePermissions, checkRootFolder} from "./components";
-import {useStore} from "../../../store/useStore";
-import {FlatList} from "react-native-gesture-handler";
-import {width} from "../../components";
+import {handlePermissions} from "./handlePermissions";
+import {checkRootFolder} from "./checkRootFolder";
+import {useStore} from "../../../../store/useStore";
+import {width} from "../../../components";
 
 export const Library = ({navigation}: TabNavProps<"Library">) => {
   const store = useStore();

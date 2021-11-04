@@ -1,5 +1,6 @@
 // external dependencies
 import * as React from "react";
+import {createStackNavigator} from "@react-navigation/stack";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
@@ -9,7 +10,6 @@ import {MainRoutes, TabRoutes} from "../components";
 // internal dependencies
 import {HomeStackScreen} from "./HomeStack";
 import {LibraryStackScreen} from "./LibraryStack";
-import {createStackNavigator} from "@react-navigation/stack";
 import {AudioStackScreen} from "./AudioStack";
 import {MiniPlayer} from "./AudioStack/MiniPlayer";
 import {SearchStackScreen} from "./SearchStack";

@@ -4,12 +4,15 @@
 // external dependencies
 import * as React from "react";
 import {Button, StyleSheet, Text, View} from "react-native";
-import {useStore} from "../../../store/useStore";
+import {useStore} from "../../../../store/useStore";
 
 // internal dependencies
-import {height} from "../../components";
-import {Album} from "../components/types";
-import {createNewFolder, removeFolder} from "./components";
+import {height} from "../../../components";
+import {createNewFolder} from "./createNewFolder";
+import {removeFolder} from "./removeFolder";
+
+// types
+import type {Album} from "../../../components/types";
 
 export const AddAlbumPopup = ({navigation, route}: any) => {
   const newAlbum = route.params?.album.volumeInfo;

@@ -1,22 +1,28 @@
 // ! After initial search is conducted, the first item of an updated search is not clickable
 // TODO - Most likely a an issue with Flatlist + async, but not sure how to fix
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // external dependencies
 import React, {useEffect, useState} from "react";
 import {View, TextInput, FlatList, StyleSheet} from "react-native";
 
 // internal dependencies
-import type {BookSearchResults} from "./components";
-import {
-  SearchResultsItem,
-  searchGoogleBooks,
-  formatBookSearchResults,
-} from "./components";
+import {SearchResultsItem} from "./SearchResultsItem";
+import {searchGoogleBooks} from "./searchGoogleBooks";
+import {formatBookSearchResults} from "./formatBookSearchResults";
 
 // constants
-import {width} from "../../components";
-import {MainNavProps} from "../../components/navigation";
+import {width} from "../../../components";
+import {MainNavProps} from "../../../components/navigation";
+
+type BookSearchResults = {
+  id: string;
+  title: string;
+  subtitle?: string;
+  authors: string[];
+  description?: string;
+  imageLink?: string;
+  selfLink?: string;
+};
 
 export const AddAlbum = ({navigation}: MainNavProps<"MainTabs">) => {
   const [searchString, onChangeText] = useState<string>("");

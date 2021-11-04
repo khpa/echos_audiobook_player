@@ -1,10 +1,10 @@
 // external dependencies
 import {Alert} from "react-native";
 import {FileSystem} from "react-native-file-access";
-import {Album} from "../../components/types";
 
 // internal dependencies
 import {useStore} from "../../../../store/useStore";
+import type {Album} from "../../../components/types";
 
 export const createNewFolder = async (newAlbum: Album) => {
   const folderName = newAlbum.title;

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // external dependencies
 import * as React from "react";
 import {View, Text, Button} from "react-native";

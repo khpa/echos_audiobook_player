@@ -3,7 +3,7 @@ import type {SetState} from "zustand";
 
 // internal dependencies
 import type {StoreState} from "../useStore";
-import type {Album} from "../../App/MainStack/components/types";
+import type {Album} from "../../App/components/types";
 
 export type LibrarySlice = {
   library: Album[];

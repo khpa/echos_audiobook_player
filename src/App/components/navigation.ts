@@ -2,7 +2,7 @@
 import {StackNavigationProp} from "@react-navigation/stack";
 import type {NavigatorScreenParams, RouteProp} from "@react-navigation/native";
 import {BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
-import {Album} from "../MainStack/components/types";
+import {Album} from "./types";
 
 export interface MainNavProps<RouteName extends keyof MainRoutes> {
   navigation: StackNavigationProp<MainRoutes, RouteName>;
@@ -12,6 +12,11 @@ export interface MainNavProps<RouteName extends keyof MainRoutes> {
 export interface TabNavProps<RouteName extends keyof TabRoutes> {
   navigation: BottomTabNavigationProp<TabRoutes, RouteName>;
   route: RouteProp<TabRoutes, RouteName>;
+}
+
+export interface AuthNavProp<RouteName extends keyof AuthRoutes> {
+  navigation: StackNavigationProp<AuthRoutes, RouteName>;
+  route: RouteProp<AuthRoutes, RouteName>;
 }
 
 export interface AudioNavProp<RouteName extends keyof AudioRoutes> {
