@@ -11,11 +11,23 @@ import {height} from "../../../components";
 import {createNewFolder} from "./createNewFolder";
 import {removeFolder} from "./removeFolder";
 
-// types
-import type {Album} from "../../../components/types";
+export type Album = {
+  id: string;
+  title: string;
+  authors: [];
+  description: string;
+  image: string;
+  tracks: Track[];
+};
+
+export type Track = {
+  index: number;
+  title: string | undefined;
+  path: string;
+};
 
 export const AddAlbumPopup = ({navigation, route}: any) => {
-  const newAlbum = route.params?.album.volumeInfo;
+  const newAlbum = route.params?.album;
   const store = useStore();
 
   const ISBN_13 = newAlbum.industryIdentifiers.find(
@@ -25,9 +37,12 @@ export const AddAlbumPopup = ({navigation, route}: any) => {
   const album: Album = {
     id: ISBN_13,
     title: newAlbum.title,
+    authors: newAlbum.authors,
+    description: newAlbum.description,
     image: newAlbum.imageLinks.extraLarge
       ? newAlbum.imageLinks.extraLarge
       : newAlbum.imageLinks.thumbnail,
+    tracks: [],
   };
 
   return (
@@ -39,7 +54,7 @@ export const AddAlbumPopup = ({navigation, route}: any) => {
       <Button
         title="Add Album"
         onPress={() => {
-          createNewFolder(album);
+          // createNewFolder(album);
           store.addAlbum(album);
           navigation.pop();
           navigation.navigate("Library");
@@ -48,7 +63,7 @@ export const AddAlbumPopup = ({navigation, route}: any) => {
       <Button
         title="Remove Album"
         onPress={() => {
-          removeFolder(album);
+          // removeFolder(album);
           store.removeAlbum(album.id);
           navigation.pop();
           navigation.navigate("Library");

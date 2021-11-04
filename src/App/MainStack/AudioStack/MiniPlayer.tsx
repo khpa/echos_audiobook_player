@@ -7,14 +7,11 @@ import {View, StyleSheet, Button, TouchableWithoutFeedback} from "react-native";
 
 // internal dependencies
 import {useStore} from "../../../store/useStore";
-
-// components
 import {width} from "../../components/Theme";
 
 export const MiniPlayer = () => {
   const store = useStore();
 
-  console.log(store.activeAlbum);
   if (store.activeAlbum && store.tabBarHeight) {
     return (
       <TouchableWithoutFeedback

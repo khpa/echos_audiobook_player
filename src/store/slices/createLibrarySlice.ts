@@ -3,12 +3,13 @@ import type {SetState} from "zustand";
 
 // internal dependencies
 import type {StoreState} from "../useStore";
-import type {Album} from "../../App/components/types";
+import type {Album} from "../../App/MainStack/SearchStack/AddAlbumPopup/AddAlbumPopup";
 
 export type LibrarySlice = {
   library: Album[];
   addAlbum: (album: Album) => void;
   removeAlbum: (id: string) => void;
+  setTracks: (id: string, tracks: Album["tracks"]) => void;
 };
 
 export const createLibrarySlice = (set: SetState<StoreState>) => {
@@ -20,6 +21,15 @@ export const createLibrarySlice = (set: SetState<StoreState>) => {
           return;
         }
         state.library.push(album);
+      });
+    },
+    setTracks: (id: string, tracks: Album["tracks"]) => {
+      set(state => {
+        const album = state.library.find(a => a.id === id);
+        if (!album) {
+          return;
+        }
+        album.tracks = tracks;
       });
     },
     removeAlbum: (id: string) => {
