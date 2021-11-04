@@ -22,8 +22,8 @@ export type Album = {
 
 export type Track = {
   index: number;
-  title: string | undefined;
-  path: string;
+  title: string;
+  url: string;
 };
 
 export const AddAlbumPopup = ({navigation, route}: any) => {

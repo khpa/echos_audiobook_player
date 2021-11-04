@@ -3,11 +3,11 @@ import {FileSystem} from "react-native-file-access";
 
 // internal dependencies
 import {useStore} from "../../../../store/useStore";
-import {Track} from "../../SearchStack/AddAlbumPopup/AddAlbumPopup";
+import {Album, Track} from "../../SearchStack/AddAlbumPopup/AddAlbumPopup";
 
-export async function getAlbumTracks(folderName: string) {
+export async function getAlbumTracks(book: Album) {
   const localRootFolder = useStore.getState().localRoot;
-  const folderPath = `${localRootFolder}/${folderName}`;
+  const folderPath = `${localRootFolder}/${book.title}`;
   const rawTracks = await FileSystem.ls(folderPath);
 
   rawTracks.sort((a, b) => {
@@ -16,17 +16,23 @@ export async function getAlbumTracks(folderName: string) {
     return 0;
   });
 
-  let counter = 1;
+  let counter = 0;
   const tracks: Track[] = rawTracks.map(track => {
     const index = counter++;
-    const trackTitle = track.split(".m").shift();
-    const trackPath = `${folderPath}/${trackTitle}`;
+    const trackTitle = cleanTrack(track);
+    const trackUrl = `${folderPath}/${track}`;
+
     return {
       index,
       title: trackTitle,
-      path: trackPath,
+      url: trackUrl,
     };
   });
 
   return tracks;
+}
+
+function cleanTrack(track: string) {
+  const cleanTrack = track.split(".m").shift() || "";
+  return cleanTrack;
 }

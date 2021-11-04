@@ -9,3 +9,5 @@ export {
 } from "./createLocalDeviceSlice";
 
 export {createLibrarySlice, LibrarySlice} from "./createLibrarySlice";
+
+export {TrackPlayerSlice, createTrackPlayerSlice} from "./trackplayer";

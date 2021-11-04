@@ -5,9 +5,11 @@ import "react-native-gesture-handler";
 
 // external dependencies
 import {AppRegistry} from "react-native";
+import TrackPlayer from "react-native-track-player";
 
 // internal dependencies
 import {Root as App} from "./src";
 import {name as appName} from "./app.json";
 
 AppRegistry.registerComponent(appName, () => App);
+TrackPlayer.registerPlaybackService(() => require("./service"));

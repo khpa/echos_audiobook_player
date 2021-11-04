@@ -1,13 +1,19 @@
 // external dependencies
 import React, {useEffect} from "react";
 import {View, Text, StyleSheet, Image, ScrollView} from "react-native";
+import {TouchableWithoutFeedback} from "react-native-gesture-handler";
 import RenderHtml from "react-native-render-html";
+import TrackPlayer from "react-native-track-player";
 
 // internal dependencies
 import {useStore} from "../../../../store/useStore";
 import {width} from "../../../components";
 import {TabNavProps} from "../../../components/navigation";
 import {getAlbumTracks} from "./getAlbumTracks";
+
+//
+
+//
 
 export const BookDetails = ({route}: TabNavProps<"BookDetails">) => {
   const store = useStore();
@@ -16,14 +22,13 @@ export const BookDetails = ({route}: TabNavProps<"BookDetails">) => {
 
   useEffect(() => {
     async function fetchData() {
-      const tracks = await getAlbumTracks(book.title);
+      const tracks = await getAlbumTracks(book);
       store.setTracks(book.id, tracks);
     }
     fetchData();
   }, []);
 
   if (!currentBook) return <View />;
-
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Image source={{uri: currentBook.image}} style={styles.cover} />
@@ -38,9 +43,18 @@ export const BookDetails = ({route}: TabNavProps<"BookDetails">) => {
       />
       {currentBook.tracks &&
         currentBook.tracks.map(track => (
-          <Text key={track.index} style={styles.track}>
-            {track.title}
-          </Text>
+          <TouchableWithoutFeedback
+            key={track.url}
+            onPress={async () => {
+              await TrackPlayer.add(track);
+              store.updateActiveAlbum(true);
+              await TrackPlayer.pause();
+            }}
+          >
+            <Text key={track.index} style={styles.track} numberOfLines={1}>
+              {track.title}
+            </Text>
+          </TouchableWithoutFeedback>
         ))}
     </ScrollView>
   );
@@ -73,7 +87,8 @@ const styles = StyleSheet.create({
     color: "black",
   },
   track: {
-    fontSize: 14,
+    fontSize: 16,
     color: "grey",
+    margin: 20,
   },
 });
