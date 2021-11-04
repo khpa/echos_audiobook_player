@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // external dependencies
 import React from "react";
-import {View, StyleSheet, Button} from "react-native";
+import {View, StyleSheet, Button, TouchableWithoutFeedback} from "react-native";
 
 // internal dependencies
 import {useStore} from "../../../store/useStore";
@@ -12,18 +12,21 @@ import {useStore} from "../../../store/useStore";
 import {width} from "../../components/Theme";
 
 export const MiniPlayer = () => {
-  const tabBarHeight = useStore(state => state.tabBarHeight);
-  const {hasActiveAlbum} = useStore.getState();
+  const store = useStore();
 
-  // console.log(navigation.setOptions);
-  if (hasActiveAlbum && tabBarHeight) {
+  console.log(store.activeAlbum);
+  if (store.activeAlbum && store.tabBarHeight) {
     return (
-      <View style={[styles.container, {bottom: tabBarHeight + 5}]}>
-        <Button
-          title="Play"
-          onPress={() => console.info("go to AudioPlayer")}
-        />
-      </View>
+      <TouchableWithoutFeedback
+        onPress={() => {
+          console.info("go to AudioPlayer");
+        }}
+      >
+        <View style={[styles.container, {bottom: store.tabBarHeight + 5}]}>
+          <Button title="Play" onPress={() => console.log("play")} />
+          <Button title="Stop" onPress={() => store.updateActiveAlbum(false)} />
+        </View>
+      </TouchableWithoutFeedback>
     );
   } else {
     return null;

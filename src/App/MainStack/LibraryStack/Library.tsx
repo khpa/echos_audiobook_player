@@ -41,7 +41,9 @@ export const Library = ({navigation}: TabNavProps<"Library">) => {
         renderItem={({item}) => (
           <TouchableWithoutFeedback
             onPress={() => {
-              console.log(item);
+              navigation.navigate("BookDetails", {
+                book: item,
+              });
             }}
           >
             <Image source={{uri: item.image}} style={styles.image} />

@@ -8,6 +8,7 @@ import {useStore} from "../../../store/useStore";
 
 // internal dependencies
 import {height} from "../../components";
+import {Album} from "../components/types";
 import {createNewFolder, removeFolder} from "./components";
 
 export const AddAlbumPopup = ({navigation, route}: any) => {
@@ -18,7 +19,7 @@ export const AddAlbumPopup = ({navigation, route}: any) => {
     (identifier: any) => identifier.type === "ISBN_13",
   ).identifier;
 
-  const album = {
+  const album: Album = {
     id: ISBN_13,
     title: newAlbum.title,
     image: newAlbum.imageLinks.extraLarge
@@ -26,7 +27,6 @@ export const AddAlbumPopup = ({navigation, route}: any) => {
       : newAlbum.imageLinks.thumbnail,
   };
 
-  console.log(newAlbum);
   return (
     <View style={styles.container}>
       <View>

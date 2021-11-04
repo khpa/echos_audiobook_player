@@ -2,6 +2,7 @@
 import {StackNavigationProp} from "@react-navigation/stack";
 import type {NavigatorScreenParams, RouteProp} from "@react-navigation/native";
 import {BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
+import {Album} from "../MainStack/components/types";
 
 export interface MainNavProps<RouteName extends keyof MainRoutes> {
   navigation: StackNavigationProp<MainRoutes, RouteName>;
@@ -36,10 +37,11 @@ export type AudioRoutes = {
 export type TabRoutes = {
   HomeStack: undefined;
   LibraryStack: undefined;
-  AddAlbumStack: undefined;
+  SearchStack: undefined;
   Home: undefined;
   Library: undefined;
   AddAlbum: undefined;
+  BookDetails: {book: Album};
   AddAlbumPopup: {
     album: {
       id: string;

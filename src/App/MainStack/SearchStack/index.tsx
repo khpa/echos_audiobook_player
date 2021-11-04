@@ -6,10 +6,10 @@ import {createStackNavigator} from "@react-navigation/stack";
 import {AddAlbum} from "./AddAlbum";
 import {AddAlbumPopup} from "./AddAlbumPopup";
 
-const AddAlbumStack = createStackNavigator();
+const SearchStack = createStackNavigator();
 
-export const AddAlbumStackScreen = () => {
-  const {Navigator, Screen} = AddAlbumStack;
+export const SearchStackScreen = () => {
+  const {Navigator, Screen} = SearchStack;
 
   return (
     <Navigator screenOptions={{headerShown: false}}>

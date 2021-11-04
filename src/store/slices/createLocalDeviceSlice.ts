@@ -1,5 +1,5 @@
 // external dependencies
-import type {GetState, SetState} from "zustand";
+import type {SetState} from "zustand";
 
 // internal dependencies
 import type {StoreState} from "../useStore";

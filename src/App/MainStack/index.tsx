@@ -7,12 +7,12 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import {MainRoutes, TabRoutes} from "../components";
 
 // internal dependencies
-import {HomeStackScreen} from "./Home";
-import {LibraryStackScreen} from "./Library";
+import {HomeStackScreen} from "./HomeStack";
+import {LibraryStackScreen} from "./LibraryStack";
 import {createStackNavigator} from "@react-navigation/stack";
-import {AudioStackScreen} from "./Audio";
-import {MiniPlayer} from "./Audio/MiniPlayer";
-import {AddAlbumStackScreen} from "./AddAlbum";
+import {AudioStackScreen} from "./AudioStack";
+import {MiniPlayer} from "./AudioStack/MiniPlayer";
+import {SearchStackScreen} from "./SearchStack";
 
 const MainTabs = createBottomTabNavigator<TabRoutes>();
 const MainStack = createStackNavigator<MainRoutes>();
@@ -47,8 +47,8 @@ export const MainTabsScreen = () => {
           }}
         />
         <Screen
-          name="AddAlbumStack"
-          component={AddAlbumStackScreen}
+          name="SearchStack"
+          component={SearchStackScreen}
           options={{
             title: "Search",
             tabBarIcon: ({color, size}) => (

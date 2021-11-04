@@ -1,6 +1,5 @@
 export async function formatBookSearchResults(res: any) {
   const bookSearchResults = res
-    // filter books without imageLinks
     .filter((book: any) => book.volumeInfo.imageLinks)
     .map((book: any) => {
       return {

@@ -1,7 +1,7 @@
 // external dependencies
 import {Alert} from "react-native";
 import {FileSystem} from "react-native-file-access";
-import {Album} from "../../../../store/slices/createLibrarySlice";
+import {Album} from "../../components/types";
 
 // internal dependencies
 import {useStore} from "../../../../store/useStore";

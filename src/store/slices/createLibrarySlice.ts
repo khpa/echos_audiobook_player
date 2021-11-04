@@ -3,17 +3,11 @@ import type {SetState} from "zustand";
 
 // internal dependencies
 import type {StoreState} from "../useStore";
-
-export type Album = {
-  id: string;
-  title: string;
-  image: Promise<string>;
-};
+import type {Album} from "../../App/MainStack/components/types";
 
 export type LibrarySlice = {
   library: Album[];
   addAlbum: (album: Album) => void;
-  updateAlbum: (id: string, prop: string, newValue: string) => Album[];
   removeAlbum: (id: string) => void;
 };
 
@@ -27,20 +21,6 @@ export const createLibrarySlice = (set: SetState<StoreState>) => {
         }
         state.library.push(album);
       });
-    },
-    updateAlbum: (id: string, prop: string, newValue: string) => {
-      set(state => ({
-        ...state,
-        library: state.library.map(album => {
-          if (album.id === id) {
-            return {
-              ...album,
-              [prop]: newValue,
-            };
-          }
-          return album;
-        }),
-      }));
     },
     removeAlbum: (id: string) => {
       set(state => {
