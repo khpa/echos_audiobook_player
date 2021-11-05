@@ -13,7 +13,7 @@ import {TabNavProps} from "../../../components/navigation";
 // internal dependencies
 import {handlePermissions} from "./handlePermissions";
 import {checkRootFolder} from "./checkRootFolder";
-import {useStore} from "../../../../store/useStore";
+import {useStore} from "../../../../store/store";
 import {width} from "../../../components";
 
 export const Library = ({navigation}: TabNavProps<"Library">) => {

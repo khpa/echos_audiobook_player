@@ -3,7 +3,7 @@ import {Alert} from "react-native";
 import {FileSystem} from "react-native-file-access";
 
 // internal dependencies
-import {useStore} from "../../../../store/useStore";
+import {useStore} from "../../../../store/store";
 import type {Album} from "./AddAlbumPopup";
 
 export const createNewFolder = async (newAlbum: Album) => {

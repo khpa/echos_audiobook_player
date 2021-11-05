@@ -2,7 +2,7 @@
 import {FileSystem} from "react-native-file-access";
 
 // internal dependencies
-import {useStore} from "../../../../store/useStore";
+import {useStore} from "../../../../store/store";
 import {Album, Chapter} from "../../SearchStack/AddAlbumPopup/AddAlbumPopup";
 
 export async function getChapters(album: Album) {

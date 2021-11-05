@@ -5,7 +5,7 @@ import {Pressable, StyleSheet, Text, View, ViewStyle} from "react-native";
 import {usePlaybackState, State} from "react-native-track-player";
 
 // internal dependencies
-import {useStore} from "../../../store/useStore";
+import {useStore} from "../../../store/store";
 import {width} from "../Theme";
 import {togglePlayback} from "../../MainStack/AudioStack/AudioPlayer";
 

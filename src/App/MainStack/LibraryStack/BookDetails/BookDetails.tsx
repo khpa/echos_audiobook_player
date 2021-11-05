@@ -11,7 +11,7 @@ import {
 import RenderHtml from "react-native-render-html";
 
 // internal dependencies
-import {useStore} from "../../../../store/useStore";
+import {useStore} from "../../../../store/store";
 import {width} from "../../../components";
 import {TabNavProps} from "../../../components/navigation";
 import {getChapters} from "./getChapters";

@@ -3,7 +3,7 @@ import {Alert} from "react-native";
 import {FileSystem} from "react-native-file-access";
 
 // internal dependencies
-import {useStore} from "../../../../store/useStore";
+import {useStore} from "../../../../store/store";
 
 export async function removeFolder(newAlbum: any) {
   const folderName = newAlbum.title;

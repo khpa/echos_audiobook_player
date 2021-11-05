@@ -2,7 +2,7 @@
 import type {SetState} from "zustand";
 
 // internal dependencies
-import type {StoreState} from "../useStore";
+import type {StoreState} from "../store";
 
 export type LocalDeviceSlice = {
   tabBarHeight: number | undefined;

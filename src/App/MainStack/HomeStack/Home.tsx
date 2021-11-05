@@ -7,7 +7,7 @@ import {Text, View, StyleSheet} from "react-native";
 import {useBottomTabBarHeight} from "@react-navigation/bottom-tabs";
 
 // internal dependencies
-import {useStore} from "../../../store/useStore";
+import {useStore} from "../../../store/store";
 import {MainNavProps} from "../../components/navigation";
 
 export const Home = ({navigation}: MainNavProps<"MainTabs">) => {

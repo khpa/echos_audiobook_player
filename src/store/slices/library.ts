@@ -2,14 +2,17 @@
 import type {SetState} from "zustand";
 
 // internal dependencies
-import type {StoreState} from "../useStore";
-import type {Album} from "../../App/MainStack/SearchStack/AddAlbumPopup/AddAlbumPopup";
+import type {StoreState} from "../store";
+import type {
+  Album,
+  Chapter,
+} from "../../App/MainStack/SearchStack/AddAlbumPopup/AddAlbumPopup";
 
 export type LibrarySlice = {
   library: Album[];
   addAlbum: (album: Album) => void;
   removeAlbum: (id: string) => void;
-  setChapters: (id: string, tracks: Album["chapters"]) => void;
+  setChapters: (id: string, chapters: Chapter[]) => void;
 };
 
 export const createLibrarySlice = (set: SetState<StoreState>) => {
@@ -23,7 +26,7 @@ export const createLibrarySlice = (set: SetState<StoreState>) => {
         state.library.push(album);
       });
     },
-    setChapters: (id: string, chapters: Album["chapters"]) => {
+    setChapters: (id: string, chapters: Chapter[]) => {
       set(state => {
         const album = state.library.find(a => a.id === id);
         if (!album) {

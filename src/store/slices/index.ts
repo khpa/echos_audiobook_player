@@ -3,7 +3,7 @@ export {
   LocalDeviceSlice,
 } from "./createLocalDeviceSlice";
 
-export {createLibrarySlice, LibrarySlice} from "./createLibrarySlice";
+export {createLibrarySlice, LibrarySlice} from "./library";
 
 export {
   TrackPlayerSlice,

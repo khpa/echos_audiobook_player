@@ -1,7 +1,7 @@
 import TrackPlayer, {State} from "react-native-track-player";
 import {SetState} from "zustand";
 import {Album} from "../../App/MainStack/SearchStack/AddAlbumPopup";
-import {StoreState} from "../useStore";
+import {StoreState} from "../store";
 
 export type TrackPlayerSlice = {
   activeAlbum: Album | undefined;

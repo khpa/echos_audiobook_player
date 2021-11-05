@@ -2,7 +2,7 @@
 // external dependencies
 import * as React from "react";
 import {Button, StyleSheet, Text, View} from "react-native";
-import {useStore} from "../../../../store/useStore";
+import {useStore} from "../../../../store/store";
 
 // internal dependencies
 import {height} from "../../../components";
@@ -21,6 +21,7 @@ export type Album = {
   addedDate?: string;
   image?: string;
   chapters: Chapter[];
+  lastPlayed?: string;
 };
 
 export type Chapter = {
@@ -28,6 +29,7 @@ export type Chapter = {
   title: string;
   url: string;
   artwork?: string;
+  lastPosition?: string;
 };
 
 export const AddAlbumPopup = ({navigation, route}: any) => {

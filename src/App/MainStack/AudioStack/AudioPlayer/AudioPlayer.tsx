@@ -22,7 +22,7 @@ import Slider from "@react-native-community/slider";
 import {setupAudioPlayer} from "./setupAudioPlayer";
 import {togglePlayback} from "./togglePlayback";
 import {AudioNavProp} from "../../../components/navigation";
-import {useStore} from "../../../../store/useStore";
+import {useStore} from "../../../../store/store";
 
 export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
   const {position, duration} = useProgress();
