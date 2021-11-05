@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Image,
   ScrollView,
-  Button,
   Pressable,
 } from "react-native";
 import RenderHtml from "react-native-render-html";
@@ -15,14 +14,12 @@ import RenderHtml from "react-native-render-html";
 import {useStore} from "../../../../store/useStore";
 import {width} from "../../../components";
 import {TabNavProps} from "../../../components/navigation";
-import {removeFolder} from "../../SearchStack/AddAlbumPopup";
 import {getChapters} from "./getChapters";
 import {playAlbum} from "./playAlbum";
 
-export const BookDetails = ({
-  navigation,
-  route,
-}: TabNavProps<"BookDetails">) => {
+type Props = TabNavProps<"BookDetails">;
+
+export const BookDetails = ({navigation, route}: Props) => {
   const store = useStore();
   const {album} = route.params;
   const currentAlbum = store.library.find(b => b.id === album.id);

@@ -1,5 +1,3 @@
-// TODO - Permission handling for library could be done in a "on first startup" screen
-
 // external dependencies
 import React, {useEffect} from "react";
 import {
@@ -21,6 +19,7 @@ import {width} from "../../../components";
 export const Library = ({navigation}: TabNavProps<"Library">) => {
   const store = useStore();
 
+  // TODO - Permission handling could be done in a "on first startup" screen
   useEffect(() => {
     handlePermissions();
     checkRootFolder();
@@ -38,7 +37,7 @@ export const Library = ({navigation}: TabNavProps<"Library">) => {
     <View style={styles.container}>
       <FlatList
         data={store.library}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(item, index) => item + index.toString()}
         numColumns={3}
         renderItem={({item}) => (
           <TouchableWithoutFeedback
@@ -59,12 +58,11 @@ export const Library = ({navigation}: TabNavProps<"Library">) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "row",
-    padding: 10,
+    padding: 5,
   },
   image: {
-    width: (width - 45) / 3,
-    height: 180,
+    width: (width - 40) / 3,
+    height: (width - 40) / 2,
     margin: 5,
     borderRadius: 5,
   },

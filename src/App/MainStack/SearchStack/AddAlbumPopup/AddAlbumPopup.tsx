@@ -1,5 +1,3 @@
-// TODO - Only the add or the remove function should be shown, depending on the state
-
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // external dependencies
 import * as React from "react";
@@ -33,7 +31,7 @@ export type Chapter = {
 };
 
 export const AddAlbumPopup = ({navigation, route}: any) => {
-  const newAlbum = route.params?.album;
+  const newAlbum = route.params?.googleAlbum;
   const store = useStore();
 
   const ISBN_13 = newAlbum.industryIdentifiers.find(
@@ -56,6 +54,7 @@ export const AddAlbumPopup = ({navigation, route}: any) => {
     chapters: [],
   };
 
+  // TODO - Only the add or the remove function should be shown, depending on the state
   return (
     <View style={styles.container}>
       <View>

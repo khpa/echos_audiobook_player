@@ -3,6 +3,7 @@ import {StackNavigationProp} from "@react-navigation/stack";
 import type {NavigatorScreenParams, RouteProp} from "@react-navigation/native";
 import {BottomTabNavigationProp} from "@react-navigation/bottom-tabs";
 import {Album} from "../MainStack/SearchStack/AddAlbumPopup";
+import {BookSearchResults} from "../MainStack/SearchStack/AddAlbum/AddAlbum";
 
 export interface MainNavProps<RouteName extends keyof MainRoutes> {
   navigation: StackNavigationProp<MainRoutes, RouteName>;
@@ -47,16 +48,7 @@ export type TabRoutes = {
   Library: undefined;
   AddAlbum: undefined;
   BookDetails: {album: Album};
-  AddAlbumPopup: {
-    googleAlbum: {
-      id: string;
-      title: string;
-      subtitle: string;
-      authors: string[];
-      description: string;
-      imageLink: string;
-    };
-  };
+  AddAlbumPopup: {searchResults: BookSearchResults};
 };
 
 export type AuthRoutes = {

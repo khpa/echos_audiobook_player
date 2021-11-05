@@ -1,5 +1,3 @@
-// TODO: Show previous searches below searchbar
-
 // external dependencies
 import React, {useEffect, useState} from "react";
 import {View, TextInput, FlatList, StyleSheet} from "react-native";
@@ -13,16 +11,19 @@ import {formatBookSearchResults} from "./formatBookSearchResults";
 import {width} from "../../../components";
 import {MainNavProps} from "../../../components/navigation";
 
-type BookSearchResults = {
+export type BookSearchResults = {
   id: string;
   title: string;
   authors: string[];
   description?: string;
-  imageLink?: string;
-  selfLink?: string;
+  imageLink: string;
+  selfLink: string;
+  industryIdentifiers: [];
 };
 
-export const AddAlbum = ({navigation}: MainNavProps<"MainTabs">) => {
+type Props = MainNavProps<"MainTabs">;
+
+export const AddAlbum = ({navigation}: Props) => {
   const [searchString, onChangeText] = useState<string>("");
   const [searchResults, setSearchResults] = useState<BookSearchResults[]>([]);
 
@@ -40,6 +41,7 @@ export const AddAlbum = ({navigation}: MainNavProps<"MainTabs">) => {
     return () => clearTimeout(delayedSearch);
   }, [searchString]);
 
+  // TODO: Show previous searches below TextInput
   return (
     <View style={styles.container}>
       <TextInput
@@ -53,7 +55,7 @@ export const AddAlbum = ({navigation}: MainNavProps<"MainTabs">) => {
       <View style={styles.albumList}>
         <FlatList
           data={searchResults}
-          keyExtractor={(item, index) => index.toString()}
+          keyExtractor={(item, index) => item + index.toString()}
           extraData={searchString}
           renderItem={({item}) => (
             <SearchResultsItem item={item} navigation={navigation} />

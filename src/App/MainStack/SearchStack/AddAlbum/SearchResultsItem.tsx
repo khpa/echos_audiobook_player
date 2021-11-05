@@ -10,13 +10,19 @@ import {
   View,
 } from "react-native";
 import {height} from "../../../components";
+import type {BookSearchResults} from "./AddAlbum";
 
-export const SearchResultsItem = ({item, navigation}: any) => {
+type Props = {
+  item: BookSearchResults;
+  navigation: any;
+};
+
+export const SearchResultsItem = ({item, navigation}: Props) => {
   async function onPressHandler() {
-    const bookDetails = await fetch(item.selfLink).then(response =>
-      response.json(),
-    );
-    navigation.navigate("AddAlbumPopup", {album: bookDetails.volumeInfo});
+    const bookDetails = await fetch(item.selfLink).then(res => res.json());
+    navigation.navigate("AddAlbumPopup", {
+      searchResults: bookDetails.volumeInfo,
+    });
   }
 
   return (
