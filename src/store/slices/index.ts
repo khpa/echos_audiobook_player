@@ -10,4 +10,8 @@ export {
 
 export {createLibrarySlice, LibrarySlice} from "./createLibrarySlice";
 
-export {TrackPlayerSlice, createTrackPlayerSlice} from "./trackplayer";
+export {
+  TrackPlayerSlice,
+  createTrackPlayerSlice,
+  getPlayerState,
+} from "./trackplayer";

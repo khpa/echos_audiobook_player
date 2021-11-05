@@ -44,7 +44,7 @@ export const Library = ({navigation}: TabNavProps<"Library">) => {
           <TouchableWithoutFeedback
             onPress={() => {
               navigation.navigate("BookDetails", {
-                book: item,
+                album: item,
               });
             }}
           >

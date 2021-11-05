@@ -19,16 +19,20 @@ import TrackPlayer, {
 import Slider from "@react-native-community/slider";
 
 // internal dependencies
-import {formatDuration} from "./formatDuration";
 import {setupAudioPlayer} from "./setupAudioPlayer";
 import {togglePlayback} from "./togglePlayback";
+import {AudioNavProp} from "../../../components/navigation";
 
-export const AudioPlayer = () => {
+export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
   const {position, duration} = useProgress();
   const playbackState = usePlaybackState();
   const [trackArtwork, setTrackArtwork] = useState<string | number>();
   const [trackTitle, setTrackTitle] = useState<string>();
   const [trackArtist, setTrackArtist] = useState<string>();
+
+  useEffect(() => {
+    setupAudioPlayer();
+  }, []);
 
   useTrackPlayerEvents([Event.PlaybackTrackChanged], async event => {
     if (
@@ -36,6 +40,7 @@ export const AudioPlayer = () => {
       event.nextTrack !== undefined
     ) {
       const track = await TrackPlayer.getTrack(event.nextTrack);
+      console.log(track);
       const {title, artist, artwork} = track || {};
       setTrackTitle(title);
       setTrackArtist(artist);
@@ -43,16 +48,16 @@ export const AudioPlayer = () => {
     }
   });
 
-  useEffect(() => {
-    setupAudioPlayer();
-  }, []);
-
   return (
     <SafeAreaView style={styles.screenContainer}>
       <StatusBar barStyle={"light-content"} />
       <View style={styles.contentContainer}>
         <View style={styles.topBarContainer}>
-          <TouchableWithoutFeedback>
+          <TouchableWithoutFeedback
+            onPress={() => {
+              navigation.navigate("CurrentQueue");
+            }}
+          >
             <Text style={styles.queueButton}>Queue</Text>
           </TouchableWithoutFeedback>
         </View>

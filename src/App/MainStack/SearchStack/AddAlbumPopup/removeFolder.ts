@@ -11,8 +11,16 @@ export async function removeFolder(newAlbum: any) {
   const folderPath = `${localRootFolder}/${folderName}`;
 
   try {
-    await FileSystem.unlink(folderPath);
-    Alert.alert("Success", `${folderName} was removed`);
+    const folderContent = await FileSystem.ls(folderPath);
+    if (folderContent.length > 0) {
+      Alert.alert(
+        "Folder is not empty",
+        `${newAlbum.title} was deleted from your library, but the folder is still there`,
+      );
+    } else {
+      await FileSystem.unlink(folderPath);
+      Alert.alert("Success", `${folderName} was removed`);
+    }
   } catch (error) {
     Alert.alert("Error", "Could not remove folder");
   }

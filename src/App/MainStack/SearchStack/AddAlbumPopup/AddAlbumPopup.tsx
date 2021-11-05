@@ -22,13 +22,14 @@ export type Album = {
   publishedDate?: string;
   addedDate?: string;
   image?: string;
-  tracks: Track[];
+  chapters: Chapter[];
 };
 
-export type Track = {
+export type Chapter = {
   index: number;
   title: string;
   url: string;
+  artwork?: string;
 };
 
 export const AddAlbumPopup = ({navigation, route}: any) => {
@@ -39,7 +40,6 @@ export const AddAlbumPopup = ({navigation, route}: any) => {
     (identifier: any) => identifier.type === "ISBN_13",
   ).identifier;
 
-  console.log(newAlbum);
   const album: Album = {
     id: ISBN_13,
     title: newAlbum.title,
@@ -53,7 +53,7 @@ export const AddAlbumPopup = ({navigation, route}: any) => {
     image: newAlbum.imageLinks.extraLarge
       ? newAlbum.imageLinks.extraLarge
       : newAlbum.imageLinks.thumbnail,
-    tracks: [],
+    chapters: [],
   };
 
   return (
@@ -74,6 +74,7 @@ export const AddAlbumPopup = ({navigation, route}: any) => {
         title="Remove Album"
         onPress={() => {
           store.removeAlbum(album.id);
+          removeFolder(album);
         }}
       />
     </View>

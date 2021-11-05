@@ -9,45 +9,45 @@ import TrackPlayer from "react-native-track-player";
 import {useStore} from "../../../../store/useStore";
 import {width} from "../../../components";
 import {TabNavProps} from "../../../components/navigation";
-import {removeFolder} from "../../SearchStack/AddAlbumPopup/removeFolder";
-import {getAlbumTracks} from "./getAlbumTracks";
+import {removeFolder} from "../../SearchStack/AddAlbumPopup";
+import {getChapters} from "./getChapters";
 
 export const BookDetails = ({
   navigation,
   route,
 }: TabNavProps<"BookDetails">) => {
   const store = useStore();
-  const {book} = route.params;
-  const currentBook = store.library.find(b => b.id === book.id);
+  const {album} = route.params;
+  const currentBook = store.library.find(b => b.id === album.id);
 
   useEffect(() => {
     async function fetchData() {
-      const tracks = await getAlbumTracks(book);
-      store.setTracks(book.id, tracks);
+      const chapters = await getChapters(album);
+      store.setParts(album.id, chapters);
     }
     fetchData();
   }, []);
 
-  console.log(currentBook);
   if (!currentBook) return <View />;
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Button
         title="Remove Album"
         onPress={() => {
-          store.removeAlbum(book.id);
-          // removeFolder(currentBook);
+          store.removeAlbum(album.id);
+          removeFolder(currentBook);
           navigation.reset({
             index: 0,
             routes: [{name: "Library"}],
           });
         }}
       />
+
       <View style={styles.details}>
         <Image source={{uri: currentBook.image}} style={styles.cover} />
-        <Text style={styles.title}>{book.title}</Text>
-        {book.subtitle ? (
-          <Text style={styles.subtitle}>{book.subtitle}</Text>
+        <Text style={styles.title}>{album.title}</Text>
+        {album.subtitle ? (
+          <Text style={styles.subtitle}>{album.subtitle}</Text>
         ) : null}
         <Text style={styles.authors}>
           by {currentBook.authors.map(a => a).join(", ")}
@@ -58,22 +58,22 @@ export const BookDetails = ({
         <Text style={styles.pageCount}>{currentBook.pageCount} pages</Text>
       </View>
       <RenderHtml
-        source={{html: book.description}}
+        source={{html: album.description || ""}}
         contentWidth={width}
         baseStyle={styles.description}
       />
-      {currentBook.tracks &&
-        currentBook.tracks.map(track => (
+      {currentBook.chapters &&
+        currentBook.chapters.map(chapter => (
           <TouchableWithoutFeedback
-            key={track.url}
+            key={chapter.url}
             onPress={async () => {
-              await TrackPlayer.add(track);
+              await TrackPlayer.add(chapter);
               store.updateActiveAlbum(true);
               await TrackPlayer.play();
             }}
           >
-            <Text key={track.index} style={styles.track} numberOfLines={1}>
-              {track.title}
+            <Text key={chapter.index} style={styles.track} numberOfLines={1}>
+              {chapter.title}
             </Text>
           </TouchableWithoutFeedback>
         ))}
