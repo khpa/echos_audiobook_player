@@ -1,5 +1,4 @@
-// ! After initial search is conducted, the first item of an updated search is not clickable
-// TODO - Most likely a an issue with Flatlist + async, but not sure how to fix
+// TODO: Show previous searches below searchbar
 
 // external dependencies
 import React, {useEffect, useState} from "react";
@@ -17,7 +16,6 @@ import {MainNavProps} from "../../../components/navigation";
 type BookSearchResults = {
   id: string;
   title: string;
-  subtitle?: string;
   authors: string[];
   description?: string;
   imageLink?: string;
@@ -56,7 +54,7 @@ export const AddAlbum = ({navigation}: MainNavProps<"MainTabs">) => {
       <View style={styles.albumList}>
         <FlatList
           data={searchResults}
-          keyExtractor={item => item.id}
+          keyExtractor={(item, index) => index.toString()}
           extraData={searchString}
           renderItem={({item}) => (
             <SearchResultsItem item={item} navigation={navigation} />

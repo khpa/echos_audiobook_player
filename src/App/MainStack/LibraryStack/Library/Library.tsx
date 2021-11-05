@@ -29,7 +29,7 @@ export const Library = ({navigation}: TabNavProps<"Library">) => {
   if (store.library.length === 0) {
     return (
       <View style={styles.container}>
-        <Text>"No Books added yet :("</Text>
+        <Text style={styles.emptyLibrary}>No books added yet :(</Text>
       </View>
     );
   }
@@ -38,6 +38,7 @@ export const Library = ({navigation}: TabNavProps<"Library">) => {
     <View style={styles.container}>
       <FlatList
         data={store.library}
+        keyExtractor={(item, index) => index.toString()}
         numColumns={3}
         renderItem={({item}) => (
           <TouchableWithoutFeedback
@@ -66,5 +67,11 @@ const styles = StyleSheet.create({
     height: 180,
     margin: 5,
     borderRadius: 5,
+  },
+  emptyLibrary: {
+    flex: 1,
+    fontSize: 16,
+    textAlign: "center",
+    textAlignVertical: "center",
   },
 });

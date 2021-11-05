@@ -5,7 +5,7 @@ import * as React from "react";
 import {createStackNavigator} from "@react-navigation/stack";
 import {AudioRoutes} from "../../components";
 import {MiniPlayer} from "./MiniPlayer";
-import {AudioPlayer} from "./AudioPlayer";
+import {AudioPlayer} from "./AudioPlayer/AudioPlayer";
 
 const AudioStack = createStackNavigator<AudioRoutes>();
 

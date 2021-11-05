@@ -1,4 +1,4 @@
-import TrackPlayer, {State} from "react-native-track-player";
+import TrackPlayer from "react-native-track-player";
 import {SetState} from "zustand";
 import {StoreState} from "../useStore";
 

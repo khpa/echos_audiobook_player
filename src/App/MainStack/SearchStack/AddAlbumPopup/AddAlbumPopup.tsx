@@ -14,9 +14,14 @@ import {removeFolder} from "./removeFolder";
 export type Album = {
   id: string;
   title: string;
-  authors: [];
-  description: string;
-  image: string;
+  subtitle?: string;
+  authors: string[];
+  description?: string;
+  categories?: string[];
+  pageCount?: number;
+  publishedDate?: string;
+  addedDate?: string;
+  image?: string;
   tracks: Track[];
 };
 
@@ -34,11 +39,17 @@ export const AddAlbumPopup = ({navigation, route}: any) => {
     (identifier: any) => identifier.type === "ISBN_13",
   ).identifier;
 
+  console.log(newAlbum);
   const album: Album = {
     id: ISBN_13,
     title: newAlbum.title,
+    subtitle: newAlbum.subtitle,
     authors: newAlbum.authors,
     description: newAlbum.description,
+    categories: newAlbum.categories,
+    pageCount: newAlbum.pageCount,
+    publishedDate: newAlbum.publishedDate,
+    addedDate: new Date().toISOString(),
     image: newAlbum.imageLinks.extraLarge
       ? newAlbum.imageLinks.extraLarge
       : newAlbum.imageLinks.thumbnail,
@@ -54,19 +65,15 @@ export const AddAlbumPopup = ({navigation, route}: any) => {
       <Button
         title="Add Album"
         onPress={() => {
-          // createNewFolder(album);
+          createNewFolder(album);
           store.addAlbum(album);
-          navigation.pop();
-          navigation.navigate("Library");
+          navigation.goBack();
         }}
       />
       <Button
         title="Remove Album"
         onPress={() => {
-          // removeFolder(album);
           store.removeAlbum(album.id);
-          navigation.pop();
-          navigation.navigate("Library");
         }}
       />
     </View>

@@ -1,6 +1,3 @@
-// TODO - hasActiveAlbum should be in a context not in store
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // external dependencies
 import React from "react";
 import {StyleSheet, Text, TouchableWithoutFeedback, View} from "react-native";
