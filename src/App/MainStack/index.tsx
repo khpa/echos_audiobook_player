@@ -11,8 +11,8 @@ import {MainRoutes, TabRoutes} from "../components";
 import {HomeStackScreen} from "./HomeStack";
 import {LibraryStackScreen} from "./LibraryStack";
 import {AudioStackScreen} from "./AudioStack";
-import {MiniPlayer} from "./AudioStack/MiniPlayer";
 import {SearchStackScreen} from "./SearchStack";
+import {TabBar} from "../components";
 
 const MainTabs = createBottomTabNavigator<TabRoutes>();
 const MainStack = createStackNavigator<MainRoutes>();
@@ -20,49 +20,45 @@ const MainStack = createStackNavigator<MainRoutes>();
 export const MainTabsScreen = () => {
   const {Navigator, Screen} = MainTabs;
   return (
-    <>
-      <Navigator screenOptions={{headerShown: false}}>
-        <Screen
-          name="HomeStack"
-          component={HomeStackScreen}
-          options={{
-            title: "Home",
-            tabBarIcon: ({color, size}) => (
-              <MaterialCommunityIcons name="home" color={color} size={size} />
-            ),
-          }}
-        />
-        <Screen
-          name="LibraryStack"
-          component={LibraryStackScreen}
-          options={{
-            title: "Library",
-            tabBarIcon: ({color, size}) => (
-              <MaterialCommunityIcons
-                name="bookshelf"
-                color={color}
-                size={size}
-              />
-            ),
-          }}
-        />
-        <Screen
-          name="SearchStack"
-          component={SearchStackScreen}
-          options={{
-            title: "Search",
-            tabBarIcon: ({color, size}) => (
-              <MaterialCommunityIcons
-                name="magnify"
-                color={color}
-                size={size}
-              />
-            ),
-          }}
-        />
-      </Navigator>
-      <MiniPlayer />
-    </>
+    <Navigator
+      screenOptions={{headerShown: false}}
+      tabBar={props => <TabBar {...props} />}
+    >
+      <Screen
+        name="HomeStack"
+        component={HomeStackScreen}
+        options={{
+          title: "Home",
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}
+      />
+      <Screen
+        name="LibraryStack"
+        component={LibraryStackScreen}
+        options={{
+          title: "Library",
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons
+              name="bookshelf"
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
+      <Screen
+        name="SearchStack"
+        component={SearchStackScreen}
+        options={{
+          title: "Search",
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons name="magnify" color={color} size={size} />
+          ),
+        }}
+      />
+    </Navigator>
   );
 };
 

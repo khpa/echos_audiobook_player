@@ -43,7 +43,6 @@ export const AddAlbum = ({navigation}: MainNavProps<"MainTabs">) => {
   return (
     <View style={styles.container}>
       <TextInput
-        autoFocus={true}
         style={styles.textInputField}
         onChangeText={input => {
           onChangeText(input);

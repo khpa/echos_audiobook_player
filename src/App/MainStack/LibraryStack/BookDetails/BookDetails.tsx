@@ -1,9 +1,15 @@
 // external dependencies
 import React, {useEffect} from "react";
-import {View, Text, StyleSheet, Image, ScrollView, Button} from "react-native";
-import {TouchableWithoutFeedback} from "react-native-gesture-handler";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ScrollView,
+  Button,
+  Pressable,
+} from "react-native";
 import RenderHtml from "react-native-render-html";
-import TrackPlayer from "react-native-track-player";
 
 // internal dependencies
 import {useStore} from "../../../../store/useStore";
@@ -11,6 +17,7 @@ import {width} from "../../../components";
 import {TabNavProps} from "../../../components/navigation";
 import {removeFolder} from "../../SearchStack/AddAlbumPopup";
 import {getChapters} from "./getChapters";
+import {playAlbum} from "./playAlbum";
 
 export const BookDetails = ({
   navigation,
@@ -18,65 +25,49 @@ export const BookDetails = ({
 }: TabNavProps<"BookDetails">) => {
   const store = useStore();
   const {album} = route.params;
-  const currentBook = store.library.find(b => b.id === album.id);
+  const currentAlbum = store.library.find(b => b.id === album.id);
 
   useEffect(() => {
     async function fetchData() {
       const chapters = await getChapters(album);
-      store.setParts(album.id, chapters);
+      store.setChapters(album.id, chapters);
     }
     fetchData();
   }, []);
 
-  if (!currentBook) return <View />;
+  if (!currentAlbum) return <View />;
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <Button
-        title="Remove Album"
-        onPress={() => {
-          store.removeAlbum(album.id);
-          removeFolder(currentBook);
-          navigation.reset({
-            index: 0,
-            routes: [{name: "Library"}],
-          });
-        }}
-      />
-
       <View style={styles.details}>
-        <Image source={{uri: currentBook.image}} style={styles.cover} />
+        <Pressable
+          onPress={() => {
+            {
+              store.setActiveAlbum(album);
+              playAlbum(album).then(() => {
+                navigation.navigate("AudioStack" as any);
+              });
+            }
+          }}
+        >
+          <Image source={{uri: currentAlbum.image}} style={styles.cover} />
+        </Pressable>
         <Text style={styles.title}>{album.title}</Text>
         {album.subtitle ? (
           <Text style={styles.subtitle}>{album.subtitle}</Text>
         ) : null}
         <Text style={styles.authors}>
-          by {currentBook.authors.map(a => a).join(", ")}
+          by {currentAlbum.authors.map(a => a).join(", ")}
         </Text>
         <Text style={styles.categories} numberOfLines={1}>
-          {currentBook.categories?.map(c => c).join(", ")}
+          {currentAlbum.categories?.map(c => c).join(", ")}
         </Text>
-        <Text style={styles.pageCount}>{currentBook.pageCount} pages</Text>
+        <Text style={styles.pageCount}>{currentAlbum.pageCount} pages</Text>
       </View>
       <RenderHtml
         source={{html: album.description || ""}}
         contentWidth={width}
         baseStyle={styles.description}
       />
-      {currentBook.chapters &&
-        currentBook.chapters.map(chapter => (
-          <TouchableWithoutFeedback
-            key={chapter.url}
-            onPress={async () => {
-              await TrackPlayer.add(chapter);
-              store.updateActiveAlbum(true);
-              await TrackPlayer.play();
-            }}
-          >
-            <Text key={chapter.index} style={styles.track} numberOfLines={1}>
-              {chapter.title}
-            </Text>
-          </TouchableWithoutFeedback>
-        ))}
     </ScrollView>
   );
 };
@@ -84,7 +75,8 @@ export const BookDetails = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 20,
+    marginTop: 20,
+    marginHorizontal: 20,
   },
   details: {
     marginVertical: 10,

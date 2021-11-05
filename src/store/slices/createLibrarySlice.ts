@@ -9,7 +9,7 @@ export type LibrarySlice = {
   library: Album[];
   addAlbum: (album: Album) => void;
   removeAlbum: (id: string) => void;
-  setParts: (id: string, tracks: Album["chapters"]) => void;
+  setChapters: (id: string, tracks: Album["chapters"]) => void;
 };
 
 export const createLibrarySlice = (set: SetState<StoreState>) => {
@@ -23,13 +23,13 @@ export const createLibrarySlice = (set: SetState<StoreState>) => {
         state.library.push(album);
       });
     },
-    setParts: (id: string, tracks: Album["chapters"]) => {
+    setChapters: (id: string, chapters: Album["chapters"]) => {
       set(state => {
         const album = state.library.find(a => a.id === id);
         if (!album) {
           return;
         }
-        album.chapters = tracks;
+        album.chapters = chapters;
       });
     },
     removeAlbum: (id: string) => {

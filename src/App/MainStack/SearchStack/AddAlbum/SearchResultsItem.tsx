@@ -12,8 +12,7 @@ import {
 import {height} from "../../../components";
 
 export const SearchResultsItem = ({item, navigation}: any) => {
-  async function handlePress() {
-    // fetch data from item.selfLink
+  async function onPressHandler() {
     const bookDetails = await fetch(item.selfLink).then(response =>
       response.json(),
     );
@@ -22,7 +21,10 @@ export const SearchResultsItem = ({item, navigation}: any) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableWithoutFeedback style={styles.container} onPress={handlePress}>
+      <TouchableWithoutFeedback
+        style={styles.container}
+        onPress={onPressHandler}
+      >
         <View style={styles.containerCols}>
           <View style={styles.imageContainer}>
             <Image source={{uri: item.imageLink}} style={styles.image} />
@@ -31,11 +33,12 @@ export const SearchResultsItem = ({item, navigation}: any) => {
             <Text style={styles.title} numberOfLines={1}>
               {item.title}
             </Text>
-            {item.authors.map((author: string) => (
-              <Text key={author} style={styles.authors}>
-                {author}
-              </Text>
-            ))}
+            {item.authors &&
+              item.authors.map((author: string) => (
+                <Text key={author} style={styles.authors}>
+                  {author}
+                </Text>
+              ))}
             <Text style={styles.text} numberOfLines={3}>
               {item.description}
             </Text>

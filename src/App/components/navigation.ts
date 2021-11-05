@@ -36,7 +36,6 @@ export type MainRoutes = {
 
 export type AudioRoutes = {
   AudioPlayer: undefined;
-  MiniPlayer: undefined;
   CurrentQueue: undefined;
 };
 

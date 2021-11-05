@@ -3,7 +3,7 @@
 
 // external dependencies
 import React, {useEffect} from "react";
-import {Text, View, StyleSheet, Button} from "react-native";
+import {Text, View, StyleSheet} from "react-native";
 import {useBottomTabBarHeight} from "@react-navigation/bottom-tabs";
 
 // internal dependencies
@@ -22,12 +22,6 @@ export const Home = ({navigation}: MainNavProps<"MainTabs">) => {
   return (
     <View style={styles.container}>
       <Text>Home</Text>
-      <Button
-        title="Go to Audio"
-        onPress={() =>
-          navigation.navigate("AudioStack", {screen: "AudioPlayer"})
-        }
-      />
     </View>
   );
 };

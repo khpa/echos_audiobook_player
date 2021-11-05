@@ -22,16 +22,21 @@ import Slider from "@react-native-community/slider";
 import {setupAudioPlayer} from "./setupAudioPlayer";
 import {togglePlayback} from "./togglePlayback";
 import {AudioNavProp} from "../../../components/navigation";
+import {useStore} from "../../../../store/useStore";
 
 export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
   const {position, duration} = useProgress();
   const playbackState = usePlaybackState();
+  const store = useStore();
   const [trackArtwork, setTrackArtwork] = useState<string | number>();
   const [trackTitle, setTrackTitle] = useState<string>();
   const [trackArtist, setTrackArtist] = useState<string>();
 
   useEffect(() => {
     setupAudioPlayer();
+    if (!store.activeAlbum) {
+      navigation.navigate("Home" as any);
+    }
   }, []);
 
   useTrackPlayerEvents([Event.PlaybackTrackChanged], async event => {
@@ -48,6 +53,9 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
     }
   });
 
+  if (!store.activeAlbum) {
+    return <></>;
+  }
   return (
     <SafeAreaView style={styles.screenContainer}>
       <StatusBar barStyle={"light-content"} />
@@ -61,9 +69,9 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
             <Text style={styles.queueButton}>Queue</Text>
           </TouchableWithoutFeedback>
         </View>
-        <Image style={styles.artwork} source={{uri: `${trackArtwork}`}} />
-        <Text style={styles.titleText}>{trackTitle}</Text>
-        <Text style={styles.artistText}>{trackArtist}</Text>
+        <Image style={styles.artwork} source={{uri: store.activeAlbum.image}} />
+        <Text style={styles.titleText}>{store.activeAlbum.title}</Text>
+        <Text style={styles.artistText}>{store.activeAlbum.authors[0]}</Text>
         <Slider
           style={styles.progressContainer}
           value={position}

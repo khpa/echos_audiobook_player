@@ -8,3 +8,4 @@ export {
   TabRoutes,
   AudioRoutes,
 } from "./navigation";
+export {TabBar} from "./TabBar";
