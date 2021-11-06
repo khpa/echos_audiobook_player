@@ -43,6 +43,9 @@ export const createLibrarySlice = (set: SetState<StoreState>): LibrarySlice => {
           case "chapters":
             album.chapters = value;
             break;
+          case "image":
+            album.image = value;
+            break;
           default:
             console.warn("not found");
             break;

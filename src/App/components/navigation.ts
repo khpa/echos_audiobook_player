@@ -42,12 +42,15 @@ export type AudioRoutes = {
 
 export type TabRoutes = {
   HomeStack: undefined;
-  LibraryStack: undefined;
-  SearchStack: undefined;
   Home: undefined;
+
+  LibraryStack: undefined;
   Library: undefined;
-  AddAlbum: undefined;
   BookDetails: {album: Album};
+  BookSettings: {album: Album};
+
+  SearchStack: undefined;
+  AddAlbum: undefined;
   AddAlbumPopup: {searchResults: BookSearchResults};
 };
 

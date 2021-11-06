@@ -18,7 +18,9 @@ export type Album = {
   pageCount?: number;
   publishedDate?: string;
   addedDate?: string;
+  selfLink: string;
   image?: string;
+  imageOptions?: any;
   chapters: Chapter[];
   lastPlayed?: string;
   lastPlayedChapterIndex?: string;
@@ -36,7 +38,7 @@ export type Chapter = {
 export const AddAlbumPopup = ({navigation, route}: any) => {
   const newAlbum = route.params?.searchResults;
   const store = useStore();
-
+  console.log(newAlbum);
   const ISBN_13 = newAlbum.industryIdentifiers.find(
     (identifier: any) => identifier.type === "ISBN_13",
   ).identifier;
@@ -51,9 +53,9 @@ export const AddAlbumPopup = ({navigation, route}: any) => {
     pageCount: newAlbum.pageCount,
     publishedDate: newAlbum.publishedDate,
     addedDate: new Date().toISOString(),
-    image: newAlbum.imageLinks.extraLarge
-      ? newAlbum.imageLinks.extraLarge
-      : newAlbum.imageLinks.thumbnail,
+    selfLink: newAlbum.selfLink,
+    image: newAlbum.image,
+    imageOptions: newAlbum.imageLinks,
     chapters: [],
   };
 

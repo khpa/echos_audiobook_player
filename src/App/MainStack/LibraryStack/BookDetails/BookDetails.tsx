@@ -7,6 +7,7 @@ import {
   Image,
   ScrollView,
   Pressable,
+  Button,
 } from "react-native";
 import RenderHtml from "react-native-render-html";
 
@@ -35,6 +36,10 @@ export const BookDetails = ({navigation, route}: Props) => {
   if (!currentAlbum) return <View />;
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      <Button
+        title="Settings"
+        onPress={() => navigation.navigate("BookSettings", {album})}
+      />
       <View style={styles.topContainer}>
         <Pressable
           // TODO - this function needs to be refactored
@@ -62,8 +67,8 @@ export const BookDetails = ({navigation, route}: Props) => {
             by {currentAlbum.authors.map(a => a).join(", ")}
           </Text>
           <View>
-            {currentAlbum.categories?.map(category => (
-              <Text style={styles.categories} numberOfLines={1}>
+            {currentAlbum.categories?.map((category, index) => (
+              <Text key={index} style={styles.categories} numberOfLines={1}>
                 {category}
               </Text>
             ))}
@@ -71,7 +76,7 @@ export const BookDetails = ({navigation, route}: Props) => {
 
           <Text style={styles.pageCount}>{currentAlbum.pageCount} pages</Text>
           <Text style={styles.chapters}>
-            {currentAlbum.chapters.length > 0
+            {currentAlbum.chapters && currentAlbum.chapters.length > 0
               ? currentAlbum.chapters.length + " "
               : "There are currently no "}
             files
@@ -105,7 +110,7 @@ const styles = StyleSheet.create({
   },
   cover: {
     width: width * 0.5 * 0.6,
-    height: "auto", //width * 0.75 * 0.6,
+    height: width * 0.75 * 0.6,
     alignSelf: "center",
     marginBottom: 10,
   },

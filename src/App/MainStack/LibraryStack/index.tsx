@@ -9,6 +9,7 @@ import {TabNavProps} from "../../components/navigation";
 import {Pressable, StyleSheet, Text} from "react-native";
 import {useStore} from "../../../store/store";
 import {removeFolder} from "./BookDetails";
+import {BookSettings} from "./BookSettings";
 
 const LibraryStack = createStackNavigator();
 
@@ -47,6 +48,7 @@ export const LibraryStackScreen = ({navigation}: Props) => {
           ),
         })}
       />
+      <Screen name="BookSettings" component={BookSettings} />
     </Navigator>
   );
 };

@@ -21,7 +21,11 @@ export const SearchResultsItem = ({item, navigation}: Props) => {
   async function onPressHandler() {
     const bookDetails = await fetch(item.selfLink).then(res => res.json());
     navigation.navigate("AddAlbumPopup", {
-      searchResults: bookDetails.volumeInfo,
+      searchResults: {
+        ...bookDetails.volumeInfo,
+        selfLink: item.selfLink,
+        image: item.imageLink,
+      },
     });
   }
 
