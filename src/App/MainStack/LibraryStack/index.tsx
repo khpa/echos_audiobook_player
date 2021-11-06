@@ -8,7 +8,7 @@ import {BookDetails} from "./BookDetails";
 import {TabNavProps} from "../../components/navigation";
 import {Pressable, StyleSheet, Text} from "react-native";
 import {useStore} from "../../../store/store";
-import {removeFolder} from "../SearchStack/AddAlbumPopup";
+import {removeFolder} from "./BookDetails";
 
 const LibraryStack = createStackNavigator();
 

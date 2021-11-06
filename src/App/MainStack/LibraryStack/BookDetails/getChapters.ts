@@ -10,6 +10,10 @@ export async function getChapters(album: Album) {
   const folderPath = `${localRootFolder}/${album.title}`;
   const rawTracks = await FileSystem.ls(folderPath);
 
+  if (rawTracks.length === 0) {
+    console.log("No tracks found");
+  }
+
   rawTracks.sort((a, b) => {
     if (a < b) return -1;
     if (a > b) return 1;

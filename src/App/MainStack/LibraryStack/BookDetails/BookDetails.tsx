@@ -32,14 +32,17 @@ export const BookDetails = ({navigation, route}: Props) => {
     fetchData();
   }, []);
 
-  console.log(currentAlbum);
   if (!currentAlbum) return <View />;
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.topContainer}>
         <Pressable
+          // TODO - this function needs to be refactored
           onPress={() => {
             {
+              if (album.chapters.length === 0) {
+                return;
+              }
               store.setActiveAlbum(album);
               store.updateAlbum(album.id, "lastPlayed");
               playAlbum(album).then(() => {
@@ -58,10 +61,21 @@ export const BookDetails = ({navigation, route}: Props) => {
           <Text style={styles.authors}>
             by {currentAlbum.authors.map(a => a).join(", ")}
           </Text>
-          <Text style={styles.categories} numberOfLines={1}>
-            {currentAlbum.categories?.map(c => c).join(", ")}
-          </Text>
+          <View>
+            {currentAlbum.categories?.map(category => (
+              <Text style={styles.categories} numberOfLines={1}>
+                {category}
+              </Text>
+            ))}
+          </View>
+
           <Text style={styles.pageCount}>{currentAlbum.pageCount} pages</Text>
+          <Text style={styles.chapters}>
+            {currentAlbum.chapters.length > 0
+              ? currentAlbum.chapters.length + " "
+              : "There are currently no "}
+            files
+          </Text>
         </View>
       </View>
       <RenderHtml
@@ -91,7 +105,7 @@ const styles = StyleSheet.create({
   },
   cover: {
     width: width * 0.5 * 0.6,
-    height: width * 0.75 * 0.6,
+    height: "auto", //width * 0.75 * 0.6,
     alignSelf: "center",
     marginBottom: 10,
   },
@@ -115,6 +129,11 @@ const styles = StyleSheet.create({
     color: "gray",
   },
   pageCount: {
+    marginTop: 10,
+    fontSize: 12,
+    color: "gray",
+  },
+  chapters: {
     fontSize: 12,
     color: "gray",
   },

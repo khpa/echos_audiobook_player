@@ -18,7 +18,10 @@ export const Home = ({navigation}: MainNavProps<"MainTabs">) => {
     <View style={styles.container}>
       <View style={styles.lastPlayedContainer}>
         <FlatList
-          data={store.library}
+          // TODO - This function should be refactored
+          data={store.library.filter(
+            book => book.chapters !== undefined && book.chapters.length > 0,
+          )}
           keyExtractor={(item, index) => item + index.toString()}
           horizontal={true}
           showsHorizontalScrollIndicator={false}

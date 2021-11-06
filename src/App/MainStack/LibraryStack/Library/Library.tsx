@@ -1,6 +1,6 @@
 // external dependencies
 import React, {useEffect} from "react";
-import {View, Text, StyleSheet, Image, FlatList, Pressable} from "react-native";
+import {View, Text, StyleSheet, FlatList, Pressable, Image} from "react-native";
 import {TabNavProps} from "../../../components/navigation";
 
 // internal dependencies
@@ -30,8 +30,9 @@ export const Library = ({navigation}: TabNavProps<"Library">) => {
     <View style={styles.container}>
       <FlatList
         data={store.library}
-        keyExtractor={(item, index) => item + index.toString()}
+        keyExtractor={(item, index) => item.id + index.toString()}
         numColumns={3}
+        showsVerticalScrollIndicator={false}
         renderItem={({item}) => (
           <Pressable
             onPress={() => {
@@ -40,7 +41,9 @@ export const Library = ({navigation}: TabNavProps<"Library">) => {
               });
             }}
           >
-            <Image source={{uri: item.image}} style={styles.image} />
+            <View style={styles.imageContainer}>
+              <Image source={{uri: item.image}} style={styles.image} />
+            </View>
           </Pressable>
         )}
       />
@@ -52,11 +55,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 5,
+    marginTop: 6,
   },
-  image: {
+  imageContainer: {
     width: (width - 40) / 3,
     height: (width - 40) / 2,
     margin: 5,
+  },
+  image: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
     borderRadius: 5,
   },
   emptyLibrary: {

@@ -7,7 +7,6 @@ import {useStore} from "../../../../store/store";
 // internal dependencies
 import {height} from "../../../components";
 import {createNewFolder} from "./createNewFolder";
-import {removeFolder} from "./removeFolder";
 
 export type Album = {
   id: string;
@@ -58,7 +57,7 @@ export const AddAlbumPopup = ({navigation, route}: any) => {
     chapters: [],
   };
 
-  // TODO - Only the add or the remove function should be shown, depending on the state
+  // TODO - Add a check to see if the album is already in the library
   return (
     <View style={styles.container}>
       <View>
@@ -71,13 +70,6 @@ export const AddAlbumPopup = ({navigation, route}: any) => {
           createNewFolder(album);
           store.addAlbum(album);
           navigation.goBack();
-        }}
-      />
-      <Button
-        title="Remove Album"
-        onPress={() => {
-          store.removeAlbum(album.id);
-          removeFolder(album);
         }}
       />
     </View>
