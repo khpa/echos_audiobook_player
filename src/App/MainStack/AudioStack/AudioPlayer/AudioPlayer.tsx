@@ -1,13 +1,13 @@
 // external dependencies
-import React, {useState, useEffect} from "react";
+import React, {useEffect} from "react";
 import {
   View,
   Text,
-  TouchableWithoutFeedback,
   StyleSheet,
   SafeAreaView,
   StatusBar,
   Image,
+  Pressable,
 } from "react-native";
 import TrackPlayer, {
   State,
@@ -28,9 +28,6 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
   const {position, duration} = useProgress();
   const playbackState = usePlaybackState();
   const store = useStore();
-  const [trackArtwork, setTrackArtwork] = useState<string | number>();
-  const [trackTitle, setTrackTitle] = useState<string>();
-  const [trackArtist, setTrackArtist] = useState<string>();
 
   useEffect(() => {
     setupAudioPlayer();
@@ -39,20 +36,6 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
     }
   }, []);
 
-  useTrackPlayerEvents([Event.PlaybackTrackChanged], async event => {
-    if (
-      event.type === Event.PlaybackTrackChanged &&
-      event.nextTrack !== undefined
-    ) {
-      const track = await TrackPlayer.getTrack(event.nextTrack);
-      console.log(track);
-      const {title, artist, artwork} = track || {};
-      setTrackTitle(title);
-      setTrackArtist(artist);
-      setTrackArtwork(artwork);
-    }
-  });
-
   if (!store.activeAlbum) {
     return <></>;
   }
@@ -60,15 +43,6 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
     <SafeAreaView style={styles.screenContainer}>
       <StatusBar barStyle={"light-content"} />
       <View style={styles.contentContainer}>
-        <View style={styles.topBarContainer}>
-          <TouchableWithoutFeedback
-            onPress={() => {
-              navigation.navigate("CurrentQueue");
-            }}
-          >
-            <Text style={styles.queueButton}>Queue</Text>
-          </TouchableWithoutFeedback>
-        </View>
         <Image style={styles.artwork} source={{uri: store.activeAlbum.image}} />
         <Text style={styles.titleText}>{store.activeAlbum.title}</Text>
         <Text style={styles.artistText}>{store.activeAlbum.authors[0]}</Text>
@@ -94,17 +68,17 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
         </View>
       </View>
       <View style={styles.actionRowContainer}>
-        <TouchableWithoutFeedback onPress={() => TrackPlayer.skipToPrevious()}>
+        <Pressable onPress={() => TrackPlayer.skipToPrevious()}>
           <Text style={styles.secondaryActionButton}>Prev</Text>
-        </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback onPress={() => togglePlayback(playbackState)}>
+        </Pressable>
+        <Pressable onPress={() => togglePlayback(playbackState)}>
           <Text style={styles.primaryActionButton}>
             {playbackState === State.Playing ? "Pause" : "Play"}
           </Text>
-        </TouchableWithoutFeedback>
-        <TouchableWithoutFeedback onPress={() => TrackPlayer.skipToNext()}>
+        </Pressable>
+        <Pressable onPress={() => TrackPlayer.skipToNext()}>
           <Text style={styles.secondaryActionButton}>Next</Text>
-        </TouchableWithoutFeedback>
+        </Pressable>
       </View>
     </SafeAreaView>
   );

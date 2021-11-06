@@ -1,13 +1,6 @@
 // external dependencies
 import React, {useEffect} from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableWithoutFeedback,
-  Image,
-  FlatList,
-} from "react-native";
+import {View, Text, StyleSheet, Image, FlatList, Pressable} from "react-native";
 import {TabNavProps} from "../../../components/navigation";
 
 // internal dependencies
@@ -40,7 +33,7 @@ export const Library = ({navigation}: TabNavProps<"Library">) => {
         keyExtractor={(item, index) => item + index.toString()}
         numColumns={3}
         renderItem={({item}) => (
-          <TouchableWithoutFeedback
+          <Pressable
             onPress={() => {
               navigation.navigate("BookDetails", {
                 album: item,
@@ -48,7 +41,7 @@ export const Library = ({navigation}: TabNavProps<"Library">) => {
             }}
           >
             <Image source={{uri: item.image}} style={styles.image} />
-          </TouchableWithoutFeedback>
+          </Pressable>
         )}
       />
     </View>

@@ -27,19 +27,21 @@ export const BookDetails = ({navigation, route}: Props) => {
   useEffect(() => {
     async function fetchData() {
       const chapters = await getChapters(album);
-      store.setChapters(album.id, chapters);
+      store.updateAlbum(album.id, "chapters", chapters);
     }
     fetchData();
   }, []);
 
+  console.log(currentAlbum);
   if (!currentAlbum) return <View />;
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <View style={styles.details}>
+      <View style={styles.topContainer}>
         <Pressable
           onPress={() => {
             {
               store.setActiveAlbum(album);
+              store.updateAlbum(album.id, "lastPlayed");
               playAlbum(album).then(() => {
                 navigation.navigate("AudioStack" as any);
               });
@@ -48,17 +50,19 @@ export const BookDetails = ({navigation, route}: Props) => {
         >
           <Image source={{uri: currentAlbum.image}} style={styles.cover} />
         </Pressable>
-        <Text style={styles.title}>{album.title}</Text>
-        {album.subtitle ? (
-          <Text style={styles.subtitle}>{album.subtitle}</Text>
-        ) : null}
-        <Text style={styles.authors}>
-          by {currentAlbum.authors.map(a => a).join(", ")}
-        </Text>
-        <Text style={styles.categories} numberOfLines={1}>
-          {currentAlbum.categories?.map(c => c).join(", ")}
-        </Text>
-        <Text style={styles.pageCount}>{currentAlbum.pageCount} pages</Text>
+        <View style={styles.detailsContainer}>
+          <Text style={styles.title}>{album.title}</Text>
+          {album.subtitle ? (
+            <Text style={styles.subtitle}>{album.subtitle}</Text>
+          ) : null}
+          <Text style={styles.authors}>
+            by {currentAlbum.authors.map(a => a).join(", ")}
+          </Text>
+          <Text style={styles.categories} numberOfLines={1}>
+            {currentAlbum.categories?.map(c => c).join(", ")}
+          </Text>
+          <Text style={styles.pageCount}>{currentAlbum.pageCount} pages</Text>
+        </View>
       </View>
       <RenderHtml
         source={{html: album.description || ""}}
@@ -75,12 +79,19 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginHorizontal: 20,
   },
-  details: {
+  topContainer: {
     marginVertical: 10,
+
+    flexDirection: "row",
+    column: true,
+  },
+  detailsContainer: {
+    flex: 1,
+    marginLeft: 20,
   },
   cover: {
-    width: width * 0.5,
-    height: width * 0.75,
+    width: width * 0.5 * 0.6,
+    height: width * 0.75 * 0.6,
     alignSelf: "center",
     marginBottom: 10,
   },

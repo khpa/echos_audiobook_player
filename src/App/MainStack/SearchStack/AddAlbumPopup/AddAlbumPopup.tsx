@@ -22,6 +22,7 @@ export type Album = {
   image?: string;
   chapters: Chapter[];
   lastPlayed?: string;
+  lastPlayedChapterIndex?: string;
 };
 
 export type Chapter = {
@@ -30,10 +31,11 @@ export type Chapter = {
   url: string;
   artwork?: string;
   lastPosition?: string;
+  finished?: boolean;
 };
 
 export const AddAlbumPopup = ({navigation, route}: any) => {
-  const newAlbum = route.params?.googleAlbum;
+  const newAlbum = route.params?.searchResults;
   const store = useStore();
 
   const ISBN_13 = newAlbum.industryIdentifiers.find(

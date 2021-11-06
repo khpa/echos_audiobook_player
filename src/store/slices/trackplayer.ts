@@ -1,17 +1,22 @@
+// external dependencies
 import TrackPlayer, {State} from "react-native-track-player";
 import {SetState} from "zustand";
-import {Album} from "../../App/MainStack/SearchStack/AddAlbumPopup";
-import {StoreState} from "../store";
+
+// internal dependencies
+import type {StoreState} from "../store";
+import type {Album} from "../../App/MainStack/SearchStack/AddAlbumPopup";
 
 export type TrackPlayerSlice = {
   activeAlbum: Album | undefined;
   setActiveAlbum: (album: Album) => void;
 };
 
-export const createTrackPlayerSlice = (set: SetState<StoreState>) => {
+export const createTrackPlayerSlice = (
+  set: SetState<StoreState>,
+): TrackPlayerSlice => {
   return {
     activeAlbum: undefined,
-    setActiveAlbum: (album: Album) =>
+    setActiveAlbum: album =>
       set({
         activeAlbum: album,
       }),

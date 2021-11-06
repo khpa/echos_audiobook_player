@@ -16,6 +16,12 @@ export const setupAudioPlayer = async () => {
       Capability.SkipToPrevious,
       Capability.Stop,
     ],
-    compactCapabilities: [Capability.Play, Capability.Pause],
+    compactCapabilities: [
+      Capability.Play,
+      Capability.Pause,
+      Capability.SkipToNext,
+      Capability.SkipToPrevious,
+      Capability.Stop,
+    ],
   });
 };

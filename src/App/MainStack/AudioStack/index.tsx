@@ -6,15 +6,50 @@ import {createStackNavigator} from "@react-navigation/stack";
 import {AudioRoutes} from "../../components";
 import {AudioPlayer} from "./AudioPlayer/AudioPlayer";
 import {CurrentQueue} from "./CurrentQueue";
+import {Pressable, StyleSheet, Text} from "react-native";
+import {MainNavProps} from "../../components/navigation";
 
 const AudioStack = createStackNavigator<AudioRoutes>();
 
-export const AudioStackScreen = () => {
+export const AudioStackScreen = ({navigation}: MainNavProps<"AudioStack">) => {
   const {Navigator, Screen} = AudioStack;
+
+  function queueButton() {
+    return (
+      <Pressable
+        onPress={() => {
+          navigation.navigate("AudioStack", {screen: "CurrentQueue"});
+        }}
+      >
+        <Text style={styles.queueButton}>Queue</Text>
+      </Pressable>
+    );
+  }
+
   return (
-    <Navigator screenOptions={{headerShown: false}}>
+    <Navigator
+      screenOptions={{
+        headerTitle: "",
+        headerShadowVisible: false,
+        headerStyle: {backgroundColor: "#212121"},
+        headerRight: () => queueButton(),
+      }}
+    >
       <Screen name="AudioPlayer" component={AudioPlayer} />
-      <Screen name="CurrentQueue" component={CurrentQueue} />
+      <Screen
+        name="CurrentQueue"
+        component={CurrentQueue}
+        options={{headerShown: false}}
+      />
     </Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  queueButton: {
+    fontSize: 14,
+    fontWeight: "bold",
+    color: "#FFD479",
+    paddingRight: 10,
+  },
+});

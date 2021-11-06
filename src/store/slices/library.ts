@@ -6,19 +6,25 @@ import type {StoreState} from "../store";
 import type {
   Album,
   Chapter,
-} from "../../App/MainStack/SearchStack/AddAlbumPopup/AddAlbumPopup";
+} from "../../App/MainStack/SearchStack/AddAlbumPopup";
 
 export type LibrarySlice = {
   library: Album[];
   addAlbum: (album: Album) => void;
+  updateAlbum: (id: string, key: keyof Album, value?: any) => void;
+  updateChapter: (
+    id: string,
+    index: number,
+    key: keyof Chapter,
+    value?: any,
+  ) => void;
   removeAlbum: (id: string) => void;
-  setChapters: (id: string, chapters: Chapter[]) => void;
 };
 
-export const createLibrarySlice = (set: SetState<StoreState>) => {
+export const createLibrarySlice = (set: SetState<StoreState>): LibrarySlice => {
   return {
     library: [],
-    addAlbum: (album: Album) => {
+    addAlbum: album => {
       set(state => {
         if (state.library.find(a => a.id === album.id)) {
           return;
@@ -26,16 +32,43 @@ export const createLibrarySlice = (set: SetState<StoreState>) => {
         state.library.push(album);
       });
     },
-    setChapters: (id: string, chapters: Chapter[]) => {
+    updateAlbum: (id, key, value) => {
       set(state => {
         const album = state.library.find(a => a.id === id);
-        if (!album) {
-          return;
+        if (!album) return;
+        switch (key) {
+          case "lastPlayed":
+            album.lastPlayed = new Date().toISOString();
+            break;
+          case "chapters":
+            album.chapters = value;
+            break;
+          default:
+            console.warn("not found");
+            break;
         }
-        album.chapters = chapters;
       });
     },
-    removeAlbum: (id: string) => {
+    updateChapter: (id, idx, key, value) => {
+      set(state => {
+        const album = state.library.find(a => a.id === id);
+        if (!album) return;
+        const chapter = album.chapters.find(c => c.index === idx);
+        if (!chapter) return;
+        switch (key) {
+          case "lastPosition":
+            chapter.lastPosition = new Date().toISOString();
+            break;
+          case "finished":
+            chapter.finished = value;
+            break;
+          default:
+            console.warn("not found");
+            break;
+        }
+      });
+    },
+    removeAlbum: id => {
       set(state => {
         state.library = state.library.filter(album => album.id !== id);
       });
