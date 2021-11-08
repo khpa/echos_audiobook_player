@@ -19,6 +19,8 @@ import TrackPlayer, {
 } from "react-native-track-player";
 import Slider from "@react-native-community/slider";
 import RNShake from "react-native-shake";
+// @ts-ignore
+import BackgroundTimer from "react-native-background-timer";
 
 // internal dependencies
 import {setupAudioPlayer} from "./setupAudioPlayer";
@@ -95,10 +97,10 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
 
   useEffect(() => {
     if (countdown !== undefined && countdown > 0) {
-      const interval = setInterval(() => {
+      const interval = BackgroundTimer.setInterval(() => {
         setCountdown(countdown - 1);
       }, 1000);
-      return () => clearInterval(interval);
+      return () => BackgroundTimer.clearInterval(interval);
     } else if (countdown === 0) {
       TrackPlayer.pause();
       return setResetTimer(10);
@@ -108,21 +110,22 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
   useEffect(() => {
     if (resetTimer !== undefined && resetTimer > 0) {
       console.log("secondtimer", resetTimer);
-      const interval = setInterval(() => {
+      const interval = BackgroundTimer.setInterval(() => {
         setResetTimer(resetTimer - 1);
       }, 1000);
       const subscription = RNShake.addListener(() => {
+        TrackPlayer.play();
         setCountdown(undefined);
         setResetTimer(undefined);
-        TrackPlayer.play();
       });
       return () => {
-        clearInterval(interval);
+        BackgroundTimer.clearInterval(interval);
         subscription.remove();
       };
     } else if (resetTimer === 0) {
       setCountdown(undefined);
       setResetTimer(undefined);
+      return;
     }
   }, [resetTimer]);
 
