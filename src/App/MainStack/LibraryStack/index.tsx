@@ -20,6 +20,7 @@ export const LibraryStackScreen = ({navigation}: Props) => {
     <Navigator
       screenOptions={{
         headerTitleAlign: "center",
+        headerShown: false,
         headerTitleStyle: {color: "black"},
         headerStyle: {
           shadowColor: "transparent",
@@ -32,6 +33,7 @@ export const LibraryStackScreen = ({navigation}: Props) => {
         component={BookDetails}
         options={({route}: any) => ({
           headerTitle: route.params?.album.title,
+          headerShown: true,
           headerRight: () => (
             <Pressable
               onPress={() =>

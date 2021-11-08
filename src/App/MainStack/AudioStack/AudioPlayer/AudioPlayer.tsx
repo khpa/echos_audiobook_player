@@ -17,7 +17,6 @@ import TrackPlayer, {
   Event,
 } from "react-native-track-player";
 import Slider from "@react-native-community/slider";
-import {format as prettyFormat} from "pretty-format";
 
 // internal dependencies
 import {setupAudioPlayer} from "./setupAudioPlayer";
@@ -64,14 +63,14 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
           test.push(...newVal);
         });
         const newTest = [...new Set(test)];
-        console.log(newTest);
+        // console.log(newTest);
       }
       // console.log(prettyFormat(activeAlbum));
     }
     getActiveAlbum();
-    console.log(State.Playing, playbackState);
+
     if (currentChapter && playbackState === State.Paused) {
-      console.log("logged ", position);
+      // console.log("logged ", position);
       store.updateChapter(
         store.activeAlbum.id,
         currentChapter.index,
@@ -81,12 +80,8 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
     }
   }, [playbackState]);
 
-  useTrackPlayerEvents([Event.PlaybackState], event => {
-    console.log(event);
-  });
-
   useTrackPlayerEvents([Event.PlaybackTrackChanged], event => {
-    console.log("PlaybackTrackChanged", event);
+    // console.log("PlaybackTrackChanged", event);
     store.updateAlbum(
       store.activeAlbum.id,
       "lastPlayedChapterIndex",
@@ -110,9 +105,6 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
   if (!store.activeAlbum) {
     return <></>;
   }
-  useEffect(() => {
-    console.log(duration);
-  }, [position]);
   return (
     <SafeAreaView style={styles.screenContainer}>
       <StatusBar barStyle={"light-content"} />

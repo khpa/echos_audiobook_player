@@ -21,6 +21,10 @@ export type LibrarySlice = {
   removeAlbum: (id: string) => void;
 };
 
+export const selectLibrary = {
+  updateAlbum: (store: LibrarySlice) => store.updateAlbum,
+};
+
 export const createLibrarySlice = (set: SetState<StoreState>): LibrarySlice => {
   return {
     library: [],

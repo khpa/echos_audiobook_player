@@ -7,6 +7,8 @@ import type {StoreState} from "../store";
 import type {Album} from "../../App/MainStack/SearchStack/AddAlbumPopup";
 
 export type TrackPlayerSlice = {
+  playerState: State;
+  setPlayerState: (playerState: State) => void;
   activeAlbum: Album;
   setActiveAlbum: (album: Album) => void;
   resetActiveAlbum: () => void;
@@ -21,10 +23,21 @@ const resetAlbum = {
   chapters: [],
 };
 
-export const createTrackPlayerSlice = (set: SetState<StoreState>) => {
+export const selectTrackPlayer = {
+  playerState: (store: TrackPlayerSlice) => store.playerState,
+  setPlayerState: (store: TrackPlayerSlice) => store.setPlayerState,
+  activeAlbum: (store: StoreState): Album => store.activeAlbum,
+  setActiveAlbum: (store: StoreState) => store.setActiveAlbum,
+};
+
+export const createTrackPlayerSlice = (
+  set: SetState<StoreState>,
+): TrackPlayerSlice => {
   return {
+    playerState: State.None,
+    setPlayerState: playerState => set({playerState}),
     activeAlbum: resetAlbum,
-    setActiveAlbum: (album: Album) =>
+    setActiveAlbum: album =>
       set({
         activeAlbum: album,
       }),

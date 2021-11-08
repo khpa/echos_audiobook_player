@@ -1,5 +1,5 @@
 // external dependencies
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {
   View,
   Text,
@@ -11,18 +11,21 @@ import {
 import RenderHtml from "react-native-render-html";
 
 // internal dependencies
+import {useAlbumSetup} from "../../../../hooks/trackplayer";
 import {useStore} from "../../../../store/store";
 import {width} from "../../../components";
 import {TabNavProps} from "../../../components/navigation";
+import {Album} from "../../SearchStack/AddAlbumPopup";
 import {getChapters} from "./getChapters";
-import {playAlbum} from "./playAlbum";
 
 type Props = TabNavProps<"BookDetails">;
 
-export const BookDetails = ({navigation, route}: Props) => {
+export const BookDetails = ({route}: Props) => {
   const store = useStore();
-  const {album} = route.params;
-  const currentAlbum = store.library.find(b => b.id === album.id);
+  const album = route.params.album;
+
+  const [albumSetup, setAlbumSetup] = useState<Album>();
+  useAlbumSetup(albumSetup);
 
   useEffect(() => {
     async function fetchData() {
@@ -32,46 +35,32 @@ export const BookDetails = ({navigation, route}: Props) => {
     fetchData();
   }, []);
 
-  if (!currentAlbum) return <View />;
+  if (!album) return <View />;
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {album.subtitle ? (
         <Text style={styles.subtitle}>{album.subtitle}</Text>
       ) : null}
       <View style={styles.topContainer}>
-        <Pressable
-          // TODO - this function needs to be refactored
-          onPress={() => {
-            {
-              if (album.chapters.length === 0) {
-                return;
-              }
-              store.setActiveAlbum(album);
-              store.updateAlbum(album.id, "lastPlayed");
-              playAlbum(album).then(() => {
-                navigation.navigate("AudioStack" as any);
-              });
-            }
-          }}
-        >
-          <Image source={{uri: currentAlbum.image}} style={styles.cover} />
+        <Pressable onPress={() => setAlbumSetup(album)}>
+          <Image source={{uri: album.image}} style={styles.cover} />
         </Pressable>
         <View style={styles.detailsContainer}>
           <Text style={styles.authors}>
-            {currentAlbum.authors.map(a => a).join(", ")}
+            {album.authors.map(a => a).join(", ")}
           </Text>
           <View>
-            {currentAlbum.categories?.map((category, index) => (
+            {album.categories?.map((category, index) => (
               <Text key={index} style={styles.categories} numberOfLines={1}>
                 {category}
               </Text>
             ))}
           </View>
 
-          <Text style={styles.pageCount}>{currentAlbum.pageCount} pages</Text>
+          <Text style={styles.pageCount}>{album.pageCount} pages</Text>
           <Text style={styles.chapters}>
-            {currentAlbum.chapters && currentAlbum.chapters.length > 0
-              ? currentAlbum.chapters.length + " "
+            {album.chapters && album.chapters.length > 0
+              ? album.chapters.length + " "
               : "There are currently no "}
             files
           </Text>

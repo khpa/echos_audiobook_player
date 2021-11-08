@@ -2,17 +2,20 @@
 // https://reactnavigation.org/docs/community-libraries-and-navigators
 
 // external dependencies
-import React from "react";
+import React, {useState} from "react";
 import {View, StyleSheet, FlatList, Pressable, Image} from "react-native";
-import {useStore} from "../../../store/store";
-import {width} from "../../components";
 
 // internal dependencies
+import {useStore} from "../../../store/store";
+import {width} from "../../components";
+import {useAlbumSetup} from "../../../hooks/trackplayer";
 import {MainNavProps} from "../../components/navigation";
-import {playAlbum} from "../LibraryStack/BookDetails/playAlbum";
+import {Album} from "../SearchStack/AddAlbumPopup";
 
-export const Home = ({navigation}: MainNavProps<"MainTabs">) => {
+export const Home = ({}: MainNavProps<"MainTabs">) => {
   const store = useStore();
+  const [albumSetup, setAlbumSetup] = useState<Album>();
+  useAlbumSetup(albumSetup);
 
   return (
     <View style={styles.container}>
@@ -26,18 +29,7 @@ export const Home = ({navigation}: MainNavProps<"MainTabs">) => {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           renderItem={({item}) => (
-            <Pressable
-              onPress={() => {
-                {
-                  store.setActiveAlbum(item);
-                  store.updateAlbum(item.id, "lastPlayed");
-
-                  playAlbum(item).then(() => {
-                    navigation.navigate("AudioStack" as any);
-                  });
-                }
-              }}
-            >
+            <Pressable onPress={() => setAlbumSetup(item)}>
               <Image source={{uri: item.image}} style={styles.image} />
             </Pressable>
           )}
