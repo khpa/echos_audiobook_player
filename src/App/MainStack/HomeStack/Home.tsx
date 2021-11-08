@@ -8,7 +8,7 @@ import {View, StyleSheet, FlatList, Pressable, Image} from "react-native";
 // internal dependencies
 import {useStore} from "../../../store/store";
 import {width} from "../../components";
-import {useAlbumSetup} from "../../../hooks/trackplayer";
+import {useAlbumSetup} from "../../../hooks";
 import {MainNavProps} from "../../components/navigation";
 import {Album} from "../SearchStack/AddAlbumPopup";
 

@@ -15,6 +15,7 @@ import TrackPlayer from "react-native-track-player";
 import {TabNavProps} from "../../../components/navigation";
 import {useStore} from "../../../../store/store";
 import {removeFolder} from "../BookDetails";
+import {getChapters} from "./getChapters";
 
 type Props = TabNavProps<"BookSettings">;
 
@@ -31,9 +32,15 @@ export const BookSettings = ({navigation, route}: Props) => {
     });
   }
 
+  async function reloadChapters() {
+    const chapters = await getChapters(album);
+    store.updateAlbum(album.id, "chapters", chapters);
+  }
+
   const imgOpt: string[] = Object.values(album.imageOptions);
   return (
     <ScrollView style={styles.container}>
+      <Button title="reload Chapters" onPress={reloadChapters} />
       <Button
         title="Set Duration"
         onPress={() => store.updateAlbum(album.id, "duration", 35638)}

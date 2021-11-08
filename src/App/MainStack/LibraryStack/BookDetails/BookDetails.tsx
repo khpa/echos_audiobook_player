@@ -1,5 +1,5 @@
 // external dependencies
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {
   View,
   Text,
@@ -9,31 +9,20 @@ import {
   Pressable,
 } from "react-native";
 import RenderHtml from "react-native-render-html";
+// import {format as pretty} from "pretty-format";
 
 // internal dependencies
-import {useAlbumSetup} from "../../../../hooks/trackplayer";
-import {useStore} from "../../../../store/store";
+import {useAlbumSetup} from "../../../../hooks";
 import {width} from "../../../components";
 import {TabNavProps} from "../../../components/navigation";
 import {Album} from "../../SearchStack/AddAlbumPopup";
-import {getChapters} from "./getChapters";
 
 type Props = TabNavProps<"BookDetails">;
 
 export const BookDetails = ({route}: Props) => {
-  const store = useStore();
   const album = route.params.album;
-
   const [albumSetup, setAlbumSetup] = useState<Album>();
   useAlbumSetup(albumSetup);
-
-  useEffect(() => {
-    async function fetchData() {
-      const chapters = await getChapters(album);
-      store.updateAlbum(album.id, "chapters", chapters);
-    }
-    fetchData();
-  }, []);
 
   if (!album) return <View />;
   return (

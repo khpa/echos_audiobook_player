@@ -1,9 +1,12 @@
-import {useNavigation} from "@react-navigation/native";
+// external dependencies
 import {useEffect} from "react";
+import {useNavigation} from "@react-navigation/native";
 import TrackPlayer, {Track} from "react-native-track-player";
+
+// internal dependencies
+import {selectTrackPlayer} from "../store/slices/trackplayer";
 import {Album} from "../App/MainStack/SearchStack/AddAlbumPopup";
 import {selectLibrary} from "../store/slices/library";
-import {selectTrackPlayer} from "../store/slices/trackplayer";
 import {useStore} from "../store/store";
 
 export async function useAlbumSetup(album?: Album) {
@@ -16,7 +19,6 @@ export async function useAlbumSetup(album?: Album) {
       if (album && album.chapters.length > 0) {
         setActiveAlbum(album);
         updateAlbum(album.id, "lastPlayed");
-        await TrackPlayer.reset();
 
         let newQueue: Track[] = [];
         if (album.chapters.length > 0) {
@@ -27,28 +29,25 @@ export async function useAlbumSetup(album?: Album) {
               title: album.chapters[i]?.title,
               album: album.title,
               artwork: album.image,
-              duration: album.duration || undefined,
+              duration: album.duration,
             });
           }
         }
+        await TrackPlayer.reset();
         await TrackPlayer.add(newQueue);
         await TrackPlayer.skip(album.lastPlayedChapterIndex || 0);
+        const position =
+          album.chapters[album.lastPlayedChapterIndex || 0]?.lastPosition || 0;
+
+        await TrackPlayer.seekTo(position);
+        await TrackPlayer.play();
 
         navigation.navigate(
           "AudioStack" as never,
           {screen: "AudioPlayer"} as never,
         );
-        await TrackPlayer.play();
       }
     }
     albumSetup();
   }, [album]);
 }
-
-export const usePause = () => {
-  return async () => await TrackPlayer.pause();
-};
-
-export const useSeekTo = () => {
-  return async (position: number) => await TrackPlayer.seekTo(position);
-};
