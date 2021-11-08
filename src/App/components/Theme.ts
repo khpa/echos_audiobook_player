@@ -7,6 +7,7 @@ const palette = {
   // main palette
   lightBlue: "#1BA098",
   darkBlue: "#051622",
+  // #070e14
 
   // shades
   white: "#FFF",

@@ -3,7 +3,7 @@
 
 // external dependencies
 import React from "react";
-import {Text, View, StyleSheet, FlatList, Pressable, Image} from "react-native";
+import {View, StyleSheet, FlatList, Pressable, Image} from "react-native";
 import {useStore} from "../../../store/store";
 import {width} from "../../components";
 
@@ -31,30 +31,7 @@ export const Home = ({navigation}: MainNavProps<"MainTabs">) => {
                 {
                   store.setActiveAlbum(item);
                   store.updateAlbum(item.id, "lastPlayed");
-                  playAlbum(item).then(() => {
-                    navigation.navigate("AudioStack" as any);
-                  });
-                }
-              }}
-            >
-              <Image source={{uri: item.image}} style={styles.image} />
-            </Pressable>
-          )}
-        />
-      </View>
-      <View style={styles.recentlyAdded}>
-        <Text style={styles.lastPlayedTitle}>Recently Played</Text>
-        <FlatList
-          data={store.library}
-          keyExtractor={(item, index) => item + index.toString()}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          renderItem={({item}) => (
-            <Pressable
-              onPress={() => {
-                {
-                  store.setActiveAlbum(item);
-                  store.updateAlbum(item.id, "lastPlayed");
+
                   playAlbum(item).then(() => {
                     navigation.navigate("AudioStack" as any);
                   });

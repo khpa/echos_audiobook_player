@@ -1,5 +1,5 @@
 // external dependencies
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {
   View,
   Text,
@@ -17,17 +17,22 @@ import TrackPlayer, {
   Event,
 } from "react-native-track-player";
 import Slider from "@react-native-community/slider";
+import {format as prettyFormat} from "pretty-format";
 
 // internal dependencies
 import {setupAudioPlayer} from "./setupAudioPlayer";
 import {togglePlayback} from "./togglePlayback";
 import {AudioNavProp} from "../../../components/navigation";
 import {useStore} from "../../../../store/store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {Album, Chapter} from "../../SearchStack/AddAlbumPopup";
+import {formatDuration} from "./formatDuration";
 
 export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
   const {position, duration} = useProgress();
   const playbackState = usePlaybackState();
   const store = useStore();
+  const [currentChapter, setCurrentChapter] = useState<Chapter>();
 
   useEffect(() => {
     setupAudioPlayer();
@@ -36,15 +41,86 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
     }
   }, []);
 
+  useEffect(() => {
+    if (currentChapter?.lastPosition && currentChapter.lastPosition > 0) {
+      jumpToPosition(currentChapter.lastPosition || 0);
+    }
+  }, [currentChapter]);
+
+  useEffect(() => {
+    async function getActiveAlbum() {
+      const currT = await TrackPlayer.getCurrentTrack();
+      setCurrentChapter(store.activeAlbum.chapters[currT]);
+
+      const test = await AsyncStorage.getItem("store");
+      const lib = JSON.parse(test as any).state.library;
+      const activeAlbum: Album = lib.find(
+        (album: Album) => album.id === store.activeAlbum.id,
+      );
+      if (activeAlbum.categories !== undefined) {
+        let test: string[] = [];
+        activeAlbum.categories.map(cat => {
+          const newVal = cat.split(" / ");
+          test.push(...newVal);
+        });
+        const newTest = [...new Set(test)];
+        console.log(newTest);
+      }
+      // console.log(prettyFormat(activeAlbum));
+    }
+    getActiveAlbum();
+    console.log(State.Playing, playbackState);
+    if (currentChapter && playbackState === State.Paused) {
+      console.log("logged ", position);
+      store.updateChapter(
+        store.activeAlbum.id,
+        currentChapter.index,
+        "lastPosition",
+        position,
+      );
+    }
+  }, [playbackState]);
+
+  useTrackPlayerEvents([Event.PlaybackState], event => {
+    console.log(event);
+  });
+
+  useTrackPlayerEvents([Event.PlaybackTrackChanged], event => {
+    console.log("PlaybackTrackChanged", event);
+    store.updateAlbum(
+      store.activeAlbum.id,
+      "lastPlayedChapterIndex",
+      event.nextTrack,
+    );
+    store.updateChapter(
+      store.activeAlbum.id,
+      event.track,
+      "lastPosition",
+      position,
+    );
+    jumpToPosition(
+      store.activeAlbum.chapters[event.nextTrack]?.lastPosition || 0,
+    );
+  });
+
+  async function jumpToPosition(position: number) {
+    await TrackPlayer.seekTo(position);
+  }
+
   if (!store.activeAlbum) {
     return <></>;
   }
+  useEffect(() => {
+    console.log(duration);
+  }, [position]);
   return (
     <SafeAreaView style={styles.screenContainer}>
       <StatusBar barStyle={"light-content"} />
       <View style={styles.contentContainer}>
         <Image style={styles.artwork} source={{uri: store.activeAlbum.image}} />
-        <Text style={styles.titleText}>{store.activeAlbum.title}</Text>
+        <Text style={styles.titleText}>
+          {currentChapter ? currentChapter.title : "No Title"}
+        </Text>
         <Text style={styles.artistText}>{store.activeAlbum.authors[0]}</Text>
         <Slider
           style={styles.progressContainer}
@@ -60,10 +136,10 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
         />
         <View style={styles.progressLabelContainer}>
           <Text style={styles.progressLabelText}>
-            {new Date(position * 1000).toISOString().substr(14, 5)}
+            {formatDuration(position)}
           </Text>
           <Text style={styles.progressLabelText}>
-            {new Date((duration - position) * 1000).toISOString().substr(14, 5)}
+            {formatDuration(duration - position)}
           </Text>
         </View>
       </View>
@@ -71,10 +147,16 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
         <Pressable onPress={() => TrackPlayer.skipToPrevious()}>
           <Text style={styles.secondaryActionButton}>Prev</Text>
         </Pressable>
+        <Pressable onPress={() => TrackPlayer.seekTo(position - 30)}>
+          <Text style={styles.secondaryActionButton}>-30</Text>
+        </Pressable>
         <Pressable onPress={() => togglePlayback(playbackState)}>
           <Text style={styles.primaryActionButton}>
             {playbackState === State.Playing ? "Pause" : "Play"}
           </Text>
+        </Pressable>
+        <Pressable onPress={() => TrackPlayer.seekTo(position + 30)}>
+          <Text style={styles.secondaryActionButton}>+30</Text>
         </Pressable>
         <Pressable onPress={() => TrackPlayer.skipToNext()}>
           <Text style={styles.secondaryActionButton}>Next</Text>
@@ -112,13 +194,15 @@ const styles = StyleSheet.create({
     backgroundColor: "grey",
   },
   titleText: {
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: "600",
     color: "white",
     marginTop: 30,
+    textAlign: "center",
+    paddingBottom: 10,
   },
   artistText: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "200",
     color: "white",
   },
@@ -138,7 +222,7 @@ const styles = StyleSheet.create({
     fontVariant: ["tabular-nums"],
   },
   actionRowContainer: {
-    width: "60%",
+    width: "70%",
     flexDirection: "row",
     marginBottom: 100,
     justifyContent: "space-between",

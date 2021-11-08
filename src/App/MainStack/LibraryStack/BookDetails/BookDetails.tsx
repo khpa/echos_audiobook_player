@@ -7,7 +7,6 @@ import {
   Image,
   ScrollView,
   Pressable,
-  Button,
 } from "react-native";
 import RenderHtml from "react-native-render-html";
 
@@ -36,10 +35,9 @@ export const BookDetails = ({navigation, route}: Props) => {
   if (!currentAlbum) return <View />;
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <Button
-        title="Settings"
-        onPress={() => navigation.navigate("BookSettings", {album})}
-      />
+      {album.subtitle ? (
+        <Text style={styles.subtitle}>{album.subtitle}</Text>
+      ) : null}
       <View style={styles.topContainer}>
         <Pressable
           // TODO - this function needs to be refactored
@@ -59,12 +57,8 @@ export const BookDetails = ({navigation, route}: Props) => {
           <Image source={{uri: currentAlbum.image}} style={styles.cover} />
         </Pressable>
         <View style={styles.detailsContainer}>
-          <Text style={styles.title}>{album.title}</Text>
-          {album.subtitle ? (
-            <Text style={styles.subtitle}>{album.subtitle}</Text>
-          ) : null}
           <Text style={styles.authors}>
-            by {currentAlbum.authors.map(a => a).join(", ")}
+            {currentAlbum.authors.map(a => a).join(", ")}
           </Text>
           <View>
             {currentAlbum.categories?.map((category, index) => (
@@ -95,11 +89,11 @@ export const BookDetails = ({navigation, route}: Props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 20,
-    marginHorizontal: 20,
+    backgroundColor: "white",
+    paddingHorizontal: 20,
   },
   topContainer: {
-    marginVertical: 10,
+    marginVertical: 20,
 
     flexDirection: "row",
     column: true,
@@ -123,24 +117,26 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "bold",
     color: "black",
+    textAlign: "center",
   },
   authors: {
     fontSize: 14,
     color: "black",
+    fontWeight: "bold",
     marginBottom: 10,
   },
   categories: {
     fontSize: 12,
-    color: "gray",
+    color: "black",
   },
   pageCount: {
     marginTop: 10,
     fontSize: 12,
-    color: "gray",
+    color: "black",
   },
   chapters: {
     fontSize: 12,
-    color: "gray",
+    color: "black",
   },
   description: {
     fontSize: 14,
@@ -149,7 +145,7 @@ const styles = StyleSheet.create({
   },
   track: {
     fontSize: 14,
-    color: "grey",
+    color: "black",
     marginVertical: 10,
   },
 });

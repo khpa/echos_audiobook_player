@@ -46,6 +46,12 @@ export const createLibrarySlice = (set: SetState<StoreState>): LibrarySlice => {
           case "image":
             album.image = value;
             break;
+          case "lastPlayedChapterIndex":
+            album.lastPlayedChapterIndex = value;
+            break;
+          case "duration":
+            album.duration = value;
+            break;
           default:
             console.warn("not found");
             break;
@@ -60,7 +66,7 @@ export const createLibrarySlice = (set: SetState<StoreState>): LibrarySlice => {
         if (!chapter) return;
         switch (key) {
           case "lastPosition":
-            chapter.lastPosition = new Date().toISOString();
+            chapter.lastPosition = value;
             break;
           case "finished":
             chapter.finished = value;

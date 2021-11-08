@@ -9,12 +9,16 @@ export const setupAudioPlayer = async () => {
   await TrackPlayer.setupPlayer({});
   await TrackPlayer.updateOptions({
     stopWithApp: false,
+    forwardJumpInterval: 30,
+    backwardJumpInterval: 30,
     capabilities: [
       Capability.Play,
       Capability.Pause,
       Capability.SkipToNext,
       Capability.SkipToPrevious,
       Capability.Stop,
+      Capability.JumpBackward,
+      Capability.JumpForward,
     ],
     compactCapabilities: [
       Capability.Play,
@@ -22,6 +26,8 @@ export const setupAudioPlayer = async () => {
       Capability.SkipToNext,
       Capability.SkipToPrevious,
       Capability.Stop,
+      Capability.JumpBackward,
+      Capability.JumpForward,
     ],
   });
 };

@@ -22,8 +22,9 @@ export type Album = {
   image?: string;
   imageOptions?: any;
   chapters: Chapter[];
+  duration?: number;
   lastPlayed?: string;
-  lastPlayedChapterIndex?: string;
+  lastPlayedChapterIndex?: number;
 };
 
 export type Chapter = {
@@ -31,7 +32,7 @@ export type Chapter = {
   title: string;
   url: string;
   artwork?: string;
-  lastPosition?: string;
+  lastPosition?: number;
   finished?: boolean;
 };
 
@@ -57,6 +58,7 @@ export const AddAlbumPopup = ({navigation, route}: any) => {
     image: newAlbum.image,
     imageOptions: newAlbum.imageLinks,
     chapters: [],
+    lastPlayedChapterIndex: 0,
   };
 
   // TODO - Add a check to see if the album is already in the library

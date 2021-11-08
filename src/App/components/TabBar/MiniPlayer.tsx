@@ -14,6 +14,7 @@ export const MiniPlayer = React.memo(() => {
   const playbackState = usePlaybackState();
   const navigation = useNavigation();
 
+  // Play/pause here doesnt trigger the playbackstate change
   const displayStyle: ViewStyle = {
     display: store.activeAlbum ? "flex" : "none",
   };

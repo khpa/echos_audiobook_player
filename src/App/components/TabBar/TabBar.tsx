@@ -59,6 +59,7 @@ export function TabBar({state, descriptors, navigation}: BottomTabBarProps) {
                 style={{
                   color: isFocused ? "black" : "gray",
                   textAlign: "center",
+                  fontWeight: isFocused ? "bold" : "normal",
                 }}
               >
                 {label}

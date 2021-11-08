@@ -54,12 +54,13 @@ export const Library = ({navigation}: TabNavProps<"Library">) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 5,
-    marginTop: 6,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    backgroundColor: "white",
   },
   imageContainer: {
-    width: (width - 40) / 3,
-    height: (width - 40) / 2,
+    width: (width - 55) / 3,
+    height: (width - 55) / 2,
     margin: 5,
   },
   image: {

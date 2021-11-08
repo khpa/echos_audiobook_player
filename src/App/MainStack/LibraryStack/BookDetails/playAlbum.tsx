@@ -1,6 +1,7 @@
 import TrackPlayer, {Track} from "react-native-track-player";
 import {Album} from "../../SearchStack/AddAlbumPopup";
 
+// somehow check if current album is already playing
 export async function playAlbum(album: Album) {
   await TrackPlayer.reset();
 
@@ -13,9 +14,11 @@ export async function playAlbum(album: Album) {
         title: album.chapters[i]?.title,
         album: album.title,
         artwork: album.image,
+        duration: album.duration || undefined,
       });
     }
   }
   await TrackPlayer.add(newQueue);
+  await TrackPlayer.skip(album.lastPlayedChapterIndex || 0);
   await TrackPlayer.play();
 }
