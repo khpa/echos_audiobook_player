@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {Text, View} from "react-native";
+import {Text, View, StyleSheet} from "react-native";
 import TrackPlayer, {Track} from "react-native-track-player";
 
 export const CurrentQueue = () => {
@@ -14,10 +14,24 @@ export const CurrentQueue = () => {
   }, []);
 
   return (
-    <View>
+    <View style={styles.container}>
       {currentQueue.map((track: Track) => (
-        <Text key={track.title}>{track.title}</Text>
+        <Text style={styles.text} key={track.title}>
+          {track.title}
+        </Text>
       ))}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+  text: {
+    fontSize: 12,
+    color: "black",
+    padding: 10,
+  },
+});

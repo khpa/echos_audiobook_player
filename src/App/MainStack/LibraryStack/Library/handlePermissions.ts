@@ -11,7 +11,8 @@ export const handlePermissions = () => {
     case "android":
       const readStorage = PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE;
       const writeStorage = PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE;
-      handleAndroidPermissions([readStorage, writeStorage]);
+      const motionDetection = PERMISSIONS.ANDROID.ACTIVITY_RECOGNITION;
+      handleAndroidPermissions([readStorage, writeStorage, motionDetection]);
       break;
     default:
       console.log("unknown Platform");

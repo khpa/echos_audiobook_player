@@ -8,6 +8,7 @@ import {
   StatusBar,
   Image,
   Pressable,
+  Button,
 } from "react-native";
 import TrackPlayer, {
   State,
@@ -17,6 +18,7 @@ import TrackPlayer, {
   Event,
 } from "react-native-track-player";
 import Slider from "@react-native-community/slider";
+import RNShake from "react-native-shake";
 
 // internal dependencies
 import {setupAudioPlayer} from "./setupAudioPlayer";
@@ -32,6 +34,8 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
   const playbackState = usePlaybackState();
   const store = useStore();
   const [currentChapter, setCurrentChapter] = useState<Chapter>();
+  const [countdown, setCountdown] = useState<number | undefined>();
+  const [resetTimer, setResetTimer] = useState<number | undefined>();
 
   useEffect(() => {
     setupAudioPlayer();
@@ -39,12 +43,6 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
       navigation.navigate("Home" as any);
     }
   }, []);
-
-  useEffect(() => {
-    if (currentChapter?.lastPosition && currentChapter.lastPosition > 0) {
-      jumpToPosition(currentChapter.lastPosition || 0);
-    }
-  }, [currentChapter]);
 
   useEffect(() => {
     async function getActiveAlbum() {
@@ -81,7 +79,7 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
   }, [playbackState]);
 
   useTrackPlayerEvents([Event.PlaybackTrackChanged], event => {
-    // console.log("PlaybackTrackChanged", event);
+    console.log("PlaybackTrackChanged", event);
     store.updateAlbum(
       store.activeAlbum.id,
       "lastPlayedChapterIndex",
@@ -93,14 +91,40 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
       "lastPosition",
       position,
     );
-    jumpToPosition(
-      store.activeAlbum.chapters[event.nextTrack]?.lastPosition || 0,
-    );
   });
 
-  async function jumpToPosition(position: number) {
-    await TrackPlayer.seekTo(position);
-  }
+  useEffect(() => {
+    if (countdown !== undefined && countdown > 0) {
+      const interval = setInterval(() => {
+        setCountdown(countdown - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    } else if (countdown === 0) {
+      TrackPlayer.pause();
+      return setResetTimer(10);
+    }
+  }, [countdown]);
+
+  useEffect(() => {
+    if (resetTimer !== undefined && resetTimer > 0) {
+      console.log("secondtimer", resetTimer);
+      const interval = setInterval(() => {
+        setResetTimer(resetTimer - 1);
+      }, 1000);
+      const subscription = RNShake.addListener(() => {
+        setCountdown(undefined);
+        setResetTimer(undefined);
+        TrackPlayer.play();
+      });
+      return () => {
+        clearInterval(interval);
+        subscription.remove();
+      };
+    } else if (resetTimer === 0) {
+      setCountdown(undefined);
+      setResetTimer(undefined);
+    }
+  }, [resetTimer]);
 
   if (!store.activeAlbum) {
     return <></>;
@@ -108,6 +132,10 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
   return (
     <SafeAreaView style={styles.screenContainer}>
       <StatusBar barStyle={"light-content"} />
+      <Button title="timer" onPress={() => setCountdown(5)} />
+      <Text style={{color: "white"}}>
+        {countdown && formatDuration(countdown)}
+      </Text>
       <View style={styles.contentContainer}>
         <Image style={styles.artwork} source={{uri: store.activeAlbum.image}} />
         <Text style={styles.titleText}>
