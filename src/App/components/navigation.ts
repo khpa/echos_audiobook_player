@@ -38,6 +38,7 @@ export type MainRoutes = {
 export type AudioRoutes = {
   AudioPlayer: undefined;
   CurrentQueue: undefined;
+  Countdown: undefined;
 };
 
 export type TabRoutes = {

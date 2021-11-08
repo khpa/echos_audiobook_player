@@ -13,6 +13,8 @@ export type TrackPlayerSlice = {
   setActiveAlbum: (album: Album) => void;
   resetActiveAlbum: () => void;
   resetChapters: () => void;
+  countdown: number | undefined;
+  setCountdown: (countdown: number | undefined) => void;
 };
 
 const resetAlbum = {
@@ -58,6 +60,8 @@ export const createTrackPlayerSlice = (
         }
       });
     },
+    countdown: undefined,
+    setCountdown: countdown => set({countdown}),
   };
 };
 

@@ -23,6 +23,7 @@ export type LibrarySlice = {
 
 export const selectLibrary = {
   updateAlbum: (store: LibrarySlice) => store.updateAlbum,
+  updateChapter: (store: LibrarySlice) => store.updateChapter,
 };
 
 export const createLibrarySlice = (set: SetState<StoreState>): LibrarySlice => {

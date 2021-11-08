@@ -36,6 +36,7 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
   const playbackState = usePlaybackState();
   const store = useStore();
   const [currentChapter, setCurrentChapter] = useState<Chapter>();
+  const cdn = store.countdown;
   const [countdown, setCountdown] = useState<number | undefined>();
   const [resetTimer, setResetTimer] = useState<number | undefined>();
 
@@ -96,6 +97,10 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
   });
 
   useEffect(() => {
+    cdn && setCountdown(cdn * 60);
+  }, [cdn]);
+
+  useEffect(() => {
     if (countdown !== undefined && countdown > 0) {
       const interval = BackgroundTimer.setInterval(() => {
         setCountdown(countdown - 1);
@@ -109,13 +114,12 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
 
   useEffect(() => {
     if (resetTimer !== undefined && resetTimer > 0) {
-      console.log("secondtimer", resetTimer);
       const interval = BackgroundTimer.setInterval(() => {
         setResetTimer(resetTimer - 1);
       }, 1000);
       const subscription = RNShake.addListener(() => {
         TrackPlayer.play();
-        setCountdown(undefined);
+        setCountdown(cdn);
         setResetTimer(undefined);
       });
       return () => {
@@ -125,6 +129,7 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
     } else if (resetTimer === 0) {
       setCountdown(undefined);
       setResetTimer(undefined);
+      store.setCountdown(undefined);
       return;
     }
   }, [resetTimer]);
@@ -135,7 +140,7 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
   return (
     <SafeAreaView style={styles.screenContainer}>
       <StatusBar barStyle={"light-content"} />
-      <Button title="timer" onPress={() => setCountdown(5)} />
+      <Text style={{color: "white"}}>{cdn}</Text>
       <Text style={{color: "white"}}>
         {countdown && formatDuration(countdown)}
       </Text>
@@ -185,6 +190,10 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
           <Text style={styles.secondaryActionButton}>Next</Text>
         </Pressable>
       </View>
+      <Button
+        title="Countdown"
+        onPress={() => navigation.navigate("Countdown")}
+      />
     </SafeAreaView>
   );
 };

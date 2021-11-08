@@ -8,6 +8,7 @@ import {AudioPlayer} from "./AudioPlayer/AudioPlayer";
 import {CurrentQueue} from "./CurrentQueue";
 import {Pressable, StyleSheet, Text} from "react-native";
 import {MainNavProps} from "../../components/navigation";
+import {Countdown} from "./Countdown";
 
 const AudioStack = createStackNavigator<AudioRoutes>();
 
@@ -41,6 +42,7 @@ export const AudioStackScreen = ({navigation}: MainNavProps<"AudioStack">) => {
         component={CurrentQueue}
         options={{headerShown: false}}
       />
+      <Screen name="Countdown" component={Countdown} />
     </Navigator>
   );
 };
