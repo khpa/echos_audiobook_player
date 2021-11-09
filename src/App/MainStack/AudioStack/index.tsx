@@ -7,37 +7,48 @@ import {AudioRoutes} from "../../components";
 import {AudioPlayer} from "./AudioPlayer/AudioPlayer";
 import {CurrentQueue} from "./CurrentQueue";
 import {Pressable, StyleSheet, Text} from "react-native";
-import {MainNavProps} from "../../components/navigation";
+import {AudioPlayerProp} from "../../components/navigation";
 import {SleepTimer} from "./SleepTimer";
 import {PlaybackSpeed} from "./PlaybackSpeed";
+import {Album} from "../SearchStack/AddAlbumPopup";
 
 const AudioStack = createStackNavigator<AudioRoutes>();
 
-export const AudioStackScreen = ({navigation}: MainNavProps<"AudioStack">) => {
+export const AudioStackScreen = ({navigation}: AudioPlayerProp) => {
   const {Navigator, Screen} = AudioStack;
-
-  function queueButton() {
-    return (
-      <Pressable
-        onPress={() => {
-          navigation.navigate("AudioStack", {screen: "CurrentQueue"});
-        }}
-      >
-        <Text style={styles.queueButton}>Queue</Text>
-      </Pressable>
-    );
-  }
-
   return (
     <Navigator
       screenOptions={{
         headerTitle: "",
         headerShadowVisible: false,
         headerStyle: {backgroundColor: "#212121"},
-        headerRight: () => queueButton(),
       }}
     >
-      <Screen name="AudioPlayer" component={AudioPlayer} />
+      <Screen
+        name="AudioPlayer"
+        component={AudioPlayer}
+        options={({route}) => ({
+          headerTitle: route.params?.album.title,
+          headerShown: true,
+          headerRight: () => (
+            <Pressable
+              onPress={() => {
+                navigation.navigate("MainTabs", {
+                  screen: "LibraryStack",
+                  params: {
+                    screen: "BookDetails",
+                    params: {
+                      album: route.params.album as Album,
+                    },
+                  },
+                });
+              }}
+            >
+              <Text style={styles.topRightButton}>Details</Text>
+            </Pressable>
+          ),
+        })}
+      />
       <Screen
         name="CurrentQueue"
         component={CurrentQueue}
@@ -55,5 +66,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#FFD479",
     paddingRight: 10,
+  },
+  topRightButton: {
+    fontSize: 12,
+    paddingRight: 10,
+    color: "black",
   },
 });

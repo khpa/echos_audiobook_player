@@ -45,7 +45,7 @@ export async function useAlbumSetup(album?: Album) {
 
         navigation.navigate(
           "AudioStack" as never,
-          {screen: "AudioPlayer"} as never,
+          {screen: "AudioPlayer", params: {album: album}} as never,
         );
       }
     }

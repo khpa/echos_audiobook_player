@@ -8,7 +8,6 @@ import {
   StatusBar,
   Image,
   Pressable,
-  Button,
 } from "react-native";
 import TrackPlayer, {
   State,
@@ -21,22 +20,24 @@ import Slider from "@react-native-community/slider";
 import RNShake from "react-native-shake";
 // @ts-ignore
 import BackgroundTimer from "react-native-background-timer";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {format as prettyFormat} from "pretty-format";
 
 // internal dependencies
 import {setupAudioPlayer} from "./setupAudioPlayer";
 import {togglePlayback} from "./togglePlayback";
 import {AudioNavProp} from "../../../components/navigation";
 import {useStore} from "../../../../store/store";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import {Album, Chapter} from "../../SearchStack/AddAlbumPopup";
 import {formatDuration} from "./formatDuration";
+import {PlayerOptions} from "./components";
 
 export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
   const {position, duration} = useProgress();
   const playbackState = usePlaybackState();
   const store = useStore();
   const [currentChapter, setCurrentChapter] = useState<Chapter>();
-  const cdn = store.countdown;
+  const countdown = store.countdown;
   const [sleepTimer, setSleepTimer] = React.useState<number | undefined>();
   const [resetTimer, setResetTimer] = useState<number | undefined>();
 
@@ -49,9 +50,6 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
 
   // useEffect(() => {
   //   async function getActiveAlbum() {
-  //     const currT = await TrackPlayer.getCurrentTrack();
-  //     setCurrentChapter(store.activeAlbum.chapters[currT]);
-
   //     const test = await AsyncStorage.getItem("store");
   //     const lib = JSON.parse(test as any).state.library;
   //     const activeAlbum: Album = lib.find(
@@ -111,8 +109,8 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
   });
 
   React.useEffect(() => {
-    cdn && setSleepTimer(cdn);
-  }, [cdn]);
+    countdown && setSleepTimer(countdown * 60);
+  }, [countdown]);
 
   useEffect(() => {
     if (sleepTimer !== undefined && sleepTimer > 0) {
@@ -133,7 +131,7 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
       }, 1000);
       const subscription = RNShake.addListener(() => {
         TrackPlayer.play();
-        setSleepTimer(cdn);
+        setSleepTimer(countdown);
         setResetTimer(undefined);
       });
       return () => {
@@ -203,20 +201,7 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
           <Text style={styles.secondaryActionButton}>Next</Text>
         </Pressable>
       </View>
-      <View style={styles.optionsContainer}>
-        <Button
-          title="Sleep Timer"
-          onPress={() => navigation.navigate("SleepTimer")}
-        />
-        <Button
-          title="Playback Speed"
-          onPress={() =>
-            navigation.navigate("PlaybackSpeed", {
-              albumId: store.activeAlbum.id,
-            })
-          }
-        />
-      </View>
+      <PlayerOptions id={store.activeAlbum.id} />
     </SafeAreaView>
   );
 };
@@ -290,12 +275,5 @@ const styles = StyleSheet.create({
   secondaryActionButton: {
     fontSize: 14,
     color: "#FFD479",
-  },
-  optionsContainer: {
-    justifyContent: "space-around",
-    width: "100%",
-    height: 100,
-    alignItems: "center",
-    flexDirection: "row",
   },
 });

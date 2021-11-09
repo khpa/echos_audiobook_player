@@ -12,12 +12,12 @@ import {width} from "../../../components";
 import TrackPlayer from "react-native-track-player";
 
 // internal dependencies
-import {TabNavProps} from "../../../components/navigation";
+import {LibraryProps} from "../../../components/navigation";
 import {useStore} from "../../../../store/store";
 import {removeFolder} from "../BookDetails";
 import {getChapters} from "./getChapters";
 
-type Props = TabNavProps<"BookSettings">;
+type Props = LibraryProps;
 
 export const BookSettings = ({navigation, route}: Props) => {
   const album = route.params.album;
