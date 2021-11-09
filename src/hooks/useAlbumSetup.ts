@@ -34,6 +34,7 @@ export async function useAlbumSetup(album?: Album) {
           }
         }
         await TrackPlayer.reset();
+        await TrackPlayer.setRate(album?.playbackSpeed || 1);
         await TrackPlayer.add(newQueue);
         await TrackPlayer.skip(album.lastPlayedChapterIndex || 0);
         const position =

@@ -37,7 +37,7 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
   const store = useStore();
   const [currentChapter, setCurrentChapter] = useState<Chapter>();
   const cdn = store.countdown;
-  const [countdown, setCountdown] = useState<number | undefined>();
+  const [sleepTimer, setSleepTimer] = React.useState<number | undefined>();
   const [resetTimer, setResetTimer] = useState<number | undefined>();
 
   useEffect(() => {
@@ -47,42 +47,56 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
     }
   }, []);
 
+  // useEffect(() => {
+  //   async function getActiveAlbum() {
+  //     const currT = await TrackPlayer.getCurrentTrack();
+  //     setCurrentChapter(store.activeAlbum.chapters[currT]);
+
+  //     const test = await AsyncStorage.getItem("store");
+  //     const lib = JSON.parse(test as any).state.library;
+  //     const activeAlbum: Album = lib.find(
+  //       (album: Album) => album.id === store.activeAlbum.id,
+  //     );
+  //     if (activeAlbum.categories !== undefined) {
+  //       let test: string[] = [];
+  //       activeAlbum.categories.map(cat => {
+  //         const newVal = cat.split(" / ");
+  //         test.push(...newVal);
+  //       });
+  //       const newTest = [...new Set(test)];
+  //       // console.log(newTest);
+  //     }
+  //     // console.log(prettyFormat(activeAlbum));
+  //   }
+  //   getActiveAlbum();
+
+  //   if (currentChapter && playbackState === State.Paused) {
+  //     store.updateChapter(
+  //       store.activeAlbum.id,
+  //       currentChapter.index,
+  //       "lastPosition",
+  //       position,
+  //     );
+  //   }
+  // }, [playbackState]);
+
   useEffect(() => {
-    async function getActiveAlbum() {
-      const currT = await TrackPlayer.getCurrentTrack();
-      setCurrentChapter(store.activeAlbum.chapters[currT]);
-
-      const test = await AsyncStorage.getItem("store");
-      const lib = JSON.parse(test as any).state.library;
-      const activeAlbum: Album = lib.find(
-        (album: Album) => album.id === store.activeAlbum.id,
-      );
-      if (activeAlbum.categories !== undefined) {
-        let test: string[] = [];
-        activeAlbum.categories.map(cat => {
-          const newVal = cat.split(" / ");
-          test.push(...newVal);
-        });
-        const newTest = [...new Set(test)];
-        // console.log(newTest);
+    async function setPosition() {
+      const chapterIndex = await TrackPlayer.getCurrentTrack();
+      setCurrentChapter(store.activeAlbum.chapters[chapterIndex]);
+      if (currentChapter) {
+        store.updateChapter(
+          store.activeAlbum.id,
+          chapterIndex,
+          "lastPosition",
+          position,
+        );
       }
-      // console.log(prettyFormat(activeAlbum));
     }
-    getActiveAlbum();
-
-    if (currentChapter && playbackState === State.Paused) {
-      // console.log("logged ", position);
-      store.updateChapter(
-        store.activeAlbum.id,
-        currentChapter.index,
-        "lastPosition",
-        position,
-      );
-    }
+    setPosition();
   }, [playbackState]);
 
   useTrackPlayerEvents([Event.PlaybackTrackChanged], event => {
-    console.log("PlaybackTrackChanged", event);
     store.updateAlbum(
       store.activeAlbum.id,
       "lastPlayedChapterIndex",
@@ -96,21 +110,21 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
     );
   });
 
-  useEffect(() => {
-    cdn && setCountdown(cdn * 60);
+  React.useEffect(() => {
+    cdn && setSleepTimer(cdn);
   }, [cdn]);
 
   useEffect(() => {
-    if (countdown !== undefined && countdown > 0) {
+    if (sleepTimer !== undefined && sleepTimer > 0) {
       const interval = BackgroundTimer.setInterval(() => {
-        setCountdown(countdown - 1);
+        setSleepTimer(sleepTimer - 1);
       }, 1000);
       return () => BackgroundTimer.clearInterval(interval);
-    } else if (countdown === 0) {
+    } else if (sleepTimer === 0) {
       TrackPlayer.pause();
       return setResetTimer(10);
     }
-  }, [countdown]);
+  }, [sleepTimer]);
 
   useEffect(() => {
     if (resetTimer !== undefined && resetTimer > 0) {
@@ -119,7 +133,7 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
       }, 1000);
       const subscription = RNShake.addListener(() => {
         TrackPlayer.play();
-        setCountdown(cdn);
+        setSleepTimer(cdn);
         setResetTimer(undefined);
       });
       return () => {
@@ -127,7 +141,7 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
         subscription.remove();
       };
     } else if (resetTimer === 0) {
-      setCountdown(undefined);
+      setSleepTimer(undefined);
       setResetTimer(undefined);
       store.setCountdown(undefined);
       return;
@@ -140,9 +154,8 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
   return (
     <SafeAreaView style={styles.screenContainer}>
       <StatusBar barStyle={"light-content"} />
-      <Text style={{color: "white"}}>{cdn}</Text>
       <Text style={{color: "white"}}>
-        {countdown && formatDuration(countdown)}
+        {sleepTimer && formatDuration(sleepTimer)}
       </Text>
       <View style={styles.contentContainer}>
         <Image style={styles.artwork} source={{uri: store.activeAlbum.image}} />
@@ -190,10 +203,20 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
           <Text style={styles.secondaryActionButton}>Next</Text>
         </Pressable>
       </View>
-      <Button
-        title="Countdown"
-        onPress={() => navigation.navigate("Countdown")}
-      />
+      <View style={styles.optionsContainer}>
+        <Button
+          title="Sleep Timer"
+          onPress={() => navigation.navigate("SleepTimer")}
+        />
+        <Button
+          title="Playback Speed"
+          onPress={() =>
+            navigation.navigate("PlaybackSpeed", {
+              albumId: store.activeAlbum.id,
+            })
+          }
+        />
+      </View>
     </SafeAreaView>
   );
 };
@@ -267,5 +290,12 @@ const styles = StyleSheet.create({
   secondaryActionButton: {
     fontSize: 14,
     color: "#FFD479",
+  },
+  optionsContainer: {
+    justifyContent: "space-around",
+    width: "100%",
+    height: 100,
+    alignItems: "center",
+    flexDirection: "row",
   },
 });

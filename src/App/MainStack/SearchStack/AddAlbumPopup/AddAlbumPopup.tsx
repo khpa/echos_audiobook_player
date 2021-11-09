@@ -25,6 +25,7 @@ export type Album = {
   duration?: number;
   lastPlayed?: string;
   lastPlayedChapterIndex?: number;
+  playbackSpeed?: number;
 };
 
 export type Chapter = {

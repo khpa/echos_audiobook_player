@@ -17,7 +17,7 @@ export const CurrentQueue = () => {
     <View style={styles.container}>
       {currentQueue.map((track: Track) => (
         <Text style={styles.text} key={track.title}>
-          {track.title}
+          {track.title} - {track.duration}
         </Text>
       ))}
     </View>

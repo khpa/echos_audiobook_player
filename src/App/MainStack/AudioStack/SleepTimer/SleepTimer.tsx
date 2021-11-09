@@ -1,25 +1,26 @@
-import * as React from "react";
+import React from "react";
 import {Pressable, StyleSheet, Text, View} from "react-native";
 import {useStore} from "../../../../store/store";
 import {AudioNavProp} from "../../../components/navigation";
 
-type Props = AudioNavProp<"Countdown">;
+type Props = AudioNavProp<"SleepTimer">;
 
-export const Countdown = ({navigation}: Props) => {
+export const SleepTimer = ({navigation}: Props) => {
   const store = useStore();
-  const countdownOptions = [10, 20, 30];
+  const sleepTimerOptions = [5, 10, 20, 30];
 
   return (
     <View style={styles.container}>
-      {countdownOptions.map(option => {
+      {sleepTimerOptions.map(option => {
         return (
           <Pressable
+            key={option}
             onPress={() => {
               store.setCountdown(option);
               navigation.goBack();
             }}
           >
-            <Text style={styles.options}>{option}</Text>
+            <Text style={styles.options}>{option} minutes</Text>
           </Pressable>
         );
       })}

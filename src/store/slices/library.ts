@@ -57,6 +57,9 @@ export const createLibrarySlice = (set: SetState<StoreState>): LibrarySlice => {
           case "duration":
             album.duration = value;
             break;
+          case "playbackSpeed":
+            album.playbackSpeed = value;
+            break;
           default:
             console.warn("not found");
             break;
