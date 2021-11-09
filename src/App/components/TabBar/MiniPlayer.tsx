@@ -7,14 +7,17 @@ import {usePlaybackState, State} from "react-native-track-player";
 // internal dependencies
 import {useStore} from "../../../store/store";
 import {width} from "../Theme";
-import {togglePlayback} from "../../MainStack/AudioStack/AudioPlayer";
+import {togglePlayback} from "../../MainStack/AudioStack/AudioPlayer/components";
 
 export const MiniPlayer = React.memo(() => {
   const store = useStore();
   const playbackState = usePlaybackState();
   const navigation = useNavigation();
 
-  // Play/pause here doesnt trigger the playbackstate change
+  // Play/pause here doesn't trigger the playbackstate change
+  // TODO - type "as never" should be fixed
+  // https://reactnavigation.org/docs/typescript/#specifying-default-types-for-usenavigation-link-ref-etc
+
   const displayStyle: ViewStyle = {
     display: store.activeAlbum ? "flex" : "none",
   };
@@ -22,7 +25,15 @@ export const MiniPlayer = React.memo(() => {
     return (
       <Pressable
         onPress={() => {
-          navigation.navigate("AudioStack" as any);
+          navigation.navigate(
+            "AudioStack" as never,
+            {
+              screen: "AudioPlayer",
+              params: {
+                album: store.activeAlbum,
+              },
+            } as never,
+          );
         }}
         style={[styles.container, displayStyle]}
       >

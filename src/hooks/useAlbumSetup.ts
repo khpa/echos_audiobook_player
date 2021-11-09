@@ -1,7 +1,7 @@
 // external dependencies
 import {useEffect} from "react";
 import {useNavigation} from "@react-navigation/native";
-import TrackPlayer, {Track} from "react-native-track-player";
+import TrackPlayer, {Track, Capability} from "react-native-track-player";
 
 // internal dependencies
 import {selectTrackPlayer} from "../store/slices/trackplayer";

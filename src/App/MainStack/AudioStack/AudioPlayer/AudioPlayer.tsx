@@ -7,10 +7,8 @@ import {
   SafeAreaView,
   StatusBar,
   Image,
-  Pressable,
 } from "react-native";
 import TrackPlayer, {
-  State,
   usePlaybackState,
   useProgress,
   useTrackPlayerEvents,
@@ -24,13 +22,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {format as prettyFormat} from "pretty-format";
 
 // internal dependencies
-import {setupAudioPlayer} from "./setupAudioPlayer";
-import {togglePlayback} from "./togglePlayback";
 import {AudioNavProp} from "../../../components/navigation";
 import {useStore} from "../../../../store/store";
-import {Album, Chapter} from "../../SearchStack/AddAlbumPopup";
-import {formatDuration} from "./formatDuration";
-import {PlayerOptions} from "./components";
+import {Chapter} from "../../SearchStack/AddAlbumPopup";
+import {Options, Controller, ProgressBar, formatDuration} from "./components";
 
 export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
   const {position, duration} = useProgress();
@@ -41,12 +36,11 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
   const [sleepTimer, setSleepTimer] = React.useState<number | undefined>();
   const [resetTimer, setResetTimer] = useState<number | undefined>();
 
-  useEffect(() => {
-    setupAudioPlayer();
-    if (!store.activeAlbum) {
-      navigation.navigate("Home" as any);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!store.activeAlbum) {
+  //     navigation.navigate("Home" as any);
+  //   }
+  // }, []);
 
   // useEffect(() => {
   //   async function getActiveAlbum() {
@@ -93,6 +87,10 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
     }
     setPosition();
   }, [playbackState]);
+
+  useTrackPlayerEvents([Event.PlaybackState], event => {
+    console.log(event);
+  });
 
   useTrackPlayerEvents([Event.PlaybackTrackChanged], event => {
     store.updateAlbum(
@@ -173,35 +171,10 @@ export const AudioPlayer = ({navigation}: AudioNavProp<"AudioPlayer">) => {
             await TrackPlayer.seekTo(value);
           }}
         />
-        <View style={styles.progressLabelContainer}>
-          <Text style={styles.progressLabelText}>
-            {formatDuration(position)}
-          </Text>
-          <Text style={styles.progressLabelText}>
-            {formatDuration(duration - position)}
-          </Text>
-        </View>
+        <ProgressBar />
       </View>
-      <View style={styles.actionRowContainer}>
-        <Pressable onPress={() => TrackPlayer.skipToPrevious()}>
-          <Text style={styles.secondaryActionButton}>Prev</Text>
-        </Pressable>
-        <Pressable onPress={() => TrackPlayer.seekTo(position - 30)}>
-          <Text style={styles.secondaryActionButton}>-30</Text>
-        </Pressable>
-        <Pressable onPress={() => togglePlayback(playbackState)}>
-          <Text style={styles.primaryActionButton}>
-            {playbackState === State.Playing ? "Pause" : "Play"}
-          </Text>
-        </Pressable>
-        <Pressable onPress={() => TrackPlayer.seekTo(position + 30)}>
-          <Text style={styles.secondaryActionButton}>+30</Text>
-        </Pressable>
-        <Pressable onPress={() => TrackPlayer.skipToNext()}>
-          <Text style={styles.secondaryActionButton}>Next</Text>
-        </Pressable>
-      </View>
-      <PlayerOptions id={store.activeAlbum.id} />
+      <Controller />
+      <Options id={store.activeAlbum.id} />
     </SafeAreaView>
   );
 };
@@ -260,20 +233,5 @@ const styles = StyleSheet.create({
   progressLabelText: {
     color: "white",
     fontVariant: ["tabular-nums"],
-  },
-  actionRowContainer: {
-    width: "70%",
-    flexDirection: "row",
-    marginBottom: 100,
-    justifyContent: "space-between",
-  },
-  primaryActionButton: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: "#FFD479",
-  },
-  secondaryActionButton: {
-    fontSize: 14,
-    color: "#FFD479",
   },
 });

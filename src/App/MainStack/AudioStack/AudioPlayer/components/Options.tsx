@@ -10,7 +10,7 @@ type Props = {
   id: string;
 };
 
-export const PlayerOptions = ({id}: Props) => {
+export const Options = ({id}: Props) => {
   const navigation = useNavigation();
 
   return (

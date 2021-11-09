@@ -9,3 +9,4 @@ export {
   AudioRoutes,
 } from "./navigation";
 export {TabBar} from "./TabBar";
+export {setupAudioPlayer} from "./setupAudioPlayer";

@@ -1,5 +1,5 @@
 // external dependencies
-import * as React from "react";
+import React, {useEffect} from "react";
 import {createStackNavigator} from "@react-navigation/stack";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -12,13 +12,21 @@ import {HomeStackScreen} from "./HomeStack";
 import {LibraryStackScreen} from "./LibraryStack";
 import {AudioStackScreen} from "./AudioStack";
 import {SearchStackScreen} from "./SearchStack";
-import {TabBar} from "../components";
+import {TabBar, setupAudioPlayer} from "../components";
 
 const MainTabs = createBottomTabNavigator<TabRoutes>();
 const MainStack = createStackNavigator<MainRoutes>();
 
 export const MainTabsScreen = () => {
   const {Navigator, Screen} = MainTabs;
+
+  useEffect(() => {
+    setupAudioPlayer();
+    return () => {
+      console.log("MainTabsScreen unmount");
+    };
+  }, []);
+
   return (
     <Navigator
       screenOptions={{headerShown: false}}

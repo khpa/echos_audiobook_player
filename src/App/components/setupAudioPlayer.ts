@@ -5,7 +5,7 @@ export const setupAudioPlayer = async () => {
   if (currentTrack !== null) {
     return;
   }
-
+  console.log("Setting up audio player");
   await TrackPlayer.setupPlayer({});
   await TrackPlayer.updateOptions({
     stopWithApp: false,
@@ -16,10 +16,18 @@ export const setupAudioPlayer = async () => {
       Capability.Pause,
       Capability.SkipToNext,
       Capability.SkipToPrevious,
-      Capability.Stop,
       Capability.JumpBackward,
       Capability.JumpForward,
+      Capability.SetRating,
     ],
-    compactCapabilities: [Capability.Play, Capability.Pause],
+    compactCapabilities: [
+      Capability.Play,
+      Capability.Pause,
+      Capability.SkipToNext,
+      Capability.SkipToPrevious,
+      Capability.JumpBackward,
+      Capability.JumpForward,
+      Capability.SetRating,
+    ],
   });
 };

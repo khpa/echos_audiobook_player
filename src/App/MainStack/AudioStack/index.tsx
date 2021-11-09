@@ -30,6 +30,8 @@ export const AudioStackScreen = ({navigation}: AudioPlayerProp) => {
         options={({route}) => ({
           headerTitle: route.params?.album.title,
           headerShown: true,
+          headerTitleAlign: "center",
+          headerTitleStyle: {color: "#fff"},
           headerRight: () => (
             <Pressable
               onPress={() => {
