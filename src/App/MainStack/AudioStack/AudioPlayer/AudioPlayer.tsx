@@ -1,20 +1,12 @@
 // external dependencies
 import React, {useEffect, useState} from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  SafeAreaView,
-  StatusBar,
-  Image,
-} from "react-native";
+import {View, Text, StyleSheet, SafeAreaView, Image} from "react-native";
 import TrackPlayer, {
   usePlaybackState,
   useProgress,
   useTrackPlayerEvents,
   Event,
 } from "react-native-track-player";
-import Slider from "@react-native-community/slider";
 import RNShake from "react-native-shake";
 // @ts-ignore
 import BackgroundTimer from "react-native-background-timer";

@@ -1,5 +1,5 @@
 export {config} from "./config";
-export {theme, height, width} from "./Theme";
+export {theme, height, width} from "./styles/Theme";
 export {Loading} from "./Loading";
 export {
   AppRoutes,
@@ -8,5 +8,5 @@ export {
   TabRoutes,
   AudioRoutes,
 } from "./navigation";
-export {TabBar} from "./TabBar";
+export {BottomTabBar} from "./BottomTabBar";
 export {setupAudioPlayer} from "./setupAudioPlayer";

@@ -71,6 +71,7 @@ export type TabRoutes = {
   SearchStack: undefined;
   AddAlbum: undefined;
   AddAlbumPopup: {searchResults: BookSearchResults};
+  SettingsStack: undefined;
 };
 
 export type AuthRoutes = {

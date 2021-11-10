@@ -3,7 +3,7 @@
 
 // external dependencies
 import React from "react";
-import {NavigationContainer} from "@react-navigation/native";
+import {NavigationContainer, DefaultTheme} from "@react-navigation/native";
 import {SafeAreaProvider} from "react-native-safe-area-context";
 import {GestureHandlerRootView} from "react-native-gesture-handler";
 
@@ -12,9 +12,16 @@ import {AppStackScreen} from "./App";
 import {AuthProvider} from "./context/AuthProvider";
 
 export const Root = () => {
+  const MyTheme = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: "rgb(255, 45, 85)",
+    },
+  };
   return (
     <GestureHandlerRootView style={{flex: 1}}>
-      <NavigationContainer>
+      <NavigationContainer theme={MyTheme}>
         <SafeAreaProvider>
           <AuthProvider>
             <AppStackScreen />

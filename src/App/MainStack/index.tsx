@@ -2,7 +2,6 @@
 import React, {useEffect} from "react";
 import {createStackNavigator} from "@react-navigation/stack";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 // components
 import {MainRoutes, TabRoutes} from "../components";
@@ -12,7 +11,8 @@ import {HomeStackScreen} from "./HomeStack";
 import {LibraryStackScreen} from "./LibraryStack";
 import {AudioStackScreen} from "./AudioStack";
 import {SearchStackScreen} from "./SearchStack";
-import {TabBar, setupAudioPlayer} from "../components";
+import {setupAudioPlayer, BottomTabBar} from "../components";
+import {SettingsStackScreen} from "./SettingsStack";
 
 const MainTabs = createBottomTabNavigator<TabRoutes>();
 const MainStack = createStackNavigator<MainRoutes>();
@@ -30,41 +30,27 @@ export const MainTabsScreen = () => {
   return (
     <Navigator
       screenOptions={{headerShown: false}}
-      tabBar={props => <TabBar {...props} />}
+      tabBar={props => <BottomTabBar {...props} />}
     >
       <Screen
         name="HomeStack"
         component={HomeStackScreen}
-        options={{
-          title: "Home",
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
-          ),
-        }}
+        options={{title: "Home"}}
       />
       <Screen
         name="LibraryStack"
         component={LibraryStackScreen}
-        options={{
-          title: "Library",
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons
-              name="bookshelf"
-              color={color}
-              size={size}
-            />
-          ),
-        }}
+        options={{title: "Library"}}
       />
       <Screen
         name="SearchStack"
         component={SearchStackScreen}
-        options={{
-          title: "Search",
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="magnify" color={color} size={size} />
-          ),
-        }}
+        options={{title: "Search"}}
+      />
+      <Screen
+        name="SettingsStack"
+        component={SettingsStackScreen}
+        options={{title: "Settings"}}
       />
     </Navigator>
   );

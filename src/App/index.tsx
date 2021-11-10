@@ -1,6 +1,9 @@
 // external dependencies
 import * as React from "react";
 import {createStackNavigator} from "@react-navigation/stack";
+import {useStore} from "../store/store";
+// @ts-ignore
+import {ThemeProvider, createGlobalStyle} from "styled-components";
 
 // context
 import {useAuth} from "../context/AuthProvider";

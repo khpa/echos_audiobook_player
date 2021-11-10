@@ -19,7 +19,7 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 // internal dependencies
 import {useStore} from "../../../store/store";
-import {width} from "../Theme";
+import {width} from "../styles/Theme";
 import {
   formatDuration,
   togglePlayback,

@@ -11,6 +11,7 @@ import {AudioPlayerProp} from "../../components/navigation";
 import {SleepTimer} from "./SleepTimer";
 import {PlaybackSpeed} from "./PlaybackSpeed";
 import {Album} from "../SearchStack/AddAlbumPopup";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 const AudioStack = createStackNavigator<AudioRoutes>();
 
@@ -44,7 +45,12 @@ export const AudioStackScreen = ({navigation, route}: AudioPlayerProp) => {
                 });
               }}
             >
-              <Text style={styles.topRightButton}>Details</Text>
+              <Icon
+                name="dots-vertical"
+                size={25}
+                color="#fff"
+                style={{paddingHorizontal: 5}}
+              />
             </Pressable>
           ),
         })}
