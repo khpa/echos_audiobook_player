@@ -6,6 +6,8 @@ import TrackPlayer, {
   useProgress,
   State,
 } from "react-native-track-player";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import {height} from "../../../../components";
 
 // internal dependencies
 import {togglePlayback} from "./togglePlayback";
@@ -16,42 +18,57 @@ export const Controller = ({}: Props) => {
   const playbackState = usePlaybackState();
   const {position} = useProgress();
   return (
-    <View style={styles.actionRowContainer}>
-      <Pressable onPress={() => TrackPlayer.skipToPrevious()}>
-        <Text style={styles.secondaryActionButton}>Prev</Text>
+    <View style={styles.container}>
+      <Pressable
+        style={styles.optionContainer}
+        onPress={() => TrackPlayer.skipToPrevious()}
+      >
+        <Icon name="skip-previous" size={45} color="#fff" />
       </Pressable>
-      <Pressable onPress={() => TrackPlayer.seekTo(position - 30)}>
-        <Text style={styles.secondaryActionButton}>-30</Text>
+      <Pressable
+        style={styles.optionContainer}
+        onPress={() => TrackPlayer.seekTo(position - 30)}
+      >
+        <Icon name="rewind-30" size={25} color="#fff" />
       </Pressable>
-      <Pressable onPress={() => togglePlayback(playbackState)}>
-        <Text style={styles.primaryActionButton}>
-          {playbackState === State.Playing ? "Pause" : "Play"}
-        </Text>
+      <Pressable
+        style={styles.optionContainer}
+        onPress={() => togglePlayback(playbackState)}
+      >
+        {playbackState === State.Playing ? (
+          <Icon name="pause-circle" size={90} color="#fff" />
+        ) : (
+          <Icon name="play-circle" size={90} color="#fff" />
+        )}
       </Pressable>
-      <Pressable onPress={() => TrackPlayer.seekTo(position + 30)}>
-        <Text style={styles.secondaryActionButton}>+30</Text>
+      <Pressable
+        style={styles.optionContainer}
+        onPress={() => TrackPlayer.seekTo(position + 30)}
+      >
+        <Icon name="fast-forward-30" size={25} color="#fff" />
       </Pressable>
-      <Pressable onPress={() => TrackPlayer.skipToNext()}>
-        <Text style={styles.secondaryActionButton}>Next</Text>
+      <Pressable
+        style={styles.optionContainer}
+        onPress={() => TrackPlayer.skipToNext()}
+      >
+        <Icon name="skip-next" size={45} color="#fff" />
       </Pressable>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  actionRowContainer: {
-    width: "70%",
+  container: {
+    flex: 1.5,
+    width: "80%",
+    height: "100%",
     flexDirection: "row",
-    marginBottom: 100,
     justifyContent: "space-between",
+    alignItems: "center",
   },
-  primaryActionButton: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: "#FFD479",
-  },
-  secondaryActionButton: {
-    fontSize: 14,
-    color: "#FFD479",
+  optionContainer: {
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

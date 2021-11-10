@@ -54,7 +54,7 @@ export const Library = ({navigation}: TabNavProps<"Library">) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 5,
+    paddingTop: 10,
     paddingHorizontal: 10,
     backgroundColor: "white",
   },

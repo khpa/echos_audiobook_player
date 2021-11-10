@@ -14,14 +14,12 @@ import {Album} from "../SearchStack/AddAlbumPopup";
 
 const AudioStack = createStackNavigator<AudioRoutes>();
 
-export const AudioStackScreen = ({navigation}: AudioPlayerProp) => {
+export const AudioStackScreen = ({navigation, route}: AudioPlayerProp) => {
   const {Navigator, Screen} = AudioStack;
   return (
     <Navigator
       screenOptions={{
-        headerTitle: "",
-        headerShadowVisible: false,
-        headerStyle: {backgroundColor: "#212121"},
+        headerStyle: {backgroundColor: "#212121", shadowColor: "transparent"},
       }}
     >
       <Screen
@@ -51,11 +49,7 @@ export const AudioStackScreen = ({navigation}: AudioPlayerProp) => {
           ),
         })}
       />
-      <Screen
-        name="CurrentQueue"
-        component={CurrentQueue}
-        options={{headerShown: false}}
-      />
+      <Screen name="CurrentQueue" component={CurrentQueue} />
       <Screen name="SleepTimer" component={SleepTimer} />
       <Screen name="PlaybackSpeed" component={PlaybackSpeed} />
     </Navigator>
