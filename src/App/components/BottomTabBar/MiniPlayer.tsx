@@ -1,6 +1,7 @@
 // external dependencies
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
+import type { ViewStyle } from "react-native";
 import {
   Image,
   ImageBackground,
@@ -8,7 +9,6 @@ import {
   StyleSheet,
   Text,
   View,
-  ViewStyle,
 } from "react-native";
 import TrackPlayer, {
   usePlaybackState,
@@ -18,8 +18,8 @@ import TrackPlayer, {
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 // internal dependencies
-import {useStore} from "../../../store/store";
-import {width} from "../styles/Theme";
+import { useStore } from "../../../store/store";
+import { width } from "../styles/themes";
 import {
   formatDuration,
   togglePlayback,
@@ -29,7 +29,7 @@ export const MiniPlayer = React.memo(() => {
   const store = useStore();
   const playbackState = usePlaybackState();
   const navigation = useNavigation();
-  const {position, duration} = useProgress();
+  const { position, duration } = useProgress();
 
   // Play/pause here doesn't trigger the playbackstate change
   // TODO - type "as never" should be fixed
@@ -38,7 +38,7 @@ export const MiniPlayer = React.memo(() => {
   const displayStyle: ViewStyle = {
     display: store.activeAlbum ? "flex" : "none",
   };
-  if (playbackState !== State.None) {
+  if (playbackState === State.Playing || playbackState === State.Paused) {
     return (
       <Pressable
         onPress={() => {
@@ -49,19 +49,19 @@ export const MiniPlayer = React.memo(() => {
               params: {
                 album: store.activeAlbum,
               },
-            } as never,
+            } as never
           );
         }}
         style={[styles.container, displayStyle]}
       >
         <ImageBackground
-          source={{uri: store.activeAlbum.image}}
+          source={{ uri: store.activeAlbum.image }}
           style={styles.imgBG}
           blurRadius={20}
         >
           <View style={styles.innerContainer}>
             <Image
-              source={{uri: store.activeAlbum.image}}
+              source={{ uri: store.activeAlbum.image }}
               style={styles.image}
             />
             <View style={styles.albumContainer}>
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "#fff",
   },
-  playbackPosition: {fontSize: 12, color: "#fff"},
+  playbackPosition: { fontSize: 12, color: "#fff" },
   controllerContainer: {
     flexDirection: "row",
     alignItems: "center",

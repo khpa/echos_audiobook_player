@@ -1,15 +1,18 @@
 // external dependencies
-import React, {useEffect, useState} from "react";
-import {View, TextInput, FlatList, StyleSheet} from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, TextInput, FlatList, StyleSheet } from "react-native";
 
 // internal dependencies
-import {SearchResultsItem} from "./SearchResultsItem";
-import {searchGoogleBooks} from "./searchGoogleBooks";
-import {formatBookSearchResults} from "./formatBookSearchResults";
 
 // constants
-import {width} from "../../../components";
-import {MainNavProps} from "../../../components/navigation";
+import { Container, width } from "../../../components";
+import type { MainNavProps } from "../../../components/navigation";
+import { selectDevice } from "../../../../store/slices/device";
+import { useStore } from "../../../../store/store";
+
+import { formatBookSearchResults } from "./formatBookSearchResults";
+import { searchGoogleBooks } from "./searchGoogleBooks";
+import { SearchResultsItem } from "./SearchResultsItem";
 
 export type BookSearchResults = {
   id: string;
@@ -23,9 +26,10 @@ export type BookSearchResults = {
 
 type Props = MainNavProps<"MainTabs">;
 
-export const AddAlbum = ({navigation}: Props) => {
+export const AddAlbum = ({ navigation }: Props) => {
   const [searchString, onChangeText] = useState<string>("");
   const [searchResults, setSearchResults] = useState<BookSearchResults[]>([]);
+  const theme = useStore(selectDevice.theme);
 
   useEffect(() => {
     const delayedSearch = setTimeout(() => {
@@ -43,26 +47,29 @@ export const AddAlbum = ({navigation}: Props) => {
 
   // TODO: Show previous searches below TextInput
   return (
-    <View style={styles.container}>
+    <Container style={styles.container}>
       <TextInput
-        style={styles.textInputField}
-        onChangeText={input => {
+        style={[
+          styles.textInputField,
+          { color: theme.text, backgroundColor: "gray" },
+        ]}
+        onChangeText={(input) => {
           onChangeText(input);
         }}
         keyboardAppearance="dark"
         value={searchString}
       />
-      <View style={styles.albumList}>
+      <Container style={styles.albumList}>
         <FlatList
           data={searchResults}
           keyExtractor={(item, index) => item + index.toString()}
           extraData={searchString}
-          renderItem={({item}) => (
+          renderItem={({ item }) => (
             <SearchResultsItem item={item} navigation={navigation} />
           )}
         />
-      </View>
-    </View>
+      </Container>
+    </Container>
   );
 };
 
@@ -75,7 +82,6 @@ const styles = StyleSheet.create({
   textInputField: {
     height: 40,
     width: width - 20,
-    color: "black",
     borderRadius: 10,
     margin: 10,
     backgroundColor: "#c5c5c5",

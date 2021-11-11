@@ -1,13 +1,17 @@
 // external dependencies
-import {BottomTabNavigationEventMap} from "@react-navigation/bottom-tabs/lib/typescript/src/types";
-import {NavigationHelpers, ParamListBase} from "@react-navigation/native";
+import type { BottomTabNavigationEventMap } from "@react-navigation/bottom-tabs/lib/typescript/src/types";
+import type {
+  NavigationHelpers,
+  ParamListBase,
+} from "@react-navigation/native";
 import React from "react";
-import {Text, StyleSheet, Pressable, Image, ImageStyle} from "react-native";
-import {bottomTabIcons, OutlineFillIcon} from "../styles";
+import type { ImageStyle } from "react-native";
+import { Text, StyleSheet, Pressable, Image } from "react-native";
 
 // internal dependencies
-
-type Props = {};
+import { selectDevice } from "../../../store/slices/device";
+import type { OutlineFillIcon } from "../styles";
+import { useStore } from "../../../store/store";
 
 export const BottomTabButton = React.memo<{
   routeKey: string;
@@ -16,7 +20,9 @@ export const BottomTabButton = React.memo<{
   isFocused: boolean;
   icon: OutlineFillIcon;
   navigation: NavigationHelpers<ParamListBase, BottomTabNavigationEventMap>;
-}>(({routeKey, label, name, isFocused, icon, navigation}) => {
+}>(({ routeKey, label, name, isFocused, icon, navigation }) => {
+  const theme = useStore(selectDevice.theme);
+
   const onPress = () => {
     const event = navigation.emit({
       type: "tabPress",
@@ -29,14 +35,14 @@ export const BottomTabButton = React.memo<{
     }
   };
 
-  const focusColor = isFocused ? "black" : "gray";
+  const focusColor = isFocused ? theme.contrast : "gray";
   const imgSource = isFocused ? icon.fill : icon.outline;
   const imgFocusStyle: ImageStyle = {
     tintColor: focusColor,
     opacity: isFocused ? 1 : 0.6,
   };
   const imgStyle = [styles.image, imgFocusStyle];
-  const textStyle = [styles.text, {color: focusColor}];
+  const textStyle = [styles.text, { color: focusColor }];
 
   return (
     <Pressable onPress={onPress} style={styles.button}>

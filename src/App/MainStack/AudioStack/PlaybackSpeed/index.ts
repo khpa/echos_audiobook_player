@@ -1,1 +1,1 @@
-export {PlaybackSpeed} from "./PlaybackSpeed";
+export { PlaybackSpeed } from "./PlaybackSpeed";

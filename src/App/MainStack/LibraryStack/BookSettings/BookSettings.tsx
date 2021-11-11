@@ -1,5 +1,5 @@
 // external dependencies
-import * as React from "react";
+import React from "react";
 import {
   Button,
   Image,
@@ -8,19 +8,22 @@ import {
   StyleSheet,
   View,
 } from "react-native";
-import {width} from "../../../components";
 import TrackPlayer from "react-native-track-player";
 
 // internal dependencies
-import {LibraryProps} from "../../../components/navigation";
-import {useStore} from "../../../../store/store";
-import {removeFolder} from "../BookDetails";
-import {getChapters} from "./getChapters";
+import { width } from "../../../components";
+import { useStore } from "../../../../store/store";
+import { removeFolder } from "../BookDetails";
+import type { LibraryProps } from "../../../components/navigation";
+
+import { getChapters } from "./getChapters";
+
+// types
 
 type Props = LibraryProps;
 
-export const BookSettings = ({navigation, route}: Props) => {
-  const album = route.params.album;
+export const BookSettings = ({ navigation, route }: Props) => {
+  const { album } = route.params;
   const store = useStore();
 
   function onPressHandler() {
@@ -28,7 +31,7 @@ export const BookSettings = ({navigation, route}: Props) => {
     removeFolder(album);
     navigation.reset({
       index: 0,
-      routes: [{name: "Library"}],
+      routes: [{ name: "Library" }],
     });
   }
 
@@ -62,7 +65,7 @@ export const BookSettings = ({navigation, route}: Props) => {
                 navigation.goBack();
               }}
             >
-              <Image source={{uri: item}} style={styles.image} />
+              <Image source={{ uri: item }} style={styles.image} />
             </Pressable>
           </View>
         );
@@ -74,11 +77,6 @@ export const BookSettings = ({navigation, route}: Props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  imageContainer: {
-    width: (width - 40) / 3,
-    height: (width - 40) / 2,
-    margin: 5,
   },
   image: {
     width: (width - 40) / 3,

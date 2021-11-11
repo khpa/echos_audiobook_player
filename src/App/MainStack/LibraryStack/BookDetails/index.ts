@@ -1,2 +1,2 @@
-export {BookDetails} from "./BookDetails";
-export {removeFolder} from "./removeFolder";
+export { BookDetails } from "./BookDetails";
+export { removeFolder } from "./removeFolder";

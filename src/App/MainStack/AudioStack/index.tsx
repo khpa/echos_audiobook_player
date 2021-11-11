@@ -1,36 +1,38 @@
 // external dependencies
-import * as React from "react";
+import React from "react";
+import { Pressable } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 //internal dependencies
-import {createStackNavigator} from "@react-navigation/stack";
-import {AudioRoutes} from "../../components";
-import {AudioPlayer} from "./AudioPlayer/AudioPlayer";
-import {CurrentQueue} from "./CurrentQueue";
-import {Pressable, StyleSheet, Text} from "react-native";
-import {AudioPlayerProp} from "../../components/navigation";
-import {SleepTimer} from "./SleepTimer";
-import {PlaybackSpeed} from "./PlaybackSpeed";
-import {Album} from "../SearchStack/AddAlbumPopup";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import type { AudioRoutes } from "../../components";
+import type { AudioPlayerProp } from "../../components/navigation";
+import type { Album } from "../SearchStack/AddAlbumPopup";
+
+// types
+import { AudioPlayer } from "./AudioPlayer/AudioPlayer";
+import { CurrentQueue } from "./CurrentQueue";
+import { SleepTimer } from "./SleepTimer";
+import { PlaybackSpeed } from "./PlaybackSpeed";
 
 const AudioStack = createStackNavigator<AudioRoutes>();
 
-export const AudioStackScreen = ({navigation, route}: AudioPlayerProp) => {
-  const {Navigator, Screen} = AudioStack;
+export const AudioStackScreen = ({ navigation }: AudioPlayerProp) => {
+  const { Navigator, Screen } = AudioStack;
   return (
     <Navigator
       screenOptions={{
-        headerStyle: {backgroundColor: "#212121", shadowColor: "transparent"},
+        headerStyle: { backgroundColor: "#212121", shadowColor: "transparent" },
       }}
     >
       <Screen
         name="AudioPlayer"
         component={AudioPlayer}
-        options={({route}) => ({
+        options={({ route }) => ({
           headerTitle: route.params?.album.title,
           headerShown: true,
           headerTitleAlign: "center",
-          headerTitleStyle: {color: "#fff"},
+          headerTitleStyle: { color: "#fff" },
           headerRight: () => (
             <Pressable
               onPress={() => {
@@ -49,7 +51,7 @@ export const AudioStackScreen = ({navigation, route}: AudioPlayerProp) => {
                 name="dots-vertical"
                 size={25}
                 color="#fff"
-                style={{paddingHorizontal: 5}}
+                style={{ paddingHorizontal: 5 }}
               />
             </Pressable>
           ),
@@ -61,17 +63,3 @@ export const AudioStackScreen = ({navigation, route}: AudioPlayerProp) => {
     </Navigator>
   );
 };
-
-const styles = StyleSheet.create({
-  queueButton: {
-    fontSize: 14,
-    fontWeight: "bold",
-    color: "#FFD479",
-    paddingRight: 10,
-  },
-  topRightButton: {
-    fontSize: 12,
-    paddingRight: 10,
-    color: "black",
-  },
-});

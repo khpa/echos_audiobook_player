@@ -1,8 +1,8 @@
 // external dependencies
-import type {SetState} from "zustand";
+import type { SetState } from "zustand";
 
 // internal dependencies
-import type {StoreState} from "../store";
+import type { StoreState } from "../store";
 import type {
   Album,
   Chapter,
@@ -16,7 +16,7 @@ export type LibrarySlice = {
     id: string,
     index: number,
     key: keyof Chapter,
-    value?: any,
+    value?: any
   ) => void;
   removeAlbum: (id: string) => void;
 };
@@ -29,18 +29,20 @@ export const selectLibrary = {
 export const createLibrarySlice = (set: SetState<StoreState>): LibrarySlice => {
   return {
     library: [],
-    addAlbum: album => {
-      set(state => {
-        if (state.library.find(a => a.id === album.id)) {
+    addAlbum: (album) => {
+      set((state) => {
+        if (state.library.find((a) => a.id === album.id)) {
           return;
         }
         state.library.push(album);
       });
     },
     updateAlbum: (id, key, value) => {
-      set(state => {
-        const album = state.library.find(a => a.id === id);
-        if (!album) return;
+      set((state) => {
+        const album = state.library.find((a) => a.id === id);
+        if (!album) {
+          return;
+        }
         switch (key) {
           case "lastPlayed":
             album.lastPlayed = new Date().toISOString();
@@ -67,11 +69,15 @@ export const createLibrarySlice = (set: SetState<StoreState>): LibrarySlice => {
       });
     },
     updateChapter: (id, idx, key, value) => {
-      set(state => {
-        const album = state.library.find(a => a.id === id);
-        if (!album) return;
-        const chapter = album.chapters.find(c => c.index === idx);
-        if (!chapter) return;
+      set((state) => {
+        const album = state.library.find((a) => a.id === id);
+        if (!album) {
+          return;
+        }
+        const chapter = album.chapters.find((c) => c.index === idx);
+        if (!chapter) {
+          return;
+        }
         switch (key) {
           case "lastPosition":
             chapter.lastPosition = value;
@@ -85,9 +91,9 @@ export const createLibrarySlice = (set: SetState<StoreState>): LibrarySlice => {
         }
       });
     },
-    removeAlbum: id => {
-      set(state => {
-        state.library = state.library.filter(album => album.id !== id);
+    removeAlbum: (id) => {
+      set((state) => {
+        state.library = state.library.filter((album) => album.id !== id);
       });
     },
   };

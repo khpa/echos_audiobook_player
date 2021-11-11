@@ -1,22 +1,21 @@
 // external dependencies
 import React from "react";
-import {View, Text, StyleSheet, Pressable} from "react-native";
+import { View, StyleSheet, Pressable } from "react-native";
 import TrackPlayer, {
   usePlaybackState,
   useProgress,
   State,
 } from "react-native-track-player";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import {height} from "../../../../components";
 
 // internal dependencies
-import {togglePlayback} from "./togglePlayback";
+import { togglePlayback } from "./togglePlayback";
 
-type Props = {};
+type Props = Record<string, never>;
 
 export const Controller = ({}: Props) => {
   const playbackState = usePlaybackState();
-  const {position} = useProgress();
+  const { position } = useProgress();
   return (
     <View style={styles.container}>
       <Pressable

@@ -5,21 +5,25 @@ import {
   Image,
   SafeAreaView,
   StyleSheet,
-  Text,
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import {height} from "../../../components";
-import type {BookSearchResults} from "./AddAlbum";
+
+import { height } from "../../../components";
+import { Text } from "../../../components/Text";
+
+import type { BookSearchResults } from "./AddAlbum";
+
+// internal dependencies
 
 type Props = {
   item: BookSearchResults;
   navigation: any;
 };
 
-export const SearchResultsItem = ({item, navigation}: Props) => {
+export const SearchResultsItem = ({ item, navigation }: Props) => {
   async function onPressHandler() {
-    const bookDetails = await fetch(item.selfLink).then(res => res.json());
+    const bookDetails = await fetch(item.selfLink).then((res) => res.json());
     navigation.navigate("AddAlbumPopup", {
       searchResults: {
         ...bookDetails.volumeInfo,
@@ -37,7 +41,7 @@ export const SearchResultsItem = ({item, navigation}: Props) => {
       >
         <View style={styles.containerCols}>
           <View style={styles.imageContainer}>
-            <Image source={{uri: item.imageLink}} style={styles.image} />
+            <Image source={{ uri: item.imageLink }} style={styles.image} />
           </View>
           <View style={styles.textBox}>
             <Text style={styles.title} numberOfLines={1}>
@@ -77,6 +81,7 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
+    borderRadius: 5,
   },
   textBox: {
     flex: 1,
@@ -87,19 +92,16 @@ const styles = StyleSheet.create({
     textAlignVertical: "bottom",
     fontSize: 20,
     fontWeight: "bold",
-    color: "black",
   },
   authors: {
     textAlign: "auto",
     textAlignVertical: "bottom",
     fontSize: 15,
-    color: "black",
   },
   text: {
     paddingTop: 20,
     textAlign: "auto",
     textAlignVertical: "bottom",
     fontSize: 15,
-    color: "black",
   },
 });

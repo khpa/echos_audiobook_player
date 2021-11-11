@@ -1,17 +1,18 @@
 // external dependencies
 import React from "react";
-import {View, Text, StyleSheet} from "react-native";
-import TrackPlayer, {useProgress} from "react-native-track-player";
+import { View, Text, StyleSheet } from "react-native";
+import TrackPlayer, { useProgress } from "react-native-track-player";
 import Slider from "@react-native-community/slider";
 
 // internal dependencies
-import {formatDuration} from "./formatDuration";
-import {height} from "../../../../components";
+import { height } from "../../../../components";
 
-type Props = {};
+import { formatDuration } from "./formatDuration";
+
+type Props = Record<string, never>;
 
 export const ProgressBar = ({}: Props) => {
-  const {position, duration} = useProgress();
+  const { position, duration } = useProgress();
   return (
     <View style={styles.contentContainer}>
       <Slider
@@ -22,7 +23,7 @@ export const ProgressBar = ({}: Props) => {
         thumbTintColor="#FFD479"
         minimumTrackTintColor="#FFD479"
         maximumTrackTintColor="#FFFFFF"
-        onSlidingComplete={async value => {
+        onSlidingComplete={async (value) => {
           await TrackPlayer.seekTo(value);
         }}
       />

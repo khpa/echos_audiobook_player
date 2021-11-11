@@ -1,11 +1,11 @@
 // TODO: let user set localRootFolder dynamically
 
 // external dependencies
-import {Alert} from "react-native";
-import {FileSystem} from "react-native-file-access";
+import { Alert } from "react-native";
+import { FileSystem } from "react-native-file-access";
 
 // internal dependencies
-import {useStore} from "../../../../store/store";
+import { useStore } from "../../../../store/store";
 
 export async function checkRootFolder() {
   if (useStore.getState().localRoot === "") {
@@ -21,7 +21,7 @@ async function createLocalRoot() {
       await FileSystem.mkdir(localRootFolder);
       Alert.alert(
         "Echos",
-        `New local root folder created under ${localRootFolder}.`,
+        `New local root folder created under ${localRootFolder}.`
       );
     }
   } catch (err) {

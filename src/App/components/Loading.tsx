@@ -1,6 +1,6 @@
 // external dependencies
 import * as React from "react";
-import {ActivityIndicator, StyleSheet, View} from "react-native";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
 
 export const Loading = () => {
   return (

@@ -1,10 +1,10 @@
 // external dependencies
 import create from "zustand";
-import {persist} from "zustand/middleware";
+import { persist } from "zustand/middleware";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // internal dependencies
-import type {DeviceSlice, LibrarySlice, TrackPlayerSlice} from "./slices";
+import type { DeviceSlice, LibrarySlice, TrackPlayerSlice } from "./slices";
 import {
   createDeviceSlice,
   createLibrarySlice,
@@ -23,6 +23,6 @@ export const useStore = create<StoreState>(
     {
       name: "store",
       getStorage: () => AsyncStorage,
-    },
-  ),
+    }
+  )
 );

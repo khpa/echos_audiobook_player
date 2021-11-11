@@ -1,11 +1,11 @@
 // external dependencies
 import * as React from "react";
-import {View, Button, StyleSheet, Text} from "react-native";
+import { View, Button, StyleSheet, Text } from "react-native";
 
 // internal dependencies
-import {AuthNavProp} from "../../components/navigation";
+import type { AuthNavProp } from "../../components/navigation";
 
-export const SignUp = ({navigation}: AuthNavProp<"SignUp">) => {
+export const SignUp = ({ navigation }: AuthNavProp<"SignUp">) => {
   return (
     <View style={styles.container}>
       <Text>SignUp</Text>

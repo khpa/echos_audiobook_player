@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // external dependencies
-import {checkMultiple, requestMultiple} from "react-native-permissions";
+import { checkMultiple, requestMultiple } from "react-native-permissions";
 
 // check if permissions are already granted
 export function handleAndroidPermissions(permissionsToCheck: any) {
   try {
-    checkMultiple(permissionsToCheck).then(results => {
+    checkMultiple(permissionsToCheck).then((results) => {
       const permissionRequests = [];
       for (const result in results) {
         if (results[result] !== "granted") {
@@ -24,7 +24,7 @@ export function handleAndroidPermissions(permissionsToCheck: any) {
 // request permissions that have not been granted
 function requestAndroidPermissions(permissionsToRequest: any) {
   try {
-    requestMultiple(permissionsToRequest).then(results => {
+    requestMultiple(permissionsToRequest).then((results) => {
       for (const result in results) {
         if (results[result] !== "granted") {
           console.warn(`Permission ${result} was not granted`);

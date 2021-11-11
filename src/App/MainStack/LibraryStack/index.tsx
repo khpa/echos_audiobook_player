@@ -1,27 +1,28 @@
 // external dependencies
-import * as React from "react";
-import {createStackNavigator} from "@react-navigation/stack";
+import React from "react";
+import { Pressable, StyleSheet, Text } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
 
 // internal dependencies
-import {Library} from "./Library";
-import {BookDetails} from "./BookDetails";
-import {TabNavProps} from "../../components/navigation";
-import {Pressable, StyleSheet, Text} from "react-native";
-import {BookSettings} from "./BookSettings";
+import type { TabNavProps } from "../../components/navigation";
+
+import { Library } from "./Library";
+import { BookDetails } from "./BookDetails";
+import { BookSettings } from "./BookSettings";
 
 const LibraryStack = createStackNavigator();
 
 type Props = TabNavProps<"Library">;
 
-export const LibraryStackScreen = ({navigation}: Props) => {
-  const {Navigator, Screen} = LibraryStack;
+export const LibraryStackScreen = ({ navigation }: Props) => {
+  const { Navigator, Screen } = LibraryStack;
 
   return (
     <Navigator
       screenOptions={{
         headerTitleAlign: "center",
         headerShown: false,
-        headerTitleStyle: {color: "black"},
+        headerTitleStyle: { color: "black" },
         headerStyle: {
           shadowColor: "transparent",
         },
@@ -31,13 +32,15 @@ export const LibraryStackScreen = ({navigation}: Props) => {
       <Screen
         name="BookDetails"
         component={BookDetails}
-        options={({route}: any) => ({
+        options={({ route }: any) => ({
           headerTitle: route.params?.album.title,
           headerShown: true,
           headerRight: () => (
             <Pressable
               onPress={() =>
-                navigation.navigate("BookSettings", {album: route.params.album})
+                navigation.navigate("BookSettings", {
+                  album: route.params.album,
+                })
               }
             >
               <Text style={styles.topRightButton}>Settings</Text>

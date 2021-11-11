@@ -1,1 +1,1 @@
-export {SleepTimer} from "./SleepTimer";
+export { SleepTimer } from "./SleepTimer";

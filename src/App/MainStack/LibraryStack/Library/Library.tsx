@@ -1,15 +1,25 @@
 // external dependencies
-import React, {useEffect} from "react";
-import {View, Text, StyleSheet, FlatList, Pressable, Image} from "react-native";
-import {TabNavProps} from "../../../components/navigation";
+import React, { useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Pressable,
+  Image,
+} from "react-native";
 
 // internal dependencies
-import {handlePermissions} from "./handlePermissions";
-import {checkRootFolder} from "./checkRootFolder";
-import {useStore} from "../../../../store/store";
-import {width} from "../../../components";
+import { useStore } from "../../../../store/store";
+import { Container, width } from "../../../components";
+import type { TabNavProps } from "../../../components/navigation";
 
-export const Library = ({navigation}: TabNavProps<"Library">) => {
+import { handlePermissions } from "./handlePermissions";
+import { checkRootFolder } from "./checkRootFolder";
+
+// types
+
+export const Library = ({ navigation }: TabNavProps<"Library">) => {
   const store = useStore();
 
   // TODO - Permission handling could be done in a "on first startup" screen
@@ -27,13 +37,13 @@ export const Library = ({navigation}: TabNavProps<"Library">) => {
   }
 
   return (
-    <View style={styles.container}>
+    <Container style={styles.container}>
       <FlatList
         data={store.library}
         keyExtractor={(item, index) => item.id + index.toString()}
         numColumns={3}
         showsVerticalScrollIndicator={false}
-        renderItem={({item}) => (
+        renderItem={({ item }) => (
           <Pressable
             onPress={() => {
               navigation.navigate("BookDetails", {
@@ -42,12 +52,12 @@ export const Library = ({navigation}: TabNavProps<"Library">) => {
             }}
           >
             <View style={styles.imageContainer}>
-              <Image source={{uri: item.image}} style={styles.image} />
+              <Image source={{ uri: item.image }} style={styles.image} />
             </View>
           </Pressable>
         )}
       />
-    </View>
+    </Container>
   );
 };
 
@@ -56,7 +66,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 10,
     paddingHorizontal: 10,
-    backgroundColor: "white",
   },
   imageContainer: {
     width: (width - 55) / 3,

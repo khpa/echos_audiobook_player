@@ -1,8 +1,9 @@
 export function formatDuration(seconds: number): string {
   const input = Math.round(seconds);
+
   const hours = Math.floor(input / 60 / 60);
   const minutes = Math.floor(input / 60) - hours * 60;
-  var seconds = input % 60;
+  const secondsOut = input % 60;
 
   if (hours > 0) {
     return (
@@ -10,13 +11,13 @@ export function formatDuration(seconds: number): string {
       ":" +
       minutes.toString().padStart(2, "0") +
       ":" +
-      seconds.toString().padStart(2, "0")
+      secondsOut.toString().padStart(2, "0")
     );
   }
   const formatted =
     minutes.toString().padStart(2, "0") +
     ":" +
-    seconds.toString().padStart(2, "0");
+    secondsOut.toString().padStart(2, "0");
 
   return formatted;
 }

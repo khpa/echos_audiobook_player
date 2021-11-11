@@ -1,1 +1,1 @@
-export {CurrentQueue} from "./CurrentQueue";
+export { CurrentQueue } from "./CurrentQueue";

@@ -1,6 +1,6 @@
 // external dependencies
-import React, {useEffect, useState} from "react";
-import {View, Text, StyleSheet, SafeAreaView, Image} from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, SafeAreaView, Image } from "react-native";
 import TrackPlayer, {
   usePlaybackState,
   useProgress,
@@ -8,24 +8,24 @@ import TrackPlayer, {
   Event,
 } from "react-native-track-player";
 import RNShake from "react-native-shake";
-// @ts-ignore
 import BackgroundTimer from "react-native-background-timer";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import {format as prettyFormat} from "pretty-format";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
+// import { format as prettyFormat } from "pretty-format";
 
 // internal dependencies
-import {AudioNavProp} from "../../../components/navigation";
-import {useStore} from "../../../../store/store";
-import {Chapter} from "../../SearchStack/AddAlbumPopup";
-import {Options, Controller, ProgressBar, formatDuration} from "./components";
-import {height} from "../../../components";
+import type { AudioNavProp } from "../../../components/navigation";
+import { useStore } from "../../../../store/store";
+import type { Chapter } from "../../SearchStack/AddAlbumPopup";
+import { height } from "../../../components";
+
+import { Options, Controller, ProgressBar, formatDuration } from "./components";
 
 export const AudioPlayer = ({}: AudioNavProp<"AudioPlayer">) => {
-  const {position} = useProgress();
+  const { position } = useProgress();
   const playbackState = usePlaybackState();
   const store = useStore();
   const [currentChapter, setCurrentChapter] = useState<Chapter>();
-  const countdown = store.countdown;
+  const { countdown } = store;
   const [sleepTimer, setSleepTimer] = React.useState<number | undefined>();
   const [resetTimer, setResetTimer] = useState<number | undefined>();
 
@@ -68,28 +68,28 @@ export const AudioPlayer = ({}: AudioNavProp<"AudioPlayer">) => {
           store.activeAlbum.id,
           chapterIndex,
           "lastPosition",
-          position,
+          position
         );
       }
     }
     setPosition();
   }, [playbackState]);
 
-  useTrackPlayerEvents([Event.PlaybackState], event => {
+  useTrackPlayerEvents([Event.PlaybackState], (event) => {
     console.log(event);
   });
 
-  useTrackPlayerEvents([Event.PlaybackTrackChanged], event => {
+  useTrackPlayerEvents([Event.PlaybackTrackChanged], (event) => {
     store.updateAlbum(
       store.activeAlbum.id,
       "lastPlayedChapterIndex",
-      event.nextTrack,
+      event.nextTrack
     );
     store.updateChapter(
       store.activeAlbum.id,
       event.track,
       "lastPosition",
-      position,
+      position
     );
   });
 
@@ -146,7 +146,7 @@ export const AudioPlayer = ({}: AudioNavProp<"AudioPlayer">) => {
         </Text>
         <Image
           style={styles.albumCover}
-          source={{uri: store.activeAlbum.image}}
+          source={{ uri: store.activeAlbum.image }}
         />
       </View>
       <View style={styles.bottomContainer}>

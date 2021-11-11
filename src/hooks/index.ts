@@ -1,1 +1,1 @@
-export {useAlbumSetup} from "./useAlbumSetup";
+export { useAlbumSetup } from "./useAlbumSetup";

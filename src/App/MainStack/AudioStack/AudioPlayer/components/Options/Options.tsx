@@ -1,23 +1,23 @@
 // external dependencies
 import React from "react";
-import {View, StyleSheet, Pressable, Text} from "react-native";
-import {useNavigation} from "@react-navigation/native";
+import { View, StyleSheet, Pressable, Text } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 // internal dependencies
-import {useStore} from "../../../../../../store/store";
+import { useStore } from "../../../../../../store/store";
 
 type Props = {
   id: string;
 };
 
-export const Options = ({id}: Props) => {
+export const Options = ({ id }: Props) => {
   const navigation = useNavigation();
   const store = useStore();
 
   // find album in store.library with id === id and return playbackSpeed
   const playbackSpeed =
-    store.library.find(album => album.id === id)?.playbackSpeed || 1;
+    store.library.find((album) => album.id === id)?.playbackSpeed || 1;
 
   return (
     <View style={styles.container}>
@@ -28,7 +28,7 @@ export const Options = ({id}: Props) => {
             "PlaybackSpeed" as never,
             {
               albumId: id,
-            } as never,
+            } as never
           )
         }
       >

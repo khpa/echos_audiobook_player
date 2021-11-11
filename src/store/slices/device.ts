@@ -1,14 +1,14 @@
 // external dependencies
-import type {SetState} from "zustand";
+import type { SetState } from "zustand";
 
 // internal dependencies
-import type {StoreState} from "../store";
-
-type ThemeTypes = "light" | "dark";
+import type { Theme } from "../../App/components/styles";
+import { lightTheme, darkTheme } from "../../App/components/styles";
+import type { StoreState } from "../store";
 
 export type DeviceSlice = {
   localRoot: string;
-  theme: ThemeTypes;
+  theme: Theme;
   toggleTheme: () => void;
 };
 
@@ -19,10 +19,10 @@ export const selectDevice = {
 
 export const createDeviceSlice = (set: SetState<StoreState>): DeviceSlice => ({
   localRoot: "/storage/emulated/0/Documents/Echos",
-  theme: "light",
+  theme: darkTheme,
   toggleTheme: () => {
-    set(state => ({
-      theme: state.theme === "light" ? "dark" : "light",
+    set((state) => ({
+      theme: state.theme === darkTheme ? lightTheme : darkTheme,
     }));
     console.log("theme changed");
   },

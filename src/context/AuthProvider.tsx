@@ -1,8 +1,9 @@
-import * as React from "react";
+// external dependencies
+import React, { useState, createContext } from "react";
 
-type User = null | {username: string};
+type User = null | { username: string };
 
-export const AuthContext = React.createContext<{
+export const AuthContext = createContext<{
   user: User;
   signIn: () => void;
   signOut: () => void;
@@ -20,17 +21,14 @@ interface AuthProviderProps {
   children: React.ReactNode;
 }
 
-export const AuthProvider = ({children}: AuthProviderProps) => {
-  const [user, setUser] = React.useState<User>(null);
-
+export const AuthProvider = ({ children }: AuthProviderProps) => {
+  const [user, setUser] = useState<User>(null);
   const signIn = () => {
-    setUser({username: "admin"});
+    setUser({ username: "admin" });
   };
-
   const signOut = () => {
     setUser(null);
   };
-
   const values = {
     user,
     signIn,

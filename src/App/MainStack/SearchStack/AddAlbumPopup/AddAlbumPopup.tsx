@@ -1,12 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // external dependencies
 import * as React from "react";
-import {Button, StyleSheet, Text, View} from "react-native";
-import {useStore} from "../../../../store/store";
+import { Button, StyleSheet, Text, View } from "react-native";
 
 // internal dependencies
-import {height} from "../../../components";
-import {createNewFolder} from "./createNewFolder";
+import { useStore } from "../../../../store/store";
+import { height } from "../../../components";
+
+import { createNewFolder } from "./createNewFolder";
 
 export type Album = {
   id: string;
@@ -37,12 +37,12 @@ export type Chapter = {
   finished?: boolean;
 };
 
-export const AddAlbumPopup = ({navigation, route}: any) => {
+export const AddAlbumPopup = ({ navigation, route }: any) => {
   const newAlbum = route.params?.searchResults;
   const store = useStore();
   console.log(newAlbum);
   const ISBN_13 = newAlbum.industryIdentifiers.find(
-    (identifier: any) => identifier.type === "ISBN_13",
+    (identifier: any) => identifier.type === "ISBN_13"
   ).identifier;
 
   const album: Album = {

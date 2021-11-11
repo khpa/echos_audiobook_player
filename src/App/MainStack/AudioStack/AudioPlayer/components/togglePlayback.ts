@@ -1,4 +1,4 @@
-import TrackPlayer, {State} from "react-native-track-player";
+import TrackPlayer, { State } from "react-native-track-player";
 
 export const togglePlayback = async (playbackState: State) => {
   const currentTrack = await TrackPlayer.getCurrentTrack();

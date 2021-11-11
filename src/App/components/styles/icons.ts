@@ -18,6 +18,6 @@ export const bottomTabIcons: Record<string, OutlineFillIcon> = {
   },
   SettingsStack: {
     outline: require("../../../../res/icons/settings.png"),
-    fill: require("../../../../res/icons/cog.png"),
+    fill: require("../../../../res/icons/settings-fill.png"),
   },
 };

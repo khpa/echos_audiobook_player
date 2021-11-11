@@ -1,1 +1,1 @@
-export {BookSettings} from "./BookSettings";
+export { BookSettings } from "./BookSettings";

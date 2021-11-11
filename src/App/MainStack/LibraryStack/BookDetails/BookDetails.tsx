@@ -1,5 +1,5 @@
 // external dependencies
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -12,19 +12,21 @@ import RenderHtml from "react-native-render-html";
 // import {format as pretty} from "pretty-format";
 
 // internal dependencies
-import {useAlbumSetup} from "../../../../hooks";
-import {width} from "../../../components";
-import {TabNavProps} from "../../../components/navigation";
-import {Album} from "../../SearchStack/AddAlbumPopup";
+import { useAlbumSetup } from "../../../../hooks";
+import { width } from "../../../components";
+import type { TabNavProps } from "../../../components/navigation";
+import type { Album } from "../../SearchStack/AddAlbumPopup";
 
 type Props = TabNavProps<"BookDetails">;
 
-export const BookDetails = ({route}: Props) => {
-  const album = route.params.album;
+export const BookDetails = ({ route }: Props) => {
+  const { album } = route.params;
   const [albumSetup, setAlbumSetup] = useState<Album>();
   useAlbumSetup(albumSetup);
 
-  if (!album) return <View />;
+  if (!album) {
+    return <View />;
+  }
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {album.subtitle ? (
@@ -32,11 +34,11 @@ export const BookDetails = ({route}: Props) => {
       ) : null}
       <View style={styles.topContainer}>
         <Pressable onPress={() => setAlbumSetup(album)}>
-          <Image source={{uri: album.image}} style={styles.cover} />
+          <Image source={{ uri: album.image }} style={styles.cover} />
         </Pressable>
         <View style={styles.detailsContainer}>
           <Text style={styles.authors}>
-            {album.authors.map(a => a).join(", ")}
+            {album.authors.map((a) => a).join(", ")}
           </Text>
           <View>
             {album.categories?.map((category, index) => (
@@ -56,7 +58,7 @@ export const BookDetails = ({route}: Props) => {
         </View>
       </View>
       <RenderHtml
-        source={{html: album.description || ""}}
+        source={{ html: album.description || "" }}
         contentWidth={width}
         baseStyle={styles.description}
       />
@@ -85,11 +87,6 @@ const styles = StyleSheet.create({
     height: width * 0.75 * 0.6,
     alignSelf: "center",
     marginBottom: 10,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "black",
   },
   subtitle: {
     fontSize: 14,
@@ -120,10 +117,5 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 10,
     color: "black",
-  },
-  track: {
-    fontSize: 14,
-    color: "black",
-    marginVertical: 10,
   },
 });

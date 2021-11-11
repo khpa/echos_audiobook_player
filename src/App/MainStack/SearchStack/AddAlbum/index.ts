@@ -1,1 +1,1 @@
-export {AddAlbum} from "./AddAlbum";
+export { AddAlbum } from "./AddAlbum";

@@ -1,34 +1,26 @@
 // external dependencies
-import {useTheme} from "@react-navigation/native";
 import React from "react";
-import {View, Text, StyleSheet, Button} from "react-native";
-import {selectDevice} from "../../../store/slices/device";
-import {useStore} from "../../../store/store";
-import {customTheme} from "../../components/styles/TestTheme";
+import { StyleSheet, Button } from "react-native";
 
 // internal dependencies
+import { selectDevice } from "../../../store/slices/device";
+import { Container, Text } from "../../components";
+import { useStore } from "../../../store/store";
 
-type Props = {};
+type Props = Record<string, never>;
 
 export const Settings = ({}: Props) => {
   const toggleTheme = useStore(selectDevice.toggleTheme);
-  const theme = useTheme();
-
   return (
-    <View
-      style={[styles.container, {backgroundColor: theme.colors.background}]}
-    >
+    <Container style={styles.container}>
       <Button title="Toggle Theme" onPress={toggleTheme} />
-      <Text style={styles.title}>Settings</Text>
-    </View>
+      <Text>Settings</Text>
+    </Container>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  title: {
-    color: "black",
   },
 });

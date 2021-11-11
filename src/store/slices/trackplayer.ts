@@ -1,10 +1,10 @@
 // external dependencies
-import TrackPlayer, {State} from "react-native-track-player";
-import {SetState} from "zustand";
+import TrackPlayer, { State } from "react-native-track-player";
+import type { SetState } from "zustand";
 
 // internal dependencies
-import type {StoreState} from "../store";
-import type {Album} from "../../App/MainStack/SearchStack/AddAlbumPopup";
+import type { StoreState } from "../store";
+import type { Album } from "../../App/MainStack/SearchStack/AddAlbumPopup";
 
 export type TrackPlayerSlice = {
   playerState: State;
@@ -33,13 +33,13 @@ export const selectTrackPlayer = {
 };
 
 export const createTrackPlayerSlice = (
-  set: SetState<StoreState>,
+  set: SetState<StoreState>
 ): TrackPlayerSlice => {
   return {
     playerState: State.None,
-    setPlayerState: playerState => set({playerState}),
+    setPlayerState: (playerState) => set({ playerState }),
     activeAlbum: resetAlbum,
-    setActiveAlbum: album =>
+    setActiveAlbum: (album) =>
       set({
         activeAlbum: album,
       }),
@@ -48,20 +48,20 @@ export const createTrackPlayerSlice = (
         activeAlbum: resetAlbum,
       }),
     resetChapters: () => {
-      set(state => {
+      set((state) => {
         const album = state.library.find(
-          album => album.id === state.activeAlbum.id,
+          (searchAlbum) => searchAlbum.id === state.activeAlbum.id
         );
         if (album) {
           album.lastPlayedChapterIndex = 0;
-          album.chapters.map(chapter => {
+          album.chapters.map((chapter) => {
             chapter.lastPosition = 0;
           });
         }
       });
     },
     countdown: undefined,
-    setCountdown: countdown => set({countdown}),
+    setCountdown: (countdown) => set({ countdown }),
   };
 };
 

@@ -1,4 +1,4 @@
-import TrackPlayer, {Capability} from "react-native-track-player";
+import TrackPlayer, { Capability } from "react-native-track-player";
 
 export const setupAudioPlayer = async () => {
   const currentTrack = await TrackPlayer.getCurrentTrack();

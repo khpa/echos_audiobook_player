@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from "react";
-import {Text, StyleSheet, ScrollView} from "react-native";
-import TrackPlayer, {Track} from "react-native-track-player";
+import React, { useState, useEffect } from "react";
+import { Text, StyleSheet, ScrollView } from "react-native";
+import type { Track } from "react-native-track-player";
+import TrackPlayer from "react-native-track-player";
 
 export const CurrentQueue = () => {
   const [currentQueue, setCurrentQueue] = useState<Track[]>([]);

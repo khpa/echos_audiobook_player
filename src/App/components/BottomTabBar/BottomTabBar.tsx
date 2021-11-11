@@ -1,12 +1,14 @@
 // external dependencies
-import * as React from "react";
-import {BottomTabBarProps} from "@react-navigation/bottom-tabs";
-import {StyleSheet, View} from "react-native";
+import React from "react";
+import type { BottomTabBarProps } from "@react-navigation/bottom-tabs";
+import { StyleSheet, View } from "react-native";
 
 // internal dependencies
-import {MiniPlayer} from "./MiniPlayer";
-import {BottomTabButton} from "./BottomTabButton";
-import {bottomTabIcons} from "../styles";
+import { bottomTabIcons } from "../styles";
+import { Container } from "..";
+
+import { BottomTabButton } from "./BottomTabButton";
+import { MiniPlayer } from "./MiniPlayer";
 
 export function BottomTabBar({
   state,
@@ -16,9 +18,9 @@ export function BottomTabBar({
   return (
     <View>
       <MiniPlayer />
-      <View style={styles.container}>
+      <Container style={styles.container}>
         {state.routes.map((route, index) => {
-          const {options} = descriptors[route.key] as any;
+          const { options } = descriptors[route.key];
           const label =
             options.tabBarLabel !== undefined
               ? (options.tabBarLabel as string)
@@ -33,12 +35,12 @@ export function BottomTabBar({
               label={label}
               name={route.name}
               isFocused={state.index === index}
-              icon={bottomTabIcons[route.name]!}
+              icon={bottomTabIcons[route.name]}
               navigation={navigation}
             />
           );
         })}
-      </View>
+      </Container>
     </View>
   );
 }
@@ -46,7 +48,6 @@ export function BottomTabBar({
 const styles = StyleSheet.create({
   container: {
     height: 55,
-    backgroundColor: "#fff",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",

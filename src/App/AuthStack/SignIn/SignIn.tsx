@@ -1,12 +1,12 @@
 // external dependencies
 import React from "react";
-import {View, Text, StyleSheet, Button} from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
 
 // internal dependencies
-import {useAuth} from "../../../context/AuthProvider";
+import { useAuth } from "../../../context/AuthProvider";
 
 export const SignIn = () => {
-  const {signIn} = useAuth();
+  const { signIn } = useAuth();
 
   return (
     <View style={styles.container}>

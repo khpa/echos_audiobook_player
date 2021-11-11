@@ -1,16 +1,20 @@
 // external dependencies
-import {StackNavigationProp, StackScreenProps} from "@react-navigation/stack";
+import type {
+  StackNavigationProp,
+  StackScreenProps,
+} from "@react-navigation/stack";
 import type {
   CompositeScreenProps,
   NavigatorScreenParams,
   RouteProp,
 } from "@react-navigation/native";
-import {
+import type {
   BottomTabNavigationProp,
   BottomTabScreenProps,
 } from "@react-navigation/bottom-tabs";
-import {Album} from "../MainStack/SearchStack/AddAlbumPopup";
-import {BookSearchResults} from "../MainStack/SearchStack/AddAlbum/AddAlbum";
+
+import type { Album } from "../MainStack/SearchStack/AddAlbumPopup";
+import type { BookSearchResults } from "../MainStack/SearchStack/AddAlbum/AddAlbum";
 
 export type AudioPlayerProp = CompositeScreenProps<
   StackScreenProps<MainRoutes, "AudioStack">,
@@ -59,10 +63,10 @@ export type MainRoutes = {
 };
 
 export type AudioRoutes = {
-  AudioPlayer: {album: Album};
+  AudioPlayer: { album: Album };
   CurrentQueue: undefined;
   SleepTimer: undefined;
-  PlaybackSpeed: {albumId: string};
+  PlaybackSpeed: { albumId: string };
 };
 
 export type TabRoutes = {
@@ -70,7 +74,7 @@ export type TabRoutes = {
   LibraryStack: NavigatorScreenParams<LibraryRoutes>;
   SearchStack: undefined;
   AddAlbum: undefined;
-  AddAlbumPopup: {searchResults: BookSearchResults};
+  AddAlbumPopup: { searchResults: BookSearchResults };
   SettingsStack: undefined;
 };
 
@@ -81,8 +85,8 @@ export type AuthRoutes = {
 
 export type LibraryRoutes = {
   Library: undefined;
-  BookDetails: {album: Album};
-  BookSettings: {album: Album};
+  BookDetails: { album: Album };
+  BookSettings: { album: Album };
 };
 
 type HomeRoutes = {

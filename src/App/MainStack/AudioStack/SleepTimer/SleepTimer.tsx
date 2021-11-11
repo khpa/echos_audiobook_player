@@ -1,17 +1,18 @@
 import React from "react";
-import {Button, Pressable, StyleSheet, Text, View} from "react-native";
-import {useStore} from "../../../../store/store";
-import {AudioNavProp} from "../../../components/navigation";
+import { Button, Pressable, StyleSheet, Text, View } from "react-native";
+
+import { useStore } from "../../../../store/store";
+import type { AudioNavProp } from "../../../components/navigation";
 
 type Props = AudioNavProp<"SleepTimer">;
 
-export const SleepTimer = ({navigation}: Props) => {
+export const SleepTimer = ({ navigation }: Props) => {
   const store = useStore();
   const sleepTimerOptions = [0, 5, 10, 20, 30];
 
   return (
     <View style={styles.container}>
-      {sleepTimerOptions.map(option => {
+      {sleepTimerOptions.map((option) => {
         return (
           <Pressable
             key={option}

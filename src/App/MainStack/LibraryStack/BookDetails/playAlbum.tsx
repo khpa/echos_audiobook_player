@@ -1,11 +1,13 @@
-import TrackPlayer, {Track} from "react-native-track-player";
-import {Album} from "../../SearchStack/AddAlbumPopup";
+import type { Track } from "react-native-track-player";
+import TrackPlayer from "react-native-track-player";
+
+import type { Album } from "../../SearchStack/AddAlbumPopup";
 
 // somehow check if current album is already playing
 export async function playAlbum(album: Album) {
   await TrackPlayer.reset();
 
-  let newQueue: Track[] = [];
+  const newQueue: Track[] = [];
   if (album.chapters.length > 0) {
     for (let i = 0; i < album.chapters.length; i++) {
       newQueue.push({

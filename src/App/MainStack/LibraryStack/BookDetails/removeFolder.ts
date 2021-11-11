@@ -1,11 +1,12 @@
 // external dependencies
-import {Alert} from "react-native";
-import {FileSystem} from "react-native-file-access";
+import { Alert } from "react-native";
+import { FileSystem } from "react-native-file-access";
 
 // internal dependencies
-import {useStore} from "../../../../store/store";
+import { useStore } from "../../../../store/store";
+import type { Album } from "../../SearchStack/AddAlbumPopup";
 
-export async function removeFolder(newAlbum: any) {
+export async function removeFolder(newAlbum: Album) {
   const folderName = newAlbum.title;
   const localRootFolder = useStore.getState().localRoot;
   const folderPath = `${localRootFolder}/${folderName}`;
@@ -15,7 +16,7 @@ export async function removeFolder(newAlbum: any) {
     if (folderContent.length > 0) {
       Alert.alert(
         "Folder is not empty",
-        `${newAlbum.title} was deleted from your library, but the folder is still there`,
+        `${newAlbum.title} was deleted from your library, but the folder is still there`
       );
     } else {
       await FileSystem.unlink(folderPath);
