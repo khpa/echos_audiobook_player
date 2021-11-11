@@ -1,8 +1,13 @@
 // external dependencies
-import * as React from "react";
+import React from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 
 // internal dependencies
+import type { SearchStackNavProps } from "../../../../navigation";
+import type {
+  ImageLinks,
+  IndustryIdentifier,
+} from "../../../../types/GoogleBooksApi";
 import { useStore } from "../../../../store/store";
 import { height } from "../../../../components";
 
@@ -20,7 +25,7 @@ export type Album = {
   addedDate?: string;
   selfLink: string;
   image?: string;
-  imageOptions?: Record<string, unknown>;
+  imageOptions: ImageLinks;
   chapters: Chapter[];
   duration?: number;
   lastPlayed?: string;
@@ -37,37 +42,42 @@ export type Chapter = {
   finished?: boolean;
 };
 
-export const AddAlbumPopup = ({ navigation, route }: any) => {
-  const newAlbum = route.params?.searchResults;
+type Props = SearchStackNavProps<"AddAlbumPopup">;
+
+export const AddAlbumPopup = ({ navigation, route }: Props) => {
+  const { rawAlbum } = route.params;
   const store = useStore();
-  console.log(newAlbum);
-  const ISBN_13 = newAlbum.industryIdentifiers.find(
-    (identifier: any) => identifier.type === "ISBN_13"
-  ).identifier;
+
+  console.log("newAlbum", route.params.rawAlbum);
+
+  const ISBN_13 =
+    rawAlbum.industryIdentifiers.find(
+      (identifier: IndustryIdentifier) => identifier.type === "ISBN_13"
+    )?.identifier || rawAlbum.title;
 
   const album: Album = {
     id: ISBN_13,
-    title: newAlbum.title,
-    subtitle: newAlbum.subtitle,
-    authors: newAlbum.authors,
-    description: newAlbum.description,
-    categories: newAlbum.categories,
-    pageCount: newAlbum.pageCount,
-    publishedDate: newAlbum.publishedDate,
+    title: rawAlbum.title,
+    subtitle: rawAlbum.subtitle,
+    authors: rawAlbum.authors,
+    description: rawAlbum.description,
+    categories: rawAlbum.categories,
+    pageCount: rawAlbum.pageCount,
+    publishedDate: rawAlbum.publishedDate,
     addedDate: new Date().toISOString(),
-    selfLink: newAlbum.selfLink,
-    image: newAlbum.image,
-    imageOptions: newAlbum.imageLinks,
+    selfLink: rawAlbum.selfLink,
+    image: rawAlbum.image,
+    imageOptions: rawAlbum.imageLinks,
     chapters: [],
     lastPlayedChapterIndex: 0,
   };
-
+  console.log("album", album);
   // TODO - Add a check to see if the album is already in the library
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.title}>{newAlbum.title}</Text>
-        <Text style={styles.subtitle}>{newAlbum.subtitle}</Text>
+        <Text style={styles.title}>{rawAlbum.title}</Text>
+        <Text style={styles.subtitle}>{rawAlbum.subtitle}</Text>
       </View>
       <Button
         title="Add Album"

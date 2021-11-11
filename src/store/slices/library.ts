@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // external dependencies
 import type { SetState } from "zustand";
 

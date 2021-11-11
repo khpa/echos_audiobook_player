@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // external dependencies
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, SafeAreaView, Image } from "react-native";
@@ -13,14 +14,14 @@ import BackgroundTimer from "react-native-background-timer";
 // import { format as prettyFormat } from "pretty-format";
 
 // internal dependencies
-import type { AudioNavProp } from "../../../../navigation";
-import { useStore } from "../../../../store/store";
+import type { AudioNavProps } from "../../../../navigation";
 import type { Chapter } from "../../SearchStack/AddAlbumPopup";
+import { useStore } from "../../../../store/store";
 import { height } from "../../../../components";
 
 import { Options, Controller, ProgressBar, formatDuration } from "./components";
 
-export const AudioPlayer = ({}: AudioNavProp<"AudioPlayer">) => {
+export const AudioPlayer = ({}: AudioNavProps<"AudioPlayer">) => {
   const { position } = useProgress();
   const playbackState = usePlaybackState();
   const store = useStore();

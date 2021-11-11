@@ -1,14 +1,12 @@
 // external dependencies
 import React, { useEffect, useState } from "react";
-import { View, TextInput, FlatList, StyleSheet } from "react-native";
+import { TextInput, FlatList, StyleSheet } from "react-native";
 
 // internal dependencies
-
-// constants
 import { Container, width } from "../../../../components";
-import type { MainNavProps } from "../../../../navigation/navigation";
 import { selectDevice } from "../../../../store/slices/device";
 import { useStore } from "../../../../store/store";
+import type { IndustryIdentifier } from "../../../../types/GoogleBooksApi";
 
 import { formatBookSearchResults } from "./formatBookSearchResults";
 import { searchGoogleBooks } from "./searchGoogleBooks";
@@ -17,18 +15,20 @@ import { SearchResultsItem } from "./SearchResultsItem";
 export type BookSearchResults = {
   id: string;
   title: string;
+  subtitle: string;
   authors: string[];
-  description?: string;
+  description: string;
   imageLink: string;
   selfLink: string;
-  industryIdentifiers: [];
+  industryIdentifiers?: IndustryIdentifier[];
+  image?: string;
 };
 
-type Props = MainNavProps<"MainTabs">;
-
-export const AddAlbum = ({ navigation }: Props) => {
+export const AddAlbum = () => {
   const [searchString, onChangeText] = useState<string>("");
-  const [searchResults, setSearchResults] = useState<BookSearchResults[]>([]);
+  const [searchResults, setSearchResults] = useState<BookSearchResults[] | []>(
+    []
+  );
   const theme = useStore(selectDevice.theme);
 
   useEffect(() => {
@@ -64,9 +64,7 @@ export const AddAlbum = ({ navigation }: Props) => {
           data={searchResults}
           keyExtractor={(item, index) => item + index.toString()}
           extraData={searchString}
-          renderItem={({ item }) => (
-            <SearchResultsItem item={item} navigation={navigation} />
-          )}
+          renderItem={({ item }) => <SearchResultsItem item={item} />}
         />
       </Container>
     </Container>

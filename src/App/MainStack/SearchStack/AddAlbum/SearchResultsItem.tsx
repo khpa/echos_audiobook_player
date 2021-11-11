@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // external dependencies
-import * as React from "react";
+import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import {
   Image,
   SafeAreaView,
@@ -8,29 +9,33 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import type { StackNavigationProp } from "@react-navigation/stack";
 
+// internal dependencies
+import type { VolumeInfo } from "../../../../types/GoogleBooksApi";
 import { height } from "../../../../components";
 import { Text } from "../../../../components/Text";
 
 import type { BookSearchResults } from "./AddAlbum";
 
-// internal dependencies
+type Props = { item: BookSearchResults };
 
-type Props = {
-  item: BookSearchResults;
-  navigation: any;
-};
+export const SearchResultsItem = ({ item }: Props) => {
+  const navigation = useNavigation<StackNavigationProp<any, any>>();
 
-export const SearchResultsItem = ({ item, navigation }: Props) => {
   async function onPressHandler() {
-    const bookDetails = await fetch(item.selfLink).then((res) => res.json());
-    navigation.navigate("AddAlbumPopup", {
-      searchResults: {
-        ...bookDetails.volumeInfo,
-        selfLink: item.selfLink,
-        image: item.imageLink,
-      },
-    });
+    const bookDetails: VolumeInfo = await fetch(item.selfLink).then((res) =>
+      res.json()
+    );
+    console.log(bookDetails);
+    bookDetails &&
+      navigation.navigate("AddAlbumPopup", {
+        rawAlbum: {
+          ...bookDetails.volumeInfo,
+          selfLink: item.selfLink,
+          image: item.imageLink,
+        },
+      });
   }
 
   return (

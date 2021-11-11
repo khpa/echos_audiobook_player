@@ -4,22 +4,25 @@ import { Pressable, StyleSheet, Text } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 // internal dependencies
-import type { TabNavProps } from "../../../navigation/navigation";
+import type {
+  LibraryStackNavProps,
+  LibraryStackParamList,
+} from "../../../navigation";
 
 import { Library } from "./Library";
 import { BookDetails } from "./BookDetails";
 import { BookSettings } from "./BookSettings";
 
-const LibraryStack = createStackNavigator();
+const LibraryStack = createStackNavigator<LibraryStackParamList>();
 
-type Props = TabNavProps<"Library">;
+type Props = LibraryStackNavProps<"Library">;
 
 export const LibraryStackScreen = ({ navigation }: Props) => {
   const { Navigator, Screen } = LibraryStack;
 
   return (
     <Navigator
-      screenOptions={({ route }: any) => ({
+      screenOptions={({ route }) => ({
         headerTitleAlign: "center",
         headerTitleStyle: { color: "black" },
         headerStyle: {
@@ -36,7 +39,7 @@ export const LibraryStackScreen = ({ navigation }: Props) => {
       <Screen
         name="BookDetails"
         component={BookDetails}
-        options={({ route }: any) => ({
+        options={({ route }) => ({
           headerRight: () => (
             <Pressable
               onPress={() =>

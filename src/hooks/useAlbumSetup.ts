@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // external dependencies
 import { useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";

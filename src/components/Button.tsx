@@ -8,27 +8,16 @@ import { Text, StyleSheet, Pressable } from "react-native";
 type Props = {
   title: string;
   onPress: (event: GestureResponderEvent) => void;
-  buttonStyle?: "hollow" | "highlight";
   style?: StyleProp<ViewStyle>;
   disabled?: boolean;
 };
 
-export const Button = ({
-  title,
-  onPress,
-  buttonStyle,
-  style,
-  disabled,
-}: Props) => {
+export const Button = ({ title, onPress, style, disabled }: Props) => {
   return (
     <Pressable
       onPress={onPress}
       disabled={disabled}
-      style={[
-        styles.container,
-        buttonStyle !== undefined ? styles[buttonStyle] : {},
-        style,
-      ]}
+      style={[styles.container, style]}
     >
       {<Text style={styles.text}>{title}</Text>}
     </Pressable>
@@ -42,13 +31,6 @@ const styles = StyleSheet.create({
     minHeight: 42,
     justifyContent: "center",
     borderRadius: 1000,
-  },
-  hollow: {
-    backgroundColor: "transparent",
-    borderWidth: 1.5,
-  },
-  highlight: {
-    borderWidth: 1.5,
   },
   text: {
     color: "black",

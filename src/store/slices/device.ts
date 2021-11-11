@@ -24,6 +24,5 @@ export const createDeviceSlice = (set: SetState<StoreState>): DeviceSlice => ({
     set((state) => ({
       theme: state.theme === darkTheme ? lightTheme : darkTheme,
     }));
-    console.log("theme changed");
   },
 });

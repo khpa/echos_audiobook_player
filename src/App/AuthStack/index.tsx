@@ -1,15 +1,15 @@
 // external dependencies
-import * as React from "react";
+import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 // types
-import type { AuthRoutes } from "../../navigation";
+import type { AuthParamList } from "../../navigation";
 
 // internal dependencies
 import { SignIn } from "./SignIn";
 import { SignUp } from "./SignUp";
 
-const AuthStack = createStackNavigator<AuthRoutes>();
+const AuthStack = createStackNavigator<AuthParamList>();
 
 export const AuthStackScreen = () => {
   const { Navigator, Screen } = AuthStack;

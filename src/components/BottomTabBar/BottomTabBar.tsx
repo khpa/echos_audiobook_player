@@ -10,11 +10,11 @@ import { Container } from "..";
 import { BottomTabButton } from "./BottomTabButton";
 import { MiniPlayer } from "./MiniPlayer";
 
-export function BottomTabBar({
+export const BottomTabBar = ({
   state,
   descriptors,
   navigation,
-}: BottomTabBarProps) {
+}: BottomTabBarProps) => {
   return (
     <View>
       <MiniPlayer />
@@ -22,6 +22,7 @@ export function BottomTabBar({
         {state.routes.map((route, index) => {
           const { options } = descriptors[route.key];
           const label =
+            // eslint-disable-next-line no-nested-ternary
             options.tabBarLabel !== undefined
               ? (options.tabBarLabel as string)
               : options.title !== undefined
@@ -43,7 +44,7 @@ export function BottomTabBar({
       </Container>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

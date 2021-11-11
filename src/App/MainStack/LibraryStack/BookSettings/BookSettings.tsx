@@ -4,18 +4,19 @@ import { Image, Pressable, ScrollView, StyleSheet, View } from "react-native";
 import TrackPlayer from "react-native-track-player";
 
 // internal dependencies
-import type { LibraryProps } from "../../../../navigation/navigation";
+import type { LibraryStackNavProps } from "../../../../navigation";
 import { width, Button } from "../../../../components";
 import { useStore } from "../../../../store/store";
 import { removeFolder } from "../BookDetails";
 
 import { getChapters } from "./getChapters";
 
-type Props = LibraryProps;
+type Props = LibraryStackNavProps<"BookSettings">;
 
 export const BookSettings = ({ navigation, route }: Props) => {
-  const { album } = route.params;
   const store = useStore();
+  const { album } = route.params;
+  const imgOpt = Object.values(album.imageOptions);
 
   function onPressHandler() {
     store.removeAlbum(album.id);
@@ -31,7 +32,6 @@ export const BookSettings = ({ navigation, route }: Props) => {
     store.updateAlbum(album.id, "chapters", chapters);
   }
 
-  const imgOpt: string[] = Object.values(album.imageOptions);
   return (
     <ScrollView style={styles.container}>
       <Button title="reload Chapters" onPress={reloadChapters} />
