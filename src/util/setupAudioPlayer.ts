@@ -5,7 +5,6 @@ export const setupAudioPlayer = async () => {
   if (currentTrack !== null) {
     return;
   }
-  console.log("Setting up audio player");
   await TrackPlayer.setupPlayer({});
   await TrackPlayer.updateOptions({
     stopWithApp: false,

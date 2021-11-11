@@ -13,8 +13,8 @@ import RenderHtml from "react-native-render-html";
 
 // internal dependencies
 import { useAlbumSetup } from "../../../../hooks";
-import { width } from "../../../components";
-import type { TabNavProps } from "../../../components/navigation";
+import { width } from "../../../../components";
+import type { TabNavProps } from "../../../../util/navigation";
 import type { Album } from "../../SearchStack/AddAlbumPopup";
 
 type Props = TabNavProps<"BookDetails">;

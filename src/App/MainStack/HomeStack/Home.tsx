@@ -7,9 +7,9 @@ import { View, StyleSheet, FlatList, Pressable, Image } from "react-native";
 
 // internal dependencies
 import { useStore } from "../../../store/store";
-import { Container, width } from "../../components";
+import { Container, width } from "../../../components";
 import { useAlbumSetup } from "../../../hooks";
-import type { MainNavProps } from "../../components/navigation";
+import type { MainNavProps } from "../../../util/navigation";
 import type { Album } from "../SearchStack/AddAlbumPopup";
 
 export const Home = ({}: MainNavProps<"MainTabs">) => {

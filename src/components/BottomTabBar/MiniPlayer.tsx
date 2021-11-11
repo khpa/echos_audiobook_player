@@ -18,12 +18,11 @@ import TrackPlayer, {
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 // internal dependencies
-import { useStore } from "../../../store/store";
-import { width } from "../styles/themes";
+import { useStore } from "../../store/store";
 import {
   formatDuration,
   togglePlayback,
-} from "../../MainStack/AudioStack/AudioPlayer/components";
+} from "../../App/MainStack/AudioStack/AudioPlayer/components";
 
 export const MiniPlayer = React.memo(() => {
   const store = useStore();
@@ -105,14 +104,11 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   imgBG: {
-    flex: 1,
     height: "100%",
     width: "100%",
     alignItems: "center",
-    justifyContent: "center",
   },
   innerContainer: {
-    flex: 1,
     height: "100%",
     width: "100%",
     flexDirection: "row",
@@ -147,7 +143,6 @@ const styles = StyleSheet.create({
   image: {
     width: 50,
     height: 50,
-    // borderRadius: 20,
     marginRight: 10,
     resizeMode: "contain",
   },

@@ -13,8 +13,8 @@ import type {
   BottomTabScreenProps,
 } from "@react-navigation/bottom-tabs";
 
-import type { Album } from "../MainStack/SearchStack/AddAlbumPopup";
-import type { BookSearchResults } from "../MainStack/SearchStack/AddAlbum/AddAlbum";
+import type { Album } from "../App/MainStack/SearchStack/AddAlbumPopup";
+import type { BookSearchResults } from "../App/MainStack/SearchStack/AddAlbum/AddAlbum";
 
 export type AudioPlayerProp = CompositeScreenProps<
   StackScreenProps<MainRoutes, "AudioStack">,

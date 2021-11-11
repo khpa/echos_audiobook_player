@@ -15,7 +15,9 @@ export const Root = () => {
   const theme = useStore(selectDevice.theme);
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView
+      style={{ flex: 1, backgroundColor: theme.background }}
+    >
       <ThemeProvider theme={theme}>
         <NavigationContainer>
           <SafeAreaProvider>

@@ -9,8 +9,8 @@ import {
   View,
 } from "react-native";
 
-import { height } from "../../../components";
-import { Text } from "../../../components/Text";
+import { height } from "../../../../components";
+import { Text } from "../../../../components/Text";
 
 import type { BookSearchResults } from "./AddAlbum";
 

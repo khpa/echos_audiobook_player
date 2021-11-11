@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Pressable, StyleSheet, Text, View } from "react-native";
 
 import { useStore } from "../../../../store/store";
-import type { AudioNavProp } from "../../../components/navigation";
+import type { AudioNavProp } from "../../../../util/navigation";
 
 type Props = AudioNavProp<"SleepTimer">;
 

@@ -1,24 +1,15 @@
 // external dependencies
 import React from "react";
-import {
-  Button,
-  Image,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  View,
-} from "react-native";
+import { Image, Pressable, ScrollView, StyleSheet, View } from "react-native";
 import TrackPlayer from "react-native-track-player";
 
 // internal dependencies
-import { width } from "../../../components";
+import type { LibraryProps } from "../../../../util/navigation";
+import { width, Button } from "../../../../components";
 import { useStore } from "../../../../store/store";
 import { removeFolder } from "../BookDetails";
-import type { LibraryProps } from "../../../components/navigation";
 
 import { getChapters } from "./getChapters";
-
-// types
 
 type Props = LibraryProps;
 

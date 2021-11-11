@@ -11,8 +11,8 @@ import {
 
 // internal dependencies
 import { useStore } from "../../../../store/store";
-import { Container, width } from "../../../components";
-import type { TabNavProps } from "../../../components/navigation";
+import { Container, width } from "../../../../components";
+import type { TabNavProps } from "../../../../util/navigation";
 
 import { handlePermissions } from "./handlePermissions";
 import { checkRootFolder } from "./checkRootFolder";

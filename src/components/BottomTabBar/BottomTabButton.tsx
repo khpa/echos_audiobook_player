@@ -9,9 +9,9 @@ import type { ImageStyle } from "react-native";
 import { Text, StyleSheet, Pressable, Image } from "react-native";
 
 // internal dependencies
-import { selectDevice } from "../../../store/slices/device";
+import { selectDevice } from "../../store/slices/device";
 import type { OutlineFillIcon } from "../styles";
-import { useStore } from "../../../store/store";
+import { useStore } from "../../store/store";
 
 export const BottomTabButton = React.memo<{
   routeKey: string;

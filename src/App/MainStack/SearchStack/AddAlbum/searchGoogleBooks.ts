@@ -4,7 +4,7 @@
 import { BookSearch } from "react-native-google-books";
 
 // internal dependencies
-import { config } from "../../../components";
+import { config } from "../../../../util/config";
 
 export async function searchGoogleBooks(searchString: string) {
   if (searchString.length > 2) {

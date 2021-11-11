@@ -4,8 +4,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 // internal dependencies
-import type { MainRoutes, TabRoutes } from "../components";
-import { setupAudioPlayer, BottomTabBar } from "../components";
+import type { MainRoutes, TabRoutes } from "../../util";
+import { setupAudioPlayer } from "../../util";
+import { BottomTabBar } from "../../components";
 
 import { HomeStackScreen } from "./HomeStack";
 import { LibraryStackScreen } from "./LibraryStack";

@@ -2,8 +2,8 @@
 import type { SetState } from "zustand";
 
 // internal dependencies
-import type { Theme } from "../../App/components/styles";
-import { lightTheme, darkTheme } from "../../App/components/styles";
+import type { Theme } from "../../components/styles";
+import { lightTheme, darkTheme } from "../../components/styles";
 import type { StoreState } from "../store";
 
 export type DeviceSlice = {

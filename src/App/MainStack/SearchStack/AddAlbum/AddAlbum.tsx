@@ -5,8 +5,8 @@ import { View, TextInput, FlatList, StyleSheet } from "react-native";
 // internal dependencies
 
 // constants
-import { Container, width } from "../../../components";
-import type { MainNavProps } from "../../../components/navigation";
+import { Container, width } from "../../../../components";
+import type { MainNavProps } from "../../../../util/navigation";
 import { selectDevice } from "../../../../store/slices/device";
 import { useStore } from "../../../../store/store";
 

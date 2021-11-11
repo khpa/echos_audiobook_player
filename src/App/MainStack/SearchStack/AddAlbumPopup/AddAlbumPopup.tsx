@@ -4,7 +4,7 @@ import { Button, StyleSheet, Text, View } from "react-native";
 
 // internal dependencies
 import { useStore } from "../../../../store/store";
-import { height } from "../../../components";
+import { height } from "../../../../components";
 
 import { createNewFolder } from "./createNewFolder";
 
@@ -20,7 +20,7 @@ export type Album = {
   addedDate?: string;
   selfLink: string;
   image?: string;
-  imageOptions?: any;
+  imageOptions?: Record<string, unknown>;
   chapters: Chapter[];
   duration?: number;
   lastPlayed?: string;

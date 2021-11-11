@@ -5,7 +5,7 @@ import TrackPlayer, { useProgress } from "react-native-track-player";
 import Slider from "@react-native-community/slider";
 
 // internal dependencies
-import { height } from "../../../../components";
+import { height } from "../../../../../components";
 
 import { formatDuration } from "./formatDuration";
 

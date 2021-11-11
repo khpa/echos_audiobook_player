@@ -1,10 +1,10 @@
 // external dependencies
 import React from "react";
-import { StyleSheet, Button } from "react-native";
+import { StyleSheet } from "react-native";
 
 // internal dependencies
 import { selectDevice } from "../../../store/slices/device";
-import { Container, Text } from "../../components";
+import { Container, Button } from "../../../components";
 import { useStore } from "../../../store/store";
 
 type Props = Record<string, never>;
@@ -14,7 +14,6 @@ export const Settings = ({}: Props) => {
   return (
     <Container style={styles.container}>
       <Button title="Toggle Theme" onPress={toggleTheme} />
-      <Text>Settings</Text>
     </Container>
   );
 };
