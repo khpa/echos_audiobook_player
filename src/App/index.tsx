@@ -6,7 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 // internal dependencies
 import { useAuth } from "../context/AuthProvider";
 import { Loading } from "../components";
-import type { AppRoutes } from "../util";
+import type { AppRoutes } from "../navigation";
 
 import { MainStackScreen } from "./MainStack";
 import { AuthStackScreen } from "./AuthStack";

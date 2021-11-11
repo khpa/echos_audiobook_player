@@ -6,7 +6,7 @@ import { View, TextInput, FlatList, StyleSheet } from "react-native";
 
 // constants
 import { Container, width } from "../../../../components";
-import type { MainNavProps } from "../../../../util/navigation";
+import type { MainNavProps } from "../../../../navigation/navigation";
 import { selectDevice } from "../../../../store/slices/device";
 import { useStore } from "../../../../store/store";
 

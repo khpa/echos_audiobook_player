@@ -5,8 +5,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 //internal dependencies
-import type { AudioRoutes } from "../../../components";
-import type { AudioPlayerProp } from "../../../util/navigation";
+import type { AudioRoutes } from "../../../navigation";
+import type { AudioPlayerProp } from "../../../navigation/navigation";
 import type { Album } from "../SearchStack/AddAlbumPopup";
 
 // types

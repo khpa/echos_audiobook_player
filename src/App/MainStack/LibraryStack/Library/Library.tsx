@@ -12,7 +12,7 @@ import {
 // internal dependencies
 import { useStore } from "../../../../store/store";
 import { Container, width } from "../../../../components";
-import type { TabNavProps } from "../../../../util/navigation";
+import type { TabNavProps } from "../../../../navigation/navigation";
 
 import { handlePermissions } from "./handlePermissions";
 import { checkRootFolder } from "./checkRootFolder";

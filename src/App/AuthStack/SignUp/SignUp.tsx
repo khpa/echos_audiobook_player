@@ -3,7 +3,7 @@ import * as React from "react";
 import { View, Button, StyleSheet, Text } from "react-native";
 
 // internal dependencies
-import type { AuthNavProp } from "../../../util/navigation";
+import type { AuthNavProp } from "../../../navigation/navigation";
 
 export const SignUp = ({ navigation }: AuthNavProp<"SignUp">) => {
   return (

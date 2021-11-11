@@ -13,7 +13,7 @@ import BackgroundTimer from "react-native-background-timer";
 // import { format as prettyFormat } from "pretty-format";
 
 // internal dependencies
-import type { AudioNavProp } from "../../../../util/navigation";
+import type { AudioNavProp } from "../../../../navigation";
 import { useStore } from "../../../../store/store";
 import type { Chapter } from "../../SearchStack/AddAlbumPopup";
 import { height } from "../../../../components";

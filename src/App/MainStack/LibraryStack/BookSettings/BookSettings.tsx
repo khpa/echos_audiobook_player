@@ -4,7 +4,7 @@ import { Image, Pressable, ScrollView, StyleSheet, View } from "react-native";
 import TrackPlayer from "react-native-track-player";
 
 // internal dependencies
-import type { LibraryProps } from "../../../../util/navigation";
+import type { LibraryProps } from "../../../../navigation/navigation";
 import { width, Button } from "../../../../components";
 import { useStore } from "../../../../store/store";
 import { removeFolder } from "../BookDetails";

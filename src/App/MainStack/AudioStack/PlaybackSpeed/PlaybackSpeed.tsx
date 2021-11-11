@@ -4,7 +4,7 @@ import TrackPlayer from "react-native-track-player";
 
 import { selectLibrary } from "../../../../store/slices/library";
 import { useStore } from "../../../../store/store";
-import type { AudioNavProp } from "../../../../util/navigation";
+import type { AudioNavProp } from "../../../../navigation/navigation";
 
 type Props = AudioNavProp<"PlaybackSpeed">;
 

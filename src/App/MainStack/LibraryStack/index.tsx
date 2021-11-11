@@ -4,7 +4,7 @@ import { Pressable, StyleSheet, Text } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 // internal dependencies
-import type { TabNavProps } from "../../../util/navigation";
+import type { TabNavProps } from "../../../navigation/navigation";
 
 import { Library } from "./Library";
 import { BookDetails } from "./BookDetails";

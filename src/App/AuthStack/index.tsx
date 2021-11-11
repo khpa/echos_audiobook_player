@@ -3,7 +3,7 @@ import * as React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 // types
-import type { AuthRoutes } from "../../components";
+import type { AuthRoutes } from "../../navigation";
 
 // internal dependencies
 import { SignIn } from "./SignIn";
